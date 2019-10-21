@@ -11,12 +11,11 @@ const rl=readline.createInterface({
     output:process.stdout
 })  //User input über stdin ermöglichen
 const ausgabe=(akt,anz)=>{
-    console.log("Aktuelle Bewertung: "+akt+" Anzahl Bewertungen: "+anz)
+    console.log("Aktuelle Bewertung: "+akt.toFixed(2)+" Anzahl Bewertungen: "+anz)
 }
 const a2 =()=>{
     neuBewertung=2
-    //sum+=neuBewertung
-    sum=Math.add(sum, neuBewertung)
+    sum+=eval(neuBewertung)
     anzBewertung++
     aktBewertung=bewertungBerechnen(anzBewertung, sum)
     ausgabe(aktBewertung,anzBewertung)
@@ -30,9 +29,7 @@ const zufallsBewertung=()=>{
             if(!isNaN(answer)){
                 for(let i=0; i<answer;i++){
                     neuBewertung=Math.round(Math.random()*(4)+1)
-                    //sum=sum+neuBewertung
-                    sum=Math.add(sum, neuBewertung)
-                    console.log(sum)
+                    sum+=eval(neuBewertung)
                     anzBewertung++
                     aktBewertung=bewertungBerechnen(anzBewertung, sum)
                     ausgabe(aktBewertung, anzBewertung)  
@@ -66,8 +63,7 @@ const bewerten=()=>{
                 console.log("Danke fuer die Bewertung")
                 redo=0
                 anzBewertung++
-                //sum=sum+answer
-                sum=Math.add(sum, answer)
+                sum+=eval(answer) //Fehler war das answer ein string war und so die gesamte variable zu einem String wurde
                 aktBewertung=bewertungBerechnen(anzBewertung,sum)
                 ausgabe(aktBewertung, anzBewertung)
             }

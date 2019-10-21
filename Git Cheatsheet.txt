@@ -28,8 +28,8 @@ git Pull Reponame                        Holt neues Abbild des Repos.
 git Add                                        Fügt eine Datei im Ordner dem Index hinzu. Danach                                        gehört die Datei zum lokalen Repo, und kann
 commited werden. 
         -------------------------------------------
-git Commit                                Lokales Repo wird dem externen Verzeichniss
-hinzugefügt.
+git Commit -m ‘text’                        Lokales Repo wird dem externen Verzeichniss
+hinzugefügt, und ein Beschreibungstext.
         -------------------------------------------
 git Branch                                Zeigt alle verfügbaren Branches an, und markiert den 
 aktiven mit einem *.
@@ -37,8 +37,7 @@ aktiven mit einem *.
 git checkout -b name                        Erschafft einen neuen Branch mit Name “name”.
         -------------------------------------------
 git checkout name                        Setzt Branch mit Name “name” als aktiv.
-
-
+                                        (Mit * können Leerzeichen Symbolisiert werden.)
 
 
 Quellen und mehr:

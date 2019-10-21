@@ -46,9 +46,17 @@ The API allows developers to get information and menu data for local restaurants
 
 https://www.programmableweb.com/api/eatstreet
 
+6. RecipeBridge
+RecipeBridge is a recipe search engine that indexes recipes from hundreds of websites. The RecipeBridge API allows developers to build applications that search for recipes by title or ingredients, or retrieve detailed recipe information including ingredient lists and quantities, recipe source, and more.
 
+ermöglicht Cross-Platform Suche nach Rezepten
 
+https://www.programmableweb.com/api/recipebridge
 
+7. Recipe Puppy
+The Recipe Puppy is an ingredient based recipe search engine. The Recipe Puppy API gives developers access to a database of over a million recipes, searching by ingredient or keyword. Access is gained via HTTP and results can be returned in JSON or XML
+
+https://www.programmableweb.com/api/recipe-puppy
 
 
 Nutrition Apis:
@@ -58,10 +66,13 @@ Edamam provides nutrition analysis tools and applications. The Edamam Food Datab
 
 https://www.programmableweb.com/api/edamam-food-database
 
+2. Edamam Nutrition Analysis API
+Edamam's Nutrition Analysis API provides developers the tools to submit recipe content (the title and ingredient list), and in return get a nutritional analysis based on the original information provided. With the API, other fields of the recipe can also be analyzed- types of recipes, nutrient information, and label definitions.
+
+https://www.programmableweb.com/api/edamam-nutrition-analysis
 
 
-
-2. Chomp
+3. Chomp
 Nutritional data on over 500,000 food products. The Chomp API enables developers to programmatically access nutrition labels, ingredients, allergen warnings, barcodes etc. The service provides a "Product List Builder" to generate a customized list of products that match inputted search terms. A customer could use this to retrieve data for all products in the United States that include cheese ingredients etc.
 
 
@@ -74,7 +85,7 @@ https://www.programmableweb.com/api/chomp
 
 
 
-3. Can I eat it?
+4. Can I eat it?
 80,000 products and barcodes instantly.
 API supports:
 - Product search by name
@@ -89,14 +100,14 @@ API supports:
 https://www.programmableweb.com/api/can-i-eat-it-barcode
 
 
-4. USDA Food Composition Database (US Regierung)
+5. USDA Food Composition Database (US Regierung)
 The USDA Food Composition Databases API allows developers to incorporate nutrient data into their websites and applications. The API provides both Food Reports and Nutrient Reports. Food Reports list the nutrient values for a specified food (e.g. cheddar cheese, potatoes); Nutrient Reports return lists of foods and their nutrient values for a given set of nutrients (e.g. protein, iron).
 
 
 https://www.programmableweb.com/api/usda-food-composition-databases
 
 
-5. FatSecret Platform 
+6. FatSecret Platform 
 The FatSecret Platform API is a food and nutrition database that is utilized by more than 10,000 developers in more than 50 countries. Use the API to integrate high quality, curated food, nutrition, and calorie data into mobile apps, websites, devices, and complementary products and services
 
 

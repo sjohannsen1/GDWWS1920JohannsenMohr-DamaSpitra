@@ -1,5 +1,6 @@
 const maxBewertung=5
 var redo=0
+var redoZufall=0
 var anzBewertung=1
 var aktBewertung=2
 const readline=require('readline')
@@ -7,10 +8,10 @@ const rl=readline.createInterface({
     input:process.stdin,
     output:process.stdout
 })  //User input über stdin ermöglichen
-function ausgabe(akt,anz){
+const ausgabe=(akt,anz)=>{
     console.log("Aktuelle Bewertung: "+akt+" Anzahl Bewertungen: "+anz)
 }
-function a2(){
+const a2 =()=>{
     ausgabe(aktBewertung,anzBewertung)
 }
 const zufallsBewertung=()=>{
@@ -22,8 +23,11 @@ const zufallsBewertung=()=>{
                     anzBewertung++
                     ausgabe(aktBewertung, anzBewertung)  
                 }
+                redoZufall=0
             }else{
                 console.log("Nur Zahlen zulässig")
+                redoZufall++
+                
             }
         
          resolve()
@@ -64,7 +68,11 @@ const main=async()=>{
         console.log("Versuchen Sie es erneut: ")
         await bewerten()
     }
-    await zufallsBewertung()
+    while(redoZufall!=0){
+        console.log("Versuchen Sie es erneut: ")
+        await zufallsBewertung()
+    }
+    
     rl.close()
 }
 main();

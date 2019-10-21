@@ -1,8 +1,10 @@
 const maxBewertung=5
 var redo=0
 var redoZufall=0
-var anzBewertung=1
-var aktBewertung=2
+var anzBewertung=0
+var aktBewertung=0
+var neuBewertung=0
+var sum=0
 const readline=require('readline')
 const rl=readline.createInterface({
     input:process.stdin,
@@ -12,15 +14,24 @@ const ausgabe=(akt,anz)=>{
     console.log("Aktuelle Bewertung: "+akt+" Anzahl Bewertungen: "+anz)
 }
 const a2 =()=>{
+    neuBewertung=2
+    sum+=neuBewertung
+    anzBewertung++
+    aktBewertung=bewertungBerechnen(anzBewertung, sum)
     ausgabe(aktBewertung,anzBewertung)
+}
+const bewertungBerechnen=(anz, sum)=>{
+    return sum/anz
 }
 const zufallsBewertung=()=>{
     return new Promise((resolve,reject)=>{
         rl.question('Anzahl an zu generierenden Bewertungen: \t', function(answer){
             if(!isNaN(answer)){
                 for(let i=0; i<answer;i++){
-                    aktBewertung=Math.round(Math.random()*(4)+1)
+                    neuBewertung=Math.round(Math.random()*(4)+1)
+                    sum+=neuBewertung
                     anzBewertung++
+                    aktBewertung=bewertungBerechnen(anzBewertung, sum)
                     ausgabe(aktBewertung, anzBewertung)  
                 }
                 redoZufall=0
@@ -52,7 +63,9 @@ const bewerten=()=>{
                 console.log("Danke fuer die Bewertung")
                 redo=0
                 anzBewertung++
-                ausgabe(answer, anzBewertung)
+                sum+=answer
+                aktBewertung=bewertungBerechnen(anzBewertung,sum)
+                ausgabe(aktBewertung, anzBewertung)
             }
          resolve()
         })

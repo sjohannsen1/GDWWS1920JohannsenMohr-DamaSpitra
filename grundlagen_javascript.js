@@ -15,13 +15,14 @@ const ausgabe=(akt,anz)=>{
 }
 const a2 =()=>{
     neuBewertung=2
-    sum+=neuBewertung
+    //sum+=neuBewertung
+    sum=Math.add(sum, neuBewertung)
     anzBewertung++
     aktBewertung=bewertungBerechnen(anzBewertung, sum)
     ausgabe(aktBewertung,anzBewertung)
 }
-const bewertungBerechnen=(anz, sum)=>{
-    return sum/anz
+var bewertungBerechnen=(anz, summe)=>{
+    return (summe/anz)
 }
 const zufallsBewertung=()=>{
     return new Promise((resolve,reject)=>{
@@ -29,7 +30,9 @@ const zufallsBewertung=()=>{
             if(!isNaN(answer)){
                 for(let i=0; i<answer;i++){
                     neuBewertung=Math.round(Math.random()*(4)+1)
-                    sum+=neuBewertung
+                    //sum=sum+neuBewertung
+                    sum=Math.add(sum, neuBewertung)
+                    console.log(sum)
                     anzBewertung++
                     aktBewertung=bewertungBerechnen(anzBewertung, sum)
                     ausgabe(aktBewertung, anzBewertung)  
@@ -63,7 +66,8 @@ const bewerten=()=>{
                 console.log("Danke fuer die Bewertung")
                 redo=0
                 anzBewertung++
-                sum+=answer
+                //sum=sum+answer
+                sum=Math.add(sum, answer)
                 aktBewertung=bewertungBerechnen(anzBewertung,sum)
                 ausgabe(aktBewertung, anzBewertung)
             }
@@ -81,6 +85,7 @@ const main=async()=>{
         console.log("Versuchen Sie es erneut: ")
         await bewerten()
     }
+    await zufallsBewertung()
     while(redoZufall!=0){
         console.log("Versuchen Sie es erneut: ")
         await zufallsBewertung()

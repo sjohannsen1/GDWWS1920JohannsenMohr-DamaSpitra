@@ -11,7 +11,15 @@ var Rating=function(anz,bew,name){
     this.anzahl=anz
     this.bewertung=bew
     this.name[anz-1]=name
+    this.durchschnittBewertung=durchschnittBew
 }
+//Aufgabe5
+/*const hello = 'hello'
+function world() {
+    const world = 'world';
+    console.log(''+hello +world);
+}*/ //Tests auf lokaler Ebende Try + Error
+
 
 
 
@@ -34,8 +42,12 @@ const arrayEintragen=(anz, bew, name) =>{
 /*const objEintragen=(anz,bew,name) =>{
     let ratings=new Rating(name,bew,anz)
     console.log("Name Bewertung "+name)
+    this.durchschnittBew= function int (){
+        return this.bew / this.anz; // A2 Aufgabe3 Ist das mit "Der Druschnistt 'EINER' Bewertung" gemeint? 
+    }
+    //this.durchschnittBew=()=>(this.bew / this.anz); A2 Aufgabe4: Arrowfunction
+    console.log('Druchschniit der Bewertung '+durchschnittBew);
 }*/
-
 
 
 const a2 =()=>{

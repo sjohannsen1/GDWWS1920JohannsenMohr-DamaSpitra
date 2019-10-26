@@ -1,0 +1,98 @@
+﻿GDW 19/20                                                                        Für den 28.10.19
+Frederik Spitra                                                
+Sophia Johannsen
+Marcus Mohr-Dama                                                        
+
+
+Projektidee: Ernährungsapp
+
+
+Inhaltesverzeichniss:
+1. Vorwort
+2. Kernidee, kurz und knapp
+3. Mögliche Weiterentwicklungen
+4. Ein Wort zur Ernährung.
+5. Absehbare Probleme
+6. Featureliste
+
+
+
+
+Vorwort:
+
+
+Bitte beachten Sie, dass das hier vorgestellte Projektziel größer ausfällt, als was von uns in der begrenzten Zeit umsetzbar sein wird.
+Die uns zur verfügung stehenden Ressourcen, und auch der Rahmen des Projektes sind stark begrenzt, weshalb wir davon ausgehen, dass wir nur die absolut Kern Features werden fertigstellen können.
+Es soll daher vor allem dazu dienen, zu zeigen, dass wir uns mit der Projektidee in Tiefe beschäftigt, und mögliche Probleme, Konsequenzen und Hindernisse erforscht haben.
+
+
+
+
+Kernidee, kurz und knapp:
+
+
+Die Kernidee unseres Projektes ist diese:
+1. Wir greifen auf eine Datenbank voller Rezepte zu. Dies geschieht per API.
+2. Diese Rezepte werden an eine Nährstoff API weitergegeben, welche uns in nutzbare Daten zu deren Nährwerten zurückgibt, nach denen wir die Rezepte herunterbrechen und sortieren können.
+3. Nach vom Nutzer eingegebenen Werten werden ihm von uns Rezepte vorgeschlagen.
+4. Auf dieser Grundlage, etwa der Methodik, mit der wir Rezepte dem Nutzer empfehlen und wir die Daten aufbereiten, ließe sich leicht aufbauen, was unterschiedlichste Weiterentwicklungen ermöglicht.
+Wir vermuten, dass dies bereits außerhalb des Fokus dieses Projektes liegt, haben aber dennoch einige Ideen und Vorschläge entwickelt.
+
+
+
+
+
+
+Mögliche Weiterentwicklungen
+
+
+* “Intelligenteres” Vorschlagssystem. (Tages und Wochenplan. Kalorienmenge verteilen auf drei Mahlzeiten. Fertige Pläne bereitstellen.)
+
+
+* Unterschiedliche Nutzer, unterschiedliche Anforderungen. Sportler, Schwanger, wenig Geld, oder nur das beste vom besten? Pläne für alle Lebenslagen.
+
+
+* Ernährungswissenschaftlich korrekte Vorgeben treffen.
+
+
+* Graphic User Interface: Simple, gut lesbare Visualisierung, etwa in der Form von Ladebalken und freundlicher Symbolik. (Grober Überblick auf einen Blick, unkomplexe Symbole leichter schnell zu lesen.)
+
+
+* Möglichkeiten für Gamification. Achievements, Herausforderungen/Aufforderungen (Saisonal/Regional essen, unterstützen von bestimmten Aktionen, Internationale Gerichte aus aller Welt, etc.) 
+
+
+* Höhere Individualisermöglichkeiten für den Nutzer. Was will er/sie angezeigt haben, was soll ignoriert werden. Kalorienmenge egal, Hoher Fokus auf Eisenaufnahme? 
+
+
+* Nutzung aller Features außerhalb eines eigenen Planes. Etwa das Nachschlagen der Werte eines einzelnen Rezeptes in Nährwertapi.
+
+
+* Daten über den Nutzer: Lieblingsgerichte, Essgewohnheiten, Mängel in der Ernährung etc.
+
+
+
+
+Ein Wort zur Ernährung
+
+
+Wenn es um Ernährung geht, stellt jeder Mensch eine einzigartige Kombination aus Anforderungen dar, und benötigt eine ganz eigene, individuelle Lösung. Dies zu leisten ist unser Team und unsere App nicht in der Lage, und dafür ist sie auch nicht ausgelegt. Stattdessen soll sie Menschen bei ihren ganze eigenen persönlichen Ernährungszielen unterstützen, kann ihnen aber nicht die Denkarbeit abnehmen.
+
+
+Es wäre möglich, in Zusammenarbeit mit Ernährungswissenschaftlern grobe Pläne für Nutzer zur Verfügung zu stellen. Dies liegt aber unserer Meinung außerhalb des Rahmens dieses Projektes. Zusätzlich müsste betont werden, dass auch diese Pläne, seien sie noch so ausgeklügelt, nicht eine Individuelle genaue Beratung ersetzen können, und nur grobe Vorschläge darstellen, die nicht auf das letzte Komma befolgt werden sollten. 
+
+
+
+
+Absehbare Probleme:
+
+
+* Rechte und Datensicherheit.
+* Was sind gute und empfohlene Ernährungswerte? Woher beziehen wir diese? 
+* Unterschiedliche Menschen, in unterschiedlichen Umständen.
+   * Schwanger?
+   * Sportlich sehr aktiv?
+   * Unterschiedliche Metabolismus Anforderungen.
+   * Unterschiedliche Umgebungen (Wüste, hohe Luftfeuchtigkeit, große Kälte, viel oder wenig Sonnenlicht, persönliche Körperliche eigenschaften wie etwa Hautfarbe etc.
+
+
+*  Rechtliche Absicherung gegenüber falscher Benutzung.

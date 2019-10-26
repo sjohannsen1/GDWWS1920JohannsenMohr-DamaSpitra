@@ -23,7 +23,7 @@ Meist genutzte Befehle:
 
 git status                                Informiert über neue Dateien, ob das Repo neu gepullt                                        werden muss etc.?
         -------------------------------------------
-git Pull Reponame                        Holt neues Abbild des Repos.
+git pull Reponame                        Holt neues Abbild des Repos.
         -------------------------------------------
 git add .                                        Fügt eine Datei im Ordner dem Index hinzu. Danach                                        gehört die Datei zum lokalen Repo, und kann
 commited werden. 

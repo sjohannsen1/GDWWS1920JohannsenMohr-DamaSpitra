@@ -21,17 +21,17 @@ Meist genutzte Befehle:
         
 
 
-git Status                                Informiert über neue Dateien, ob das Repo neu gepullt                                        werden muss etc.?
+git status                                Informiert über neue Dateien, ob das Repo neu gepullt                                        werden muss etc.?
         -------------------------------------------
 git Pull Reponame                        Holt neues Abbild des Repos.
         -------------------------------------------
-git Add                                        Fügt eine Datei im Ordner dem Index hinzu. Danach                                        gehört die Datei zum lokalen Repo, und kann
+git add .                                        Fügt eine Datei im Ordner dem Index hinzu. Danach                                        gehört die Datei zum lokalen Repo, und kann
 commited werden. 
         -------------------------------------------
-git Commit -m ‘text’                        Lokales Repo wird dem externen Verzeichniss
+git commit -m ‘text’                        Lokales Repo wird dem externen Verzeichniss
 hinzugefügt, und ein Beschreibungstext.
         -------------------------------------------
-git Branch                                Zeigt alle verfügbaren Branches an, und markiert den 
+git branch                                Zeigt alle verfügbaren Branches an, und markiert den 
 aktiven mit einem *.
         -------------------------------------------
 git checkout -b name                        Erschafft einen neuen Branch mit Name “name”.

@@ -13,6 +13,7 @@ var Rating=function(anz,bew,name){
     this.name[anz-1]=name
     this.durchschnittBewertung=durchschnittBew
 }
+var ratings= {anzahl:anzBewertung, bewertung:aktBewertung, lastBew:neuBewertung, nameBewertung[0]:nameBewertung} //ka ob das so geht
 //Aufgabe5
 /*const hello = 'hello'
 function world() {
@@ -49,21 +50,27 @@ const arrayEintragen=(anz, bew, name) =>{
     console.log('Druchschniit der Bewertung '+durchschnittBew);
 }*/
 
+const objEintragen=(anz,bew,name,akt) =>{
+    ratings.anzahl=anz
+    ratings.bewertung=akt
+    ratings.last=bew
+    ratings.nameBewertung[anz-1]=name //ka ob das so geht
+    console.log('Druchschniit der Bewertung '+durchschnittBew);
+}
+
 
 const a2 =()=>{
     neuBewertung=2
     anzBewertung++
     nameBewertung="aufgabe1"
-    //objEintragen(anzBewertung,neuBewertung,nameBewertung)
     arrayEintragen(anzBewertung,neuBewertung,nameBewertung)
     sum+=eval(neuBewertung)
     aktBewertung=bewertungBerechnen(anzBewertung, sum)
+    objEintragen(anzBewertung,neuBewertung,nameBewertung,aktBewertung)
     ausgabe(aktBewertung,anzBewertung)
 }
 
-var bewertungBerechnen=(anz, summe)=>{
-    return (summe/anz)
-}
+var bewertungBerechnen=(anz, summe)=> (summe/anz)
 
 const zufallsBewertung=()=>{
     return new Promise((resolve,reject)=>{
@@ -74,9 +81,10 @@ const zufallsBewertung=()=>{
                     sum+=eval(neuBewertung)
                     anzBewertung++
                     nameBewertung="Zufaellige Bewertung "+(i+1)
-                    //objEintragen(anzBewertung,neuBewertung,nameBewertung)
+                    
                     arrayEintragen(anzBewertung, neuBewertung, nameBewertung)
                     aktBewertung=bewertungBerechnen(anzBewertung, sum)
+                    objEintragen(anzBewertung,neuBewertung,nameBewertung,aktBewertung)
                     ausgabe(aktBewertung, anzBewertung)  
                 }
                 redoZufall=0
@@ -116,10 +124,11 @@ const bewerten=()=>{
                 console.log("Danke fuer die Bewertung")
                 redo=0
                 anzBewertung++
-                //objEintragen(anzBewertung,neuBewertung,nameBewertung)
+              
                 arrayEintragen(anzBewertung, answer, nameBewertung)
                 sum+=eval(answer) //Fehler war das answer ein string war und so die gesamte variable zu einem String wurde
                 aktBewertung=bewertungBerechnen(anzBewertung,sum)
+                objEintragen(anzBewertung,answer,nameBewertung,aktBewertung)
                 ausgabe(aktBewertung, anzBewertung)
               
             }

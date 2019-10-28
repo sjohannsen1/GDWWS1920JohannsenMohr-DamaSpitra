@@ -7,13 +7,13 @@ var aktBewertung=0
 var neuBewertung=0
 var sum=0
 var nameBewertung
-var Rating=function(anz,bew,name){
+var Rating=function(anz,bew,name,neuBewertung){
     this.anzahl=anz
-    this.bewertung=bew
+    this.bewertung=neuBewertung
     this.name[anz-1]=name
-    this.durchschnittBewertung=durchschnittBew
+    this.durchschnittBewertung=bew
 }
-var ratings= {anzahl:anzBewertung, bewertung:aktBewertung, lastBew:neuBewertung, nameBewertung[0]:nameBewertung} //ka ob das so geht
+var ratings= {anzahl:anzBewertung, bewertung:aktBewertung, lastBew:neuBewertung, /*nameBewertung[0]:nameBewertung*/} //ka ob das so geht
 //Aufgabe5
 /*const hello = 'hello'
 function world() {
@@ -54,8 +54,8 @@ const objEintragen=(anz,bew,name,akt) =>{
     ratings.anzahl=anz
     ratings.bewertung=akt
     ratings.last=bew
-    ratings.nameBewertung[anz-1]=name //ka ob das so geht
-    console.log('Druchschniit der Bewertung '+durchschnittBew);
+    //ratings.nameBewertung[anz-1]=name //ka ob das so geht
+    console.log('Druchschniit der Bewertung '+akt);
 }
 
 

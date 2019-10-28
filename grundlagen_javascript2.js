@@ -7,6 +7,7 @@ var aktBewertung=0
 var neuBewertung=0
 var sum=0
 var nameBewertung
+var arrayRatings=[]
 var Rating=function(anz,bew,name,neuBewertung){
     this.anzahl=anz
     this.bewertung=neuBewertung
@@ -51,9 +52,14 @@ const arrayEintragen=(anz, bew, name) =>{
 }*/
 
 const objEintragen=(anz,bew,name,akt) =>{
-    ratings.anzahl=anz
-    ratings.bewertung=akt
-    ratings.last=bew
+    let ratings= {
+    anzahl:anz,
+    bewertung:akt,
+    last:bew,
+    name: name
+}
+    arrayRatings.push(ratings)
+
     //ratings.nameBewertung[anz-1]=name //ka ob das so geht
     console.log('Druchschniit der Bewertung '+akt);
 }

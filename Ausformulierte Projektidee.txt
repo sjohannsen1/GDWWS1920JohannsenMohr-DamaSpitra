@@ -34,7 +34,7 @@ Kernidee, kurz und knapp:
 Die Kernidee unseres Projektes ist diese:
 1. Wir greifen auf eine Datenbank voller Rezepte zu. Dies geschieht per API.
 2. Diese Rezepte werden an eine Nährstoff API weitergegeben, welche uns in nutzbare Daten zu deren Nährwerten zurückgibt, nach denen wir die Rezepte herunterbrechen und sortieren können.
-3. Nach vom Nutzer eingegebenen Werten werden ihm von uns Rezepte vorgeschlagen.
+3. Nach vom Nutzer eingegebenen Informationen (Größe, Gewicht, Aktivitätslevel,...) werden durch eine weitere API seine empfohlen Nährstoffrichtlinien berechnet und darauf basierend werden ihm von uns Rezepte vorgeschlagen.
 4. Auf dieser Grundlage, etwa der Methodik, mit der wir Rezepte dem Nutzer empfehlen und wir die Daten aufbereiten, ließe sich leicht aufbauen, was unterschiedlichste Weiterentwicklungen ermöglicht.
 Wir vermuten, dass dies bereits außerhalb des Fokus dieses Projektes liegt, haben aber dennoch einige Ideen und Vorschläge entwickelt.
 
@@ -92,7 +92,7 @@ Absehbare Probleme:
    * Schwanger?
    * Sportlich sehr aktiv?
    * Unterschiedliche Metabolismus Anforderungen.
-   * Unterschiedliche Umgebungen (Wüste, hohe Luftfeuchtigkeit, große Kälte, viel oder wenig Sonnenlicht, persönliche Körperliche eigenschaften wie etwa Hautfarbe etc.
+   * Unterschiedliche Umgebungen (Wüste, hohe Luftfeuchtigkeit, große Kälte, viel oder wenig Sonnenlicht, persönliche körperliche Eigenschaften.
 
 
 *  Rechtliche Absicherung gegenüber falscher Benutzung.

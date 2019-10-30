@@ -1,0 +1,29 @@
+{
+ "user":
+ [
+    {
+        "user_vorname": "Laura",
+        "user_nachname": "Müller",
+        "user_email": "laura@mueller.de",
+        "user_wohnort": "München"
+    },
+    {
+        "user_vorname": "Paula",
+        "user_nachname": "Xino",
+        "user_email": "paula@xino.de",
+        "user_wohnort": "Köln"
+    },
+    {
+        "user_vorname": "Jörg",
+        "user_nachname": "Garb",
+        "user_email": "joerg@garb.de",
+        "user_wohnort": "Düsseldorf"
+    },
+    {
+        "user_vorname": "Tom",
+        "user_nachname": "Gerber",
+        "user_email": "tom@gerber.de",
+        "user_wohnort": "Hamburg"
+    }
+ ]
+}

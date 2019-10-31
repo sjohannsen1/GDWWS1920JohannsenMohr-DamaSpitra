@@ -32,10 +32,12 @@ const schreiben=(jsonString, path)=>{
         if(err){
             console.log("Error writing file", err)
         } else{
+            console.log(jsonString)
             console.log("Datei erfolgreich beschrieben")
         }
     })
 }
+
 
 const loeschenSuche=(pathIn, pathOut,suchBegriff)=>{
     lesen(pathIn, (err, staedte)=>
@@ -82,7 +84,8 @@ module.exports={
     loeschenSuche,
     suche,
     lesen,
-    schreiben
+    schreiben,
+    
 }
 
 

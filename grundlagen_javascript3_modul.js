@@ -74,10 +74,20 @@ const stadtHinzu=(pathIn, pathOut, stadtInfos)=>
 {
     lesen(pathIn, (err, staedte)=>{
         if(err){console.log("Error: ", err); return}
-        staedte.cities[staedte.cities.length]=stadtInfos
+        staedte.cities.push(/*[staedte.cities.length]=*/stadtInfos)
         schreiben(JSON.stringify(staedte.cities,null, 2),pathOut)
     })
 }
+const stringHinzu=(pathIn, pathOut, aString)=>
+{
+    //schreiben(aString, pathOut)
+    lesen(pathIn, (err, data)=>{
+        if(err){console.log("Error: ", err); return}
+        data.users.push(aString)
+        schreiben(JSON.stringify(data.users,null, 2),pathOut)
+    })
+}
+
 
 module.exports={
     stadtHinzu,
@@ -85,6 +95,7 @@ module.exports={
     suche,
     lesen,
     schreiben,
+    stringHinzu
     
 }
 

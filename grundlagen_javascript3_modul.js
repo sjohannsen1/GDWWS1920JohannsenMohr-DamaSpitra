@@ -83,7 +83,8 @@ const stringHinzu=(pathIn, pathOut, aString)=>
     //schreiben(aString, pathOut)
     lesen(pathIn, (err, data)=>{
         if(err){console.log("Error: ", err); return}
-        data.users.push(aString)
+        //data.users.push(aString)
+        data.users[data.length]=aString
         schreiben(JSON.stringify(data.users,null, 2),pathOut)
     })
 }

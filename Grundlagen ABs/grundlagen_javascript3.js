@@ -39,15 +39,15 @@ const kombinieren=()=>{
 
 const kombinieren2=()=>{  
     return new Promise((resolve, reject)=>{
-        /*JSONtools.lesen(user, (err, benutzer)=>
+        JSONtools.lesen(user, (err, benutzer)=>
         { 
             if(err){
                 console.log('Error: ',err)
                 reject(err)
             }
-            */
-            resolve(JSONtools.getData(cities),JSONtools.getData(user))//benutzer)        
-       // })
+            
+            resolve(/*JSONtools.getData(cities),JSONtools.getData(user))*/benutzer)        
+       })
         
     })
 }
@@ -77,7 +77,7 @@ const main=async()=>{
         console.log(err)
     })*/
     //wie kombinieren2 nur mit zwei thens
-    kombinieren2()/*.then(function(nutzer){
+    kombinieren2().then(function(nutzer){
         console.log("vor lesen"+nutzer.user[1].user_wohnort)
         
        //JSONtools.lesen(cities, (staedte) => {
@@ -87,12 +87,13 @@ const main=async()=>{
       return(JSONtools.getData(cities),nutzer)
     },function(err){
         console.log(err)
-    })*/
-    .then(function(staedte, nutzer){
+    })
+    .then(function(staedte,nutzer){
         let arrayErgebnis=[]
+       
         console.log("in 2. then "+nutzer)
         console.log("in 2. then "+staedte)
-        /*nutzer.user.forEach(person => {
+        nutzer.user.forEach(person => {
             staedte.cities.forEach(stadt=>{
                 if(person.user_wohnort==stadt.stadt_name)
                     arrayErgebnis.push([stadt,person])
@@ -101,7 +102,7 @@ const main=async()=>{
             
           //Aus dem Workshop: Foreach ist blöd, lösung unpraktisch
             
-        })*/
+        })
         return arrayErgebnis
     }, function(err){
         console.log(err)

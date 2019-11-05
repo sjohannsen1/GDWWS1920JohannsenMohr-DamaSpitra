@@ -27,6 +27,20 @@ function lesen(path, callback){
         }
     })
 }
+
+const getData=(path)=>{
+    fs.readFile(path,(err, fileData)=>{
+        if(err){
+            return err
+        }
+        try{
+            let jsonDaten=JSON.parse(fileData)
+            return jsonDaten
+        } catch(err){
+            return err
+        }
+    })
+}
 const schreiben=(jsonString, path)=>{
     fs.writeFile(path,jsonString, err=>{
         if(err){
@@ -96,7 +110,8 @@ module.exports={
     suche,
     lesen,
     schreiben,
-    stringHinzu
+    stringHinzu,
+    getData
     
 }
 

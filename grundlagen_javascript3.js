@@ -39,15 +39,16 @@ const kombinieren=()=>{
 
 const kombinieren2=()=>{  
     return new Promise((resolve, reject)=>{
-        JSONtools.lesen(user, (err, benutzer)=>
+        /*JSONtools.lesen(user, (err, benutzer)=>
         { 
             if(err){
                 console.log('Error: ',err)
                 reject(err)
             }
-            
-            resolve(benutzer)      
-        })
+            */
+            resolve(JSONtools.getData(cities),JSONtools.getData(user))//benutzer)        
+       // })
+        
     })
 }
 const suchenUndLoeschen=()=>{
@@ -76,18 +77,36 @@ const main=async()=>{
         console.log(err)
     })*/
     //wie kombinieren2 nur mit zwei thens
-    kombinieren2().then(function(benutzer){
-        var arrayErgebnis=[]
-            benutzer.user.forEach(element => {
-                JSONtools.suche(cities, element.user_wohnort, (treffer)=>{
-                arrayErgebnis.push([treffer,element])
-              //Aus dem Workshop: Foreach ist scheisse, lösung unpraktisch
-                }) 
-            })
-            return arrayErgebnis
-        }, function(err){
+    kombinieren2()/*.then(function(nutzer){
+        console.log("vor lesen"+nutzer.user[1].user_wohnort)
+        
+       //JSONtools.lesen(cities, (staedte) => {
+           //console.log("in lesen"+staedte.cities.toString)
+            
+        //})
+      return(JSONtools.getData(cities),nutzer)
+    },function(err){
         console.log(err)
-    }).then(function(arrayE){
+    })*/
+    .then(function(staedte, nutzer){
+        let arrayErgebnis=[]
+        console.log("in 2. then "+nutzer)
+        console.log("in 2. then "+staedte)
+        /*nutzer.user.forEach(person => {
+            staedte.cities.forEach(stadt=>{
+                if(person.user_wohnort==stadt.stadt_name)
+                    arrayErgebnis.push([stadt,person])
+                
+            })
+            
+          //Aus dem Workshop: Foreach ist blöd, lösung unpraktisch
+            
+        })*/
+        return arrayErgebnis
+    }, function(err){
+        console.log(err)
+    })
+    .then(function(arrayE){
         JSONtools.schreiben(JSON.stringify(arrayE.toString()),testen)
     }, function(err){
         console.log(err)

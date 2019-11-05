@@ -1,0 +1,147 @@
+﻿Domäne und Domänenmodell
+
+
+Vorwort:
+“Der Mensch ist, was er isst”. So sagte es bereits 1846 der deutsche Philosoph Ludwig Feuerbach. 
+Heute eher bekannt unter “Du bist, was du isst” geht der Ausspruch über die Beziehung zwischen dem Menschen und seiner Nahrung, dass das was wir zu uns nehmen, ein Teil von uns wird. 
+Ganz wissenschaftlich ist das nicht, aber es fasst gut zusammen, dass eine durchdachte Ernährung wichtig ist. Und in Zeiten der Überversorgung, in der Nahrung keine Knappheit mehr darstellt, sondern oft eher ein derartiger Überfluss herrscht, dass es zu negativen Konsequenzen kommt, gewinnt diese eigentlich ganz einfache Erkenntniss noch einmal besondere Bedeutung.
+
+
+Allerdings ist das alles leichter gesagt als getan. Auf die eigene Ernährung zu achten ist, vor allem in einer eher liberal freiheitlichen Gesellschaft, am Ende auch Teil der eigenen Verantwortung. Niemand verbietet einem den Schokopudding vor dem zu Bett gehen, und der eigene Alltag ist so vollgestopft mit Aufgaben und Verantwortungen, das oft nur wenig Zeit und Energie bleibt, darüber nachzudenken ob das nun wirklich gut für einen ist.
+
+
+An dieser Stelle möchten wir ansetzen. Wir können und möchten niemanden verbieten was er zu tun und zu lassen hat, aber wir glauben, dass wir mit der Hilfe der uns allzeit umgebenden Technologien es den Menschen leichter machen können, sich mit diesem Aspekt ihres Lebens auseinanderzusetzen.
+
+
+Problemdefinition:
+Ernährung ist oft kompliziert, unübersichtlich, undurchschaubar, und meist dann auch noch hochindividuell. Jeder Mensch hat einen ganz eigenen Metabolismus, der sich zwar kategorisieren, aber nicht vollkommen durchschauen lässt. Manch einer verbrennt im Schlaf, was andere am ganzen Tag zu sich nehmen, und betrachtet man dann auch noch besondere Umstände wie Schwangerschaften, Allergien und Unverträglichkeiten dazu, scheint es kaum möglich, als Normalsterblicher einen Überblick zu gewinnen und ihn auch behalten zu können. Und dabei haben wir Nährstoffe noch nicht einmal erwähnt.
+
+
+Wie also vorgehen? Das Thema ist so derartig weit, dass wir zuerst drei Betrachtungsebenen definieren wollen: Die Persönliche, die Gesellschaftliche und die einzelner Organisationen.
+Die Persönliche kennen wir vermutlich alle: Der eigene Bedarf, zusammengesetzt aus Metabolismus, Gewohnheit und Belastung, etwa durch Arbeit und Sport. Dazu kommen individuelle Umstände, etwa bestimmte Unverträglichkeiten, Allergien, aber auch Situationen wie Schwangerschaft, oder die Umstellung, nach langem Zeit des Übergewichts gesünder und mit weniger zu leben.
+Aber selbst wenn all dies nicht für einen relevant ist, stellt Nahrung 
+
+
+
+
+Militär, Armut, Belastung der Krankenkassen, 
+Zusammenhang zwischen Leistung von Angestellten und deren Umgebung. Essen spielt da auch eine wesentlcihe Rolle, besonders in starken Leistungumgebungen. Firmen, 
+
+
+
+
+
+
+In diesem Sinne möchten wir eine Anwendung erstellen, welche 
+
+
+
+
+
+
+
+
+* Persönlich
+* Freiheitliche Gesellschaft
+* nicht immer ganz efinach
+* viel zu tun, wenig Zeit.
+* Erleichterung durch technik
+* Am ende oft auch persönlcihe Verantwortung.
+
+
+, und auch den Zusammenhang es 
+
+
+
+
+
+
+
+
+Thema ist: Ernährung, Nährstoffe und Rezepte.
+
+
+Was heißt das?
+
+
+Stakeholder: Alle Personen. Jeder Mensch, und auch jedes Tier, vor allem Nutz und Haustiere, wenn aus menschlicher Sicht betrachtet
+
+
+Brechen wir dies weiter hinunter:
+
+
+* Personen mit Ahnung, also: Ernährungswissenschaftler, Soziale Arbeiter 
+* Schlechte Ernährung wirkt sich weitgehend negativ auf einen aus, 
+* Gruppen und Personen mit interesse an gesunderer, und besser funktionierender Gesellschaft. Was im großen alle Mitglieder dieser Gesellschaft beinhaltet. (im kleinen: Politiker, Lehrer, Sportler, Firmenleitungen, militärische Organisationen)
+* (Problem-gegenden und Armut gehen oft mit schlechtem Essen einher etc.)
+* Kann man (noch) nicht beweisen,die Datenlage gibt das noch nicht her. Wird aber weitgehend vermutet, und entsprechende Theorien gebildet.
+* Armut und Fettleibigkeit lassen sich nicht perfekt belegen, haben aber starke Argumente für ihre These.
+
+
+* Tierhalter, im weiten Sinne.
+
+
+
+
+Trennung in Ebenen (für Gründe?):
+Persönliche: Schwangerschaft, Unverträglichtkeit
+Gesellschaftliche: Militär, Armut, Belastung der Krankenkassen, 
+und auf der Ebende einzelner Organisationen: Zusammenhang zwischen Leistung von Angestellten und deren Umgebung. Essen spielt da auch eine wesentlcihe Rolle, besonders in starken Leistungumgebungen. Firmen, 
+
+
+
+
+
+
+
+
+* Große Teile der Bevölkerung sind übergewichtig, ein wesentlicher Teil davon stark.
+* Ungesunde Ernährungs, und Lebensweise
+* Gesundheitliche Gründe (Fettleibigkeit verringert die Lebenserwartung.
+* Sportlicher Gründe (Kalorienmenge)
+* Direkte Lebensumstände (Schwangerschaft, Kind versorgen, unverträglichkeiten)
+
+
+Ilias: Beispiele für Domänenmodell nachschauen:
+Meine eigenes altes Domänenmodell mal ansehen:
+
+
+Wir stützen uns im wesentlichen auf:
+Im besonderen möchten wir verweisen auf die executive Zusammenfassung auf Seite 14, alternativ hier:
+
+
+
+
+
+
+Dies bedeutet:
+
+
+
+
+Wie auch immer die Gründe beschaffen sein mögen, es gibt ein relevates, und weit verbreitetes Interesse an besserer Ernährung, sei es Nährstoffmangel, zu hohe Einnahme von Fetten oder 
+
+
+
+
+
+
+Quelle: https://read.oecd-ilibrary.org/social-issues-migration-health/the-heavy-burden-of-obesity_67450d67-en#page14
+
+
+
+
+http://www.gkpn.de/lemke.pdf
+
+
+
+
+
+
+
+
+
+
+Stattistisches Bundestamt: “Wirtschaftsrechnungen, Laufende Wirtschaftsrechnungen Einkommen, Einnahmen und Ausgaben privater Haushalte” 
+https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html#sprg229122 
+(Abgerufen am 3.11.2019)

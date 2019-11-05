@@ -22,7 +22,7 @@ Vorwort:
 
 
 Bitte beachten Sie, dass das hier vorgestellte Projektziel größer ausfällt, als was von uns in der begrenzten Zeit umsetzbar sein wird.
-Die uns zur verfügung stehenden Ressourcen, und auch der Rahmen des Projektes sind stark begrenzt, weshalb wir davon ausgehen, dass wir nur die absolut Kern Features werden fertigstellen können.
+Die uns zur verfügung stehenden Ressourcen, und auch der Rahmen des Projektes sind stark begrenzt, weshalb wir davon ausgehen, dass wir nur die absoluten Kernideen werden fertigstellen können.
 Es soll daher vor allem dazu dienen, zu zeigen, dass wir uns mit der Projektidee in Tiefe beschäftigt, und mögliche Probleme, Konsequenzen und Hindernisse erforscht haben.
 
 
@@ -93,10 +93,17 @@ Absehbare Probleme:
    * Sportlich sehr aktiv?
    * Unterschiedliche Metabolismus Anforderungen.
    * Unterschiedliche Klimata (bspw: gemäßigt, kontinental)
-   * Unterschiedliche Umgebungen
-        *
+   * Unterschiedliche Umgebungen:
+        * Haben starke Auswirkungen auf die Nahrungsmitteln die uns zur Verfügung stehen, und die Nährstoffe die wir benötigen.
+           * Wüstenumgebungen = höherer Wasserbedarf. 
+           * hohe Luftfeuchtigkeit = höherer Bedarf an Salzen 
+           * große Kälte = höherer Bedarf an Kalorien und Fetten.
+           * viel oder wenig Sonnenlicht = Bedarf an Vitamin D, besonders abhängig mit persönlichen körperlichen Eigenschaften. 
+       
+
+
     
-   Wüste, hohe Luftfeuchtigkeit, große Kälte, viel oder wenig Sonnenlicht, persönliche körperliche Eigenschaften.
+ 
 
 
 *  Rechtliche Absicherung gegenüber falscher Benutzung.

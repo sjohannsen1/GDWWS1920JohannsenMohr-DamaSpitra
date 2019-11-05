@@ -92,7 +92,11 @@ Absehbare Probleme:
    * Schwanger?
    * Sportlich sehr aktiv?
    * Unterschiedliche Metabolismus Anforderungen.
-   * Unterschiedliche Umgebungen (Wüste, hohe Luftfeuchtigkeit, große Kälte, viel oder wenig Sonnenlicht, persönliche körperliche Eigenschaften.
+   * Unterschiedliche Klimata (bspw: gemäßigt, kontinental)
+   * Unterschiedliche Umgebungen
+        *
+    
+   Wüste, hohe Luftfeuchtigkeit, große Kälte, viel oder wenig Sonnenlicht, persönliche körperliche Eigenschaften.
 
 
 *  Rechtliche Absicherung gegenüber falscher Benutzung.

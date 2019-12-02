@@ -39,7 +39,7 @@ await eingabe().then(function(foodQuery){
 .end(function (result) {
     //console.log(result)
 let cals = result.body.totalNutrients.ENERC_KCAL.quantity
- console.log(cals + "calories")
+ console.log(cals + " first")
  })
 })
 

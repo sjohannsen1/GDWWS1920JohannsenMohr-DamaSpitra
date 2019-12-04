@@ -1,6 +1,14 @@
 Anwendungslogik<br>
 
-1.Array, welches Zutaten (unformatierte Strings) sammelt die zu einem Rezept gehören.
+Anfrage an API
+
+Konstanten: API Key, APP ID, API Endpoint
+
+input 1. Array, welches Zutaten (unformatierte Strings) sammelt die zu einem Rezept gehören.
 
 2. Funktion die Eingabe bzw String annimmt, diesen formatiert sodass er im rahmen eines GET command
 an die API weiter gegeben werden kann (mkString im Code).
+
+3. GET Anfrage an API senden mit Formatiertem String und Konstanten, Resultat wird gespeichert.
+
+output: Komplettes Resultat oder einzelne Teile

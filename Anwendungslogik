@@ -1,0 +1,6 @@
+Anwendungslogik<br>
+
+1.Array, welches Zutaten (unformatierte Strings) sammelt die zu einem Rezept gehören.
+
+2. Funktion die Eingabe bzw String annimmt, diesen formatiert sodass er im rahmen eines GET command
+an die API weiter gegeben werden kann (mkString im Code).

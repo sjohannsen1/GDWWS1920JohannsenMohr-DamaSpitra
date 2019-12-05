@@ -7,6 +7,8 @@ const rl=readline.createInterface({
     output:process.stdout
 }) 
 
+//FAIL und so implementieren -> in Proof of Concept rtf file
+
 const eingabe=()=>{
     return new Promise((resolve,reject)=>{
         rl.question('Zutaten eingeben \t', function(foodStr){
@@ -36,8 +38,14 @@ const eingabe=()=>{
 const main=async()=>{
 await eingabe().then(function(foodQuery){
   unirest.get('https://api.edamam.com/api/nutrition-data?app_id=d583615a&app_key=360dfcc569d8706ce6255d3595c6cd68'+'&'+foodQuery)
-.end(function (result) {
-    //console.log(result)
+  .end(function (result) {
+    //console.log(result.body)
+    if(result.statusCode<200 || result.statusCode>299){
+      console.log("an error occurred")
+      //eingabe()
+      //wie repeate ich hier
+    }
+    console.log(result.statusCode)
 let cals = result.body.totalNutrients.ENERC_KCAL.quantity
  console.log(cals + "calories")
  })

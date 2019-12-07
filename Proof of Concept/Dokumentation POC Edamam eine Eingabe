@@ -1,0 +1,17 @@
+Beschreibung:
+Der Benutzer soll in diesem POC aufgefordert werden eine Zutat einzugeben. Diese Zutat wird in einem Arry gespeichert und dann an die Edamam API übergeben.
+
+
+Exit-Kriterien:
+Die Eingabe des Benutzers ist richtig (fehlerfrei), die AIP gibt den korrekt ermittelten Wert an den Benutzer zurück.
+
+
+Fail-Kriterien:
+1. Die Eingabe des Benutzers ist falsch oder unfollständig.
+2. Die Eingabe des Benutzers wurde nicht in der Datenbank gefunden.
+
+
+
+Fallback:
+1. Der Benutzer wird aufgefordert die Eingabe zu überprüfen und zu verbessern.
+2. Fehlermeldung wird ausgegeben, das dass gesuchte Elment nicht in der Datenbank gefunden werden konnte.

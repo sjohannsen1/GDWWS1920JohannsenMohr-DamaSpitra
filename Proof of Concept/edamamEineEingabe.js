@@ -1,4 +1,5 @@
 const unirest = require('unirest')
+const _=require('underscore')
 const readline=require('readline')
 const app_id="d583615a"
 const app_id2="13242f"
@@ -14,7 +15,7 @@ const rl=readline.createInterface({
 
 const eingabe=()=>{
     return new Promise((resolve,reject)=>{
-        rl.question('Zutaten eingeben \t', function(foodStr){
+        rl.question('Zutaten eingeben ', function(foodStr){
             //ingredientArray.push(foodStr);
                 var ingredients = new Array();
                 ingredients.push(foodStr);
@@ -37,35 +38,53 @@ const eingabe=()=>{
          })
     })
 }
-const main=async()=>{
-  await eingabe().then(function(foodQuery){
-    unirest.get('https://api.edamam.com/api/nutrition-data?app_id='+app_id2+'&app_key='+app_key+'&'+foodQuery)
-    .end(function (result) {
-      if(typeof result.body.totalNutrients===undefined){
-        console.log("invalid argument")
-        //reject()
-      }//FUNKTIONIERT NICHT
-      
-      else if(result.statusCode<200 || result.statusCode>299){
-        console.log("an error occurred")
-        //eingabe()
-        //wie repeate ich hier
-        if(repeated<3){
-          repeated++
-          setTimeout(function(){
-           //main()
-           //apiRequest(foodQuery)
-           main()
-          },3000)
-          rl.close() //readline schließt nicht 
-        }else{
-          //console.log("fatal error occured, please try again later")
-          reject(result.statusCode)
-        } 
+
+const menu=()=>{
+  return new Promise((resolve,reject)=>{
+    rl.question("1: Nochmal versuchen \n 2: Abort ", function(answer){
+      if(answer==1){
+        console.log("retrying")
+        setTimeout(function(){
+          //main()
+          //apiRequest(foodQuery)
+          
+          main()
+         },3000)
+         resolve()
       }
-        else {
-         let cals = result.body.totalNutrients.ENERC_KCAL.quantity
+      else if(answer==2){
+        console.log("fatal error occured, please try again later")
+        reject()
+        
+      }
+      else{
+        console.log("invalid argument, aborted")
+        reject()
+      }
+  })
+  })
+}
+const main=async()=>{
+  eingabe().then(function(foodQuery){
+    unirest.get('https://api.edamam.com/api/nutrition-data?app_id='+app_id+'&app_key='+app_key+'&'+foodQuery)
+    .end(function (result) {
+      if(result.statusCode>299){ //error fallbacks
+        if(result.statusCode<400){
+          console.log("a redirection error occurred "+ result.statusCode)
+        }else if(result.statusCode<500){
+          console.log("connection could not be established "+ result.statusCode)
+          console.log("please check application id and/or application key "+ result.statusCode)
+        }else if(result.statusCode>=500){
+          console.log("server unavailable "+ result.statusCode)
+          menu() //TODO: menu fixen
+        } 
+      }else if(!_.isEmpty(result.body.totalNutrients)){ //fallback falls eingabe invalid ist
+        let cals = result.body.totalNutrients.ENERC_KCAL.quantity
         console.log(cals + "calories")
+      }else {
+          console.log("invalid argument")
+          menu() //TODO: menu fixen
+          rl.close() 
       }
    })
   })

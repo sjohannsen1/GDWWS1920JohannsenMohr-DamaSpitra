@@ -14,7 +14,7 @@ const rl=readline.createInterface({
 //Fordert user zur eingabe einer Zutat. Formatiert diese und return dies
 const eingabe=()=>{
     return new Promise((resolve,reject)=>{
-        rl.question('Zutaten eingeben ', function(foodStr){
+        rl.question('Zutaten eingeben: ', function(foodStr){
 
                 var ingredients = new Array();
                 ingredients.push(foodStr);
@@ -43,7 +43,7 @@ const menu=(result1)=>{
  return new Promise((resolve,reject)=>{
     rl.question('1: Nochmal versuchen \n2: Abort \nEingabe: ', function(answer){
       if(answer==1){
-        console.log("retrying")
+        console.log("retrying \n")
         if(typeof result1 === "boolean"){
           eingabe().then(query=>anfrage(query)).then(res=>ausgabeCals(res)).then(function(){ rl.close()}) //wiederholt alles
         
@@ -85,7 +85,7 @@ const anfrage=(foodQuery)=>{
           resolve(foodQuery) //da der fehler am server liegt ist eine erneute sucheingabe nicht nötig, foodQuery wird übergeben
         } 
       }else if(!_.isEmpty(result.body.totalNutrients)){ //Wenns in der If-Abfrage ist lief alles gut
-          resolve(result.body.totalNutrients)
+          resolve(result.body)
       }else { //fallback falls eingabe invalid ist
           console.log("invalid argument")
           resolve(false) //sagt dem then dass eine neue eingabe nötig ist
@@ -94,14 +94,20 @@ const anfrage=(foodQuery)=>{
       }
    })
   })
-  }
+}
 
 const ausgabeCals=async(result)=>{
 if(typeof result ==="boolean" && result){ 
     return
   }else if (typeof result === "object"){
-  console.log("total Nutrients: "+JSON.stringify(result, 0, 2)) //Reicht das so als ausgabe? sonst gib ich nur die macros aus
-  }else{
+  console.log("total calories: "+result.totalNutrients.ENERC_KCAL.quantity+" kcal")
+  console.log("total protein: "+result.totalNutrients.PROCNT.quantity+" g \t \t"+`totalling ${result.totalNutrientsKCal.PROCNT_KCAL.quantity} ${result.totalNutrientsKCal.PROCNT_KCAL.label}`)
+  console.log("total fat: "+result.totalNutrients.FAT.quantity+" g \t \t "+`totalling ${result.totalNutrientsKCal.FAT_KCAL.quantity} ${result.totalNutrientsKCal.FAT_KCAL.label}`)
+  console.log("of which saturated fat: "+result.totalNutrients.FASAT.quantity+" g")
+  console.log("and unsaturated fat: "+(result.totalNutrients.FAMS.quantity+result.totalNutrients.FAPU.quantity)+" g")
+  console.log("total carbohydrates: "+result.totalNutrients.CHOCDF.quantity+" g \t"+`totalling ${result.totalNutrientsKCal.CHOCDF_KCAL.quantity} ${result.totalNutrientsKCal.CHOCDF_KCAL.label}`)  
+  console.log("of which sugars: "+result.totalNutrients.SUGAR.quantity+" g")
+}else{
     await menu(result) //es ist ein fehler passiert und dem User wird das Fehlermenu angezeigt
    }
 }

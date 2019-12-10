@@ -5,9 +5,10 @@ Anwendungslogik:
   Außerdem besteht noch die Möglichkeit einzelne Zutaten mit Mengenangaben direkt zu suchen. Dabei wird genauso vorgegangen, wie mit den Zutatenlisten aus Rezepten. Bei jeder weiteren Nährwertanfrage wird neu errechnet wie viel von dem Tagesbedarf erreicht wurde und das in dem Objekt gespeichert. Auf Wunsch des Nutzers wird das Objekt in eine Datei gespeichert und kann ausgegeben werden.
 
 Verwendete Algorithmen:
-Die Formel für die Berechnung des Kalorienbedarfs ist der Harris-Benedict-Algorithmus*, da dieser von Ernährungswissenschaftlern anerkannt ist und unter Berücksichtigung der 
-
-//ALGORITHMEN FEHLEN NOCH!!!!
+  Der Algorithmus für die Berechnung des Kalorienbedarfs ist der Harris-Benedict-Algorithmus¹, da dieser von Ernährungswissenschaftlern anerkannt ist und unter Berücksichtigung der Körpergröße, des Gewichts, des Geschlechts und des Aktivitätslevels den täglichen Kaloriengrundbedarf errechnet. 
+  Für die Berechnung des Proteinbedarfs wird für Benutzer unter 65 dieser Algorithmus verwendet: Eiweißbedarf (g/Tag) = Körpergewicht (kg) x 0,8 (g/kg KG) pro Tag und für Menschen älter als 65 Jahre dieser: Eiweißbedarf (g/Tag) = Körpergewicht (kg) x 1,0 (g/kg KG) . Dieser wurde von der Deutschen Gesellschaft für Ernährung e. V. (DGE) veröffentlicht². 
+  Die Berechnung des Bedarfs an Fetten lässt sich aus dem Kalorienbedarf errechnen. Die DGE empfiehlt dort für Erwachsene dass 30% des Kalorienbedarfs durch Fette gedeckt werden³. Davon sollen maximal 10% von gesättigten Fettsäuren gedeckt werden⁴.
+  Die restlichen benötigten Kalorien sollen laut der DGE von Kohlenhydraten gedeckt werden⁵, wobei davon maximal 10% aus Zucker bestehen sollen⁶. 
 
 Interne Datenstruktur:
 - Daten in der Datenbank werden in JSON-Dateien gespeichert
@@ -19,4 +20,9 @@ Interne Datenstruktur:
 Als primäre Datenstruktur zur Speicherung von Daten haben wir und für JSON-Dateien entschieden, da wir uns durch vorherige Nutzung mit denen auskannten und sie sich besonders in Kombination mit Javascript anbieten. Da die ständige Beschreibung und Auslesung dieser Dateien zu Ressourcenaufwändig wäre und sich auch sehr negativ auf die Laufzeit des Programmes auswirken würde, werden Dateien, solange sie verwendet werden in ein Objekt eingelesen und dann erst gegen Ende der Nutzung wieder in eine JSON-Datei eingespeichert. Der Nutzer erhält Ergebnisse in Form einer JSON-Datei.
 
 
-*:J. A. Harris und F. G. Benedict: Publication No 279A biometric study of basal metabolism in man. In: Carnegie Institution of Washington 1919
+¹:J. A. Harris und F. G. Benedict: Publication No 279A biometric study of basal metabolism in man. In: Carnegie Institution of Washington 1919
+²:https://www.dge.de/presse/pm/wie-viel-protein-brauchen-wir/
+³:https://www.dge.de/wissenschaft/referenzwerte/fett/
+⁴:https://www.dge.de/presse/pm/dge-empfiehlt-auf-fettmenge-und-qualitaet-achten/
+⁵:https://www.dge.de/wissenschaft/referenzwerte/kohlenhydrate-ballaststoffe/
+⁶:https://www.dge.de/presse/pm/empfehlung-zur-maximalen-zuckerzufuhr-in-deutschland/

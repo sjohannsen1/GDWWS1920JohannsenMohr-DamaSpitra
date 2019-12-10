@@ -1,12 +1,12 @@
 Anwendungslogik:
 
-Als erstes wird der User dazu aufgefordert einen Account zu erzeugen und seine Größe, sein Alter, Gewicht, Geschlecht und Aktivitätslevel einzugeben. Daraus wird der tägliche Kalorienbedarf berechnet
-Die errechneten Zielwerte für den täglichen Bedarf an Kalorien, Kohlenhydraten, Fetten und Proteinen werden dann in einem Objekt gespeichert. 
-Danach kann der Benutzer Rezepte suchen, indem er entweder nach Zutaten oder einem konkreten Rezept sucht. Das Programm hat vorher die Rezept-Dateien eingelesen und in einem Array eingespeichert. Dann durchsucht es dieses und präsentiert das Resultat dem Nutzer. Wenn er dies bestätigt, werden die Zutaten und deren Mengenangaben formatiert, sodass diese von der API empfangen und verarbeitet werden können. Nun werden sie mit dem Application Key und der Application ID an die API gesendet.  Die API schickt die Nährwertangaben der angefragten Zutaten zurück. 
-Außerdem besteht noch die Möglichkeit einzelne Zutaten mit Mengenangaben direkt zu suchen. Dabei wird genauso vorgegangen, wie mit den Zutatenlisten aus Rezepten. Bei jeder weiteren Nährwertanfrage wird neu errechnet wie viel von dem Tagesbedarf erreicht wurde und das in dem Objekt gespeichert. Auf Wunsch des Nutzers wird das Objekt in eine Datei gespeichert und kann ausgegeben werden.
+  Als erstes wird der Nutzer dazu aufgefordert einen Account zu erzeugen und seine Größe, sein Alter, Gewicht, Geschlecht und Aktivitätslevel einzugeben. Daraus werden Zielwerte für den täglichen Bedarf an Kalorien, Kohlenhydraten, Fetten und Proteinen errechnet und in einem Objekt gespeichert. Diese kann der Nutzer jederzeit mit seiner NutzerID, welche er zu Beginn bei der Erzeugung des Accounts erhält, abrufen.
+  Danach kann der Benutzer Rezepte suchen, indem er entweder nach Zutaten oder einem konkreten Rezept sucht. Das Programm hat vorher die Rezept-Dateien eingelesen und in einem Array eingespeichert. Dann durchsucht es dieses und präsentiert das Resultat dem Nutzer. Wenn er dies bestätigt, werden die Zutaten und deren Mengenangaben formatiert, sodass diese von der API empfangen und verarbeitet werden können. Nun werden sie mit dem Application Key und der Application ID an die API gesendet.  Die API schickt die Nährwertangaben der angefragten Zutaten zurück. 
+  Außerdem besteht noch die Möglichkeit einzelne Zutaten mit Mengenangaben direkt zu suchen. Dabei wird genauso vorgegangen, wie mit den Zutatenlisten aus Rezepten. Bei jeder weiteren Nährwertanfrage wird neu errechnet wie viel von dem Tagesbedarf erreicht wurde und das in dem Objekt gespeichert. Auf Wunsch des Nutzers wird das Objekt in eine Datei gespeichert und kann ausgegeben werden.
 
 Verwendete Algorithmen:
-Die Formel für die Berechnung des Kalorienbedarfs ist der Harris-Benedict-Algorithmus.
+Die Formel für die Berechnung des Kalorienbedarfs ist der Harris-Benedict-Algorithmus*, da dieser von Ernährungswissenschaftlern anerkannt ist und unter Berücksichtigung der 
+
 //ALGORITHMEN FEHLEN NOCH!!!!
 
 Interne Datenstruktur:
@@ -16,4 +16,7 @@ Interne Datenstruktur:
 - Zutaten aus Rezeptdateien werden als formatierte Strings in einem Array eingespeichert
 - Die Antworten der API werden in einem Objekt gespeichert und ggf. zu Ende des Nutzungszyklus in einer JSON Datei gespeichert
 
-Als primäre Datenstruktur zur Speicherung von Daten haben wir und für JSON-Dateien entschieden, da wir uns durch vorherige Nutzung mit denen auskannten und sie sich besonders in Kombination mit Javascript anbieten. Da die ständige Beschreibung und Auslesung dieser Dateien zu Ressourcenaufwändig wäre und sich auch sehr negativ auf die Laufzeit des Programmes auswirken würde, werden Dateien, solange sie verwendet werden in ein Objekt eingelesen und dann erst gegen Ende der Nutzung wieder in eine JSON-Datei eingespeichert. 
+Als primäre Datenstruktur zur Speicherung von Daten haben wir und für JSON-Dateien entschieden, da wir uns durch vorherige Nutzung mit denen auskannten und sie sich besonders in Kombination mit Javascript anbieten. Da die ständige Beschreibung und Auslesung dieser Dateien zu Ressourcenaufwändig wäre und sich auch sehr negativ auf die Laufzeit des Programmes auswirken würde, werden Dateien, solange sie verwendet werden in ein Objekt eingelesen und dann erst gegen Ende der Nutzung wieder in eine JSON-Datei eingespeichert. Der Nutzer erhält Ergebnisse in Form einer JSON-Datei.
+
+
+*:J. A. Harris und F. G. Benedict: Publication No 279A biometric study of basal metabolism in man. In: Carnegie Institution of Washington 1919

@@ -1,5 +1,28 @@
 Anwendungslogik:
-Als erstes wird der User dazu aufgefordert seine Gr��e und sein Alter Gewicht, Geschlecht und Aktivit�tslevel einzugeben. Daraus wird dann mithilfe der Harris-Benedict-Formel der t�gliche Kalorienbedarf berechnet. WIE BERECHNET MAN RESTLICHE MARKROS, RECHERCHIEREN
-Die errechneten Zielwerte f�r den t�glichen Bedarf an Kalorien, Kohlenhydraten, Fetten und Proteinen werden dann in einem Objekt gespeichert. 
-Danach kann der Benutzer Rezepte suchen, indem er entweder nach Zutaten oder einem Konkreten Rezept sucht. Das Programm hat vorher die Rezept JSON Dateien eingelesen und in einem Array eingespeichert. Dann durchsucht es dieses mithilfe der String funktion "includes" oder "search". Das Resultat wird dem Nutzer nun pr�sentiert. Wenn er dies best�tigt, werden die Zutaten und deren Mengenangaben formatiert, sodass diese von der API empfangen und verarbeitet werden k�nnen. Nun werden sie mit dem Application Key und der Application ID an die API gesendet.  Die API schickt die N�hrwertangaben der angefragten Zutaten zur�ck. 
-Au�erdem besteht noch die M�glichkeit einzelne Zutaten mit Mengenangaben direkt zu suchen. Damit wird genauso vorgegangen wie mit den Zutatenlisten aus Rezepten. Bei jeder weiteren N�hrwertanfrage wird neu errechnet wie viel von dem Tagesbedarf erreicht wurde und das in dem Objekt gespeichert. Auf Wunsch des Nutzers wird das Objekt in eine JSON Datei gespeichert und kann ausgegeben werden. 
+
+  Als erstes wird der Nutzer dazu aufgefordert einen Account zu erzeugen und seine Größe, sein Alter, Gewicht, Geschlecht und Aktivitätslevel einzugeben. Daraus werden Zielwerte für den täglichen Bedarf an Kalorien, Kohlenhydraten, Fetten und Proteinen errechnet und in einem Objekt gespeichert. Diese kann der Nutzer jederzeit mit seiner NutzerID, welche er zu Beginn bei der Erzeugung des Accounts erhält, abrufen.
+  Danach kann der Benutzer Rezepte suchen, indem er entweder nach Zutaten oder einem konkreten Rezept sucht. Das Programm hat vorher die Rezept-Dateien eingelesen und in einem Array eingespeichert. Dann durchsucht es dieses und präsentiert das Resultat dem Nutzer. Wenn er dies bestätigt, werden die Zutaten und deren Mengenangaben formatiert, sodass diese von der API empfangen und verarbeitet werden können. Nun werden sie mit dem Application Key und der Application ID an die API gesendet.  Die API schickt die Nährwertangaben der angefragten Zutaten zurück. 
+  Außerdem besteht noch die Möglichkeit einzelne Zutaten mit Mengenangaben direkt zu suchen. Dabei wird genauso vorgegangen, wie mit den Zutatenlisten aus Rezepten. Bei jeder weiteren Nährwertanfrage wird neu errechnet wie viel von dem Tagesbedarf erreicht wurde und das in dem Objekt gespeichert. Auf Wunsch des Nutzers wird das Objekt in eine Datei gespeichert und kann ausgegeben werden.
+
+Verwendete Algorithmen:
+  Der Algorithmus für die Berechnung des Kalorienbedarfs ist der Harris-Benedict-Algorithmus¹, da dieser von Ernährungswissenschaftlern anerkannt ist und unter Berücksichtigung der Körpergröße, des Gewichts, des Geschlechts und des Aktivitätslevels den täglichen Kaloriengrundbedarf errechnet. 
+  Für die Berechnung des Proteinbedarfs wird für Benutzer unter 65 dieser Algorithmus verwendet: Eiweißbedarf (g/Tag) = Körpergewicht (kg) x 0,8 (g/kg KG) pro Tag und für Menschen älter als 65 Jahre dieser: Eiweißbedarf (g/Tag) = Körpergewicht (kg) x 1,0 (g/kg KG) . Dieser wurde von der Deutschen Gesellschaft für Ernährung e. V. (DGE) veröffentlicht². 
+  Die Berechnung des Bedarfs an Fetten lässt sich aus dem Kalorienbedarf errechnen. Die DGE empfiehlt dort für Erwachsene dass 30% des Kalorienbedarfs durch Fette gedeckt werden³. Davon sollen maximal 10% von gesättigten Fettsäuren gedeckt werden⁴.
+  Die restlichen benötigten Kalorien sollen laut der DGE von Kohlenhydraten gedeckt werden⁵, wobei davon maximal 10% aus Zucker bestehen sollen⁶. 
+
+Interne Datenstruktur:
+- Daten in der Datenbank werden in JSON-Dateien gespeichert
+- Personendaten, die aktuell verwendet werden, werden aus existierenden JSON-Dateien ausgelesen und in einem Objekt gespeichert. Wenn keine   vorherigen Daten existieren werden sie solbald sie verfügbar sind in einem Objekt eingespeichert. Wenn die Verwendung vorbei ist, werden   diese in eine JSON-Datei gespeichert 
+- Rezeptdaten werden aus JSON-Dateien in ein Array eingelesen
+- Zutaten aus Rezeptdateien werden als formatierte Strings in einem Array eingespeichert
+- Die Antworten der API werden in einem Objekt gespeichert und ggf. zu Ende des Nutzungszyklus in einer JSON Datei gespeichert
+
+Als primäre Datenstruktur zur Speicherung von Daten haben wir und für JSON-Dateien entschieden, da wir uns durch vorherige Nutzung mit denen auskannten und sie sich besonders in Kombination mit Javascript anbieten. Da die ständige Beschreibung und Auslesung dieser Dateien zu Ressourcenaufwändig wäre und sich auch sehr negativ auf die Laufzeit des Programmes auswirken würde, werden Dateien, solange sie verwendet werden in ein Objekt eingelesen und dann erst gegen Ende der Nutzung wieder in eine JSON-Datei eingespeichert. Der Nutzer erhält Ergebnisse in Form einer JSON-Datei.
+
+
+¹:J. A. Harris und F. G. Benedict: Publication No 279A biometric study of basal metabolism in man. In: Carnegie Institution of Washington 1919
+²:https://www.dge.de/presse/pm/wie-viel-protein-brauchen-wir/
+³:https://www.dge.de/wissenschaft/referenzwerte/fett/
+⁴:https://www.dge.de/presse/pm/dge-empfiehlt-auf-fettmenge-und-qualitaet-achten/
+⁵:https://www.dge.de/wissenschaft/referenzwerte/kohlenhydrate-ballaststoffe/
+⁶:https://www.dge.de/presse/pm/empfehlung-zur-maximalen-zuckerzufuhr-in-deutschland/

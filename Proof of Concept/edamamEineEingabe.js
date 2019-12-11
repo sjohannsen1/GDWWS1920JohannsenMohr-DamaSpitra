@@ -103,9 +103,12 @@ if(typeof result ==="boolean" && result){
   console.log("total calories: "+result.totalNutrients.ENERC_KCAL.quantity+" kcal")
   console.log("total protein: "+result.totalNutrients.PROCNT.quantity+" g \t \t"+`totalling ${result.totalNutrientsKCal.PROCNT_KCAL.quantity} ${result.totalNutrientsKCal.PROCNT_KCAL.label}`)
   console.log("total fat: "+result.totalNutrients.FAT.quantity+" g \t \t "+`totalling ${result.totalNutrientsKCal.FAT_KCAL.quantity} ${result.totalNutrientsKCal.FAT_KCAL.label}`)
+  if(typeof result.totalNutrients.FASAT !== "undefined")
   console.log("of which saturated fat: "+result.totalNutrients.FASAT.quantity+" g")
+  if(typeof result.totalNutrients.FAMS !== "undefined" && typeof result.totalNutrients.FAPU !== "undefined")
   console.log("and unsaturated fat: "+(result.totalNutrients.FAMS.quantity+result.totalNutrients.FAPU.quantity)+" g")
   console.log("total carbohydrates: "+result.totalNutrients.CHOCDF.quantity+" g \t"+`totalling ${result.totalNutrientsKCal.CHOCDF_KCAL.quantity} ${result.totalNutrientsKCal.CHOCDF_KCAL.label}`)  
+  if(typeof result.totalNutrients.SUGAR !== "undefined")
   console.log("of which sugars: "+result.totalNutrients.SUGAR.quantity+" g")
 }else{
     await menu(result) //es ist ein fehler passiert und dem User wird das Fehlermenu angezeigt

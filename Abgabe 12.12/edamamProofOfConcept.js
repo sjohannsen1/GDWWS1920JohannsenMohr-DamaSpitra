@@ -1,5 +1,5 @@
-const unirest = require('unirest')
-const _ =require('underscore')
+const unirest = require('\Abgabe 12.12/node_modules/unirest')
+const _ =require('\Abgabe 12.12/node_modules/underscore')
 const readline=require('readline')
 const app_id="d583615a"
 const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500

@@ -1,10 +1,12 @@
 const unirest = require('unirest') //..\\GDWWS1920JohannsenMohr-DamaSpitra\\Abgabe 12.12\\node_modules\\
 const _ = require('underscore') 
 const readline=require('readline')
+const reqTools= require("./bedarfModul.js")
 const app_id="d583615a"
 const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
+
 
 const rl=readline.createInterface({
     input:process.stdin,
@@ -37,6 +39,48 @@ const eingabe=()=>{
          })
     })
 }
+//TODO: funktion sichern (fehlerhafte Eingaben abfangen), vielleicht in eigene Promises aufsplitten, dann mit then verknüpfen
+const eingabeNutzer=()=>{
+    return new Promise((resolve,reject)=>{
+        benutzer={}
+        benutzer.id=1 //fortlaufend (???)
+        rl.question('Alter Eingeben', function(age){
+            benutzer.alter=age
+            rl.question('Groesse eingeben (in cm)', function(height){
+                benutzer.groesse=height
+                rl.question('Gewicht eingeben (in kg)', function(weight){
+                    benutzer.gewicht=weight
+                    rl.question('Geschlecht eingeben (m für männlich, w für weiblich', function(sex){
+                        if(sex=="m"||sex=="w"){
+                            benutzer.geschlecht=sex
+                        }
+                        else reject("Invalid Sex")
+                        rl.question('Aktivitätslevel eingeben: \n keine Aktivität = 1.2 \n kaum Aktivität = 1.5 \n mäßige Aktivität = 1.7 \n Aktiv = 1.9 \n sehr Aktiv = 2.3', function(activitaet){
+                            benutzer.activity=activitaet
+                            resolve(benutzer)
+                        })
+                    })
+                })
+            })
+         })
+    })
+}
+//errechnet Bedarfwerte des Nutzers
+const bedarfNutzer=(user)=>{
+    return new Promise((resolve, reject)=>{
+        bedarf={}
+        bedarf.kcal=reqTools.calBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
+        bedarf.fett=reqTools.fatBedarf(user.bedarf.kcal)
+        bedarf.gesFett=reqTools.maxSatFat(bedarf.fett)
+        bedarf.ungesFett=bedarf.fett-bedarf.gesFett
+        bedarf.protein=reqTools.proBedarf(user.gewicht, user.alter) 
+        bedarf.carbs=reqTools.carbBedarf(bedarf.calBedarf, bedarf.fatBedarf, bedarf.proBedarf)
+        bedarf.zucker=reqTools.maxSugar(bedarf.carbs)
+        user.bedarf=bedarf
+        resolve(user)
+    })
+}
+
 
 //Fehlermenu, ermöglicht dem User die wahl zwischen einem Weiteren Versuch oder dem Programmabbruch
 const menu=(result1)=>{

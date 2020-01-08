@@ -44,18 +44,21 @@ const eingabeNutzer=()=>{
     return new Promise((resolve,reject)=>{
         benutzer={}
         benutzer.id=1 //fortlaufend (???)
-        rl.question('Alter Eingeben', function(age){
+        rl.question('Alter Eingeben \t', function(age){
             benutzer.alter=age
-            rl.question('Groesse eingeben (in cm)', function(height){
+            rl.question('Groesse eingeben (in cm) \t', function(height){
                 benutzer.groesse=height
-                rl.question('Gewicht eingeben (in kg)', function(weight){
+                rl.question('Gewicht eingeben (in kg) \t', function(weight){
                     benutzer.gewicht=weight
-                    rl.question('Geschlecht eingeben (m für männlich, w für weiblich', function(sex){
+                    rl.question('Geschlecht eingeben (m für männlich, w für weiblich) \t', function(sex){
+                        
                         if(sex=="m"||sex=="w"){
                             benutzer.geschlecht=sex
                         }
-                        else reject("Invalid Sex")
-                        rl.question('Aktivitätslevel eingeben: \n keine Aktivität = 1.2 \n kaum Aktivität = 1.5 \n mäßige Aktivität = 1.7 \n Aktiv = 1.9 \n sehr Aktiv = 2.3', function(activitaet){
+                        else benutzer.geschlecht="m"
+                        // reject("Invalid Argument")
+
+                        rl.question('Aktivitätslevel eingeben: \n keine Aktivität = 1.2 \n kaum Aktivität = 1.5 \n mäßige Aktivität = 1.7 \n Aktiv = 1.9 \n sehr Aktiv = 2.3 \n', function(activitaet){
                             benutzer.activity=activitaet
                             resolve(benutzer)
                         })
@@ -65,17 +68,17 @@ const eingabeNutzer=()=>{
          })
     })
 }
-//errechnet Bedarfwerte des Nutzers
+//errechnet Bedarfwerte des Nutzers, getestet und funktioniert
 const bedarfNutzer=(user)=>{
     return new Promise((resolve, reject)=>{
-        bedarf={}
+        bedarf=new Object()
         bedarf.kcal=reqTools.calBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
-        bedarf.fett=reqTools.fatBedarf(user.bedarf.kcal)
-        bedarf.gesFett=reqTools.maxSatFat(bedarf.fett)
-        bedarf.ungesFett=bedarf.fett-bedarf.gesFett
+        bedarf.fett=reqTools.fatBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
+        bedarf.gesFett=reqTools.maxSatFat(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
+        bedarf.ungesFett=reqTools.fatBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)-reqTools.maxSatFat(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
         bedarf.protein=reqTools.proBedarf(user.gewicht, user.alter) 
-        bedarf.carbs=reqTools.carbBedarf(bedarf.calBedarf, bedarf.fatBedarf, bedarf.proBedarf)
-        bedarf.zucker=reqTools.maxSugar(bedarf.carbs)
+        bedarf.carbs=reqTools.carbBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
+        bedarf.zucker=reqTools.maxSugar(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
         user.bedarf=bedarf
         resolve(user)
     })
@@ -159,7 +162,10 @@ if(typeof result ==="boolean" && result){
    }
 }
 const main=async()=>{
-  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>ausgabeCals(result))
+  //await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>ausgabeCals(result))
+  await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){
+    console.log(user)
+  })
   rl.close()
   }
 main()

@@ -1,0 +1,24 @@
+{
+   "Rezept": {
+    "title": "Name",
+    "zutaten":
+    [
+        {
+        "Zutat1":{
+            "nameZutat":"name",
+            "mengeZutat":"menge in gramm bzw schauen in edamam"
+            } ,
+
+
+
+
+        "Zutatx": "zutatx"
+
+        }
+    ],
+    "Zubereitung": "String mit Zubereitung, interessiert uns nicht, wird nur ausgegeben",
+    "Dauer": "in Min",
+    "Kategorie": "Kategorienaufzählung (Strings),  nice to have, nicht essentiel" 
+    }
+    
+}

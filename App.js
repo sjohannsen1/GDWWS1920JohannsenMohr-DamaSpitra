@@ -2,17 +2,32 @@ const unirest = require('unirest') //..\\GDWWS1920JohannsenMohr-DamaSpitra\\Abga
 const _ = require('underscore') 
 const readline=require('readline')
 const reqTools= require("./bedarfModul.js")
+const JSONtools=require("./JSONModul.js")
 const app_id="d583615a"
 const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
-
+//var recipepaths,recipes=[] //Woher die rezepte?
 
 const rl=readline.createInterface({
     input:process.stdin,
     output:process.stdout
 }) 
 
+const rezepteLesen=(recipepaths)=>{
+  for(let i=0; i++;i<recipepaths.length)
+   recipes[i]=JSONtools.getData(recipepaths[i])
+  //ASYNCHRON
+}
+const rezeptPresent=(recipeArray)=>{
+  return new Promise((resolve, reject)=>{
+    for(let i=0;i++;i<recipeArray.length){
+      console.log(i+":")
+      console.log(recipeArray[i])
+    }
+    resolve()//Auswahl ermöglichen
+  })
+}
 //Fordert user zur eingabe einer Zutat. Formatiert diese und return dies
 const eingabe=()=>{
     return new Promise((resolve,reject)=>{

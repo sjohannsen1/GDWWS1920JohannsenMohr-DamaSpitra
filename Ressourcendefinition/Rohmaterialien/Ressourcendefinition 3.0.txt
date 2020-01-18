@@ -1,0 +1,224 @@
+﻿Ressourcendefinition
+
+
+Der Logik von REST folgend, verfügt unsere Schnittstelle über eine Reihe von klar definierten, und durchgehend anwendbaren HTTP Methoden.
+
+
+Die verschiedenen Representationen der Ressourcen bieten wir über den Vorgang der Content Negotiation als JSON an. Wir nutzen JSON, da wir schon einige Erfahrungen mit JSON sammeln konnten. Außerdem harmoniert JSON sehr gut mit der für das Projekt  verwendeten Programmiersprache Javascript.
+
+
+Hier sehen Sie die HTTP Methoden losgelöst von einzelnen Ressourcen.
+
+
+Verb
+	Semantik
+	Sicher
+	idempotent
+	cache fähig
+	sichtbare semantik
+	URI
+	Get
+	Greift auf die Repräsentation einer Ressource zu. Die Form dieser Repräsentation wird via Content Negotiation gelöst.
+	X
+	X
+	X
+	X
+	
+
+	Header
+	Greift auf den Header einer Repräsentation einer Ressource zu. Dient im wesentlichen zur genaueren Ausführung und Performanceverbesserung.
+	X
+	X
+	X
+	X
+	
+
+	Put
+	Aktualisiert den Zustand der Repräsentation einer Ressource.
+	
+
+	
+
+	
+
+	X
+	
+
+	Post
+	Erstellt eine neue Repräsentation einer Ressource.
+	
+
+	
+
+	
+
+	
+
+	
+
+	Delete
+	Löscht die Repräsentation einer Ressource.
+	
+
+	
+
+	
+
+	X
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Im folgenden erwartet Sie eine Auflistung aller Ressourcen der Schnittstelle sowie eine komplette Methodentabelle:
+________________
+Benutzer, Listenressource. (Endpoint: /benutzer)
+
+
+Die Benutzer Ressource versammelt alle Benutzer_Id Ressourcen als Listenressource unter sich. 
+Sie beinhaltet beliebig viele Benutzer_Ids.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/benutzer/
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Benutzer_Id, Einzelressource, Primärressource von Körperdaten. 
+(Endpoint: benutzer/{orderId})
+
+
+Die Benutzer_id Ressource beschreibt individuelle Nutzer des Services.
+Sie dient zudem als Primärressource für die Subressource Körperdaten des individuellen Nutzers.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/benutzer/{orderId}
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Körperdaten, Subressource von Benutzer_Id; 
+Primärressource von Subressourcen Größe, Geschlecht, Gewicht, Aktivitätslevel.
+(Endpoint: /kpd)
+
+
+Die Körperdaten Ressource beschreibt die individuellen Körperwerte eines Nutzers.
+
+
+Sie ist die Subressource einer Benutzer_Id Ressource. Dies folgert, da die Körperwerte Ressource ohne verlinkte Benutzer_Id nicht sinnvoll nutzbar wäre.
+
+
+Sie dient zudem als Primärressource der Subressourcen Größe, Geschlecht, Gewicht.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/benutzer/{orderId}/kpd/
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Größe, Subressource von Körperdaten; (Endpoint: /groeße)
+
+
+Die Ressource Größe beschreibt die individuelle Körpergröße eines Nutzers.
+
+
+Sie ist die Subressource einer Körperdaten Ressource. Dies folgert, da die Größe Ressource ohne verlinkte Körperdaten Ressource nicht sinnvoll nutzbar wäre.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/benutzer/{orderId}/kpd/groeße
+---------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+Geschlecht, Subressource von Körperdaten; (Endpoint: /geschlecht)
+
+
+Die Ressource Geschlecht beschreibt das individuelle Geschlecht eines Nutzers.
+
+
+Sie ist die Subressource einer Körperdaten Ressource. Dies folgert, da die Geschlecht Ressource ohne verlinkte Körperdaten Ressource nicht sinnvoll nutzbar wäre.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/benutzer/{orderId}/kpd/geschlecht
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Gewicht, Subressource von Körperdaten; (Endpoint: /gewicht)
+
+
+Die Ressource Gewicht beschreibt das individuelle Gewicht eines Nutzers.
+
+
+Sie ist die Subressource einer Körperdaten Ressource. Dies folgert, da die Gewicht Ressource ohne verlinkte Körperdaten Ressource nicht sinnvoll nutzbar wäre.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/benutzer/{orderId}/kpd/gewicht
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Aktivitätslevel, Subressource von Körperdaten; (Endpoint: /aktivitaetslevel)
+
+
+Die Ressource Aktivitätslevel beschreibt das individuelle Aktivitätslevel eines Nutzers.
+
+
+Sie ist die Subressource einer Körperdaten Ressource. Dies folgert, da die Aktivitätslevel Ressource ohne verlinkte Körperdaten Ressource nicht sinnvoll nutzbar wäre.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/benutzer/{orderId}/kpd/aktivitaetslevel
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Rezeptkategorien, Listenressource; (Endpoint: /rezeptkategorie)
+
+
+Die Rezeptkategorien Ressource versammelt alle Rezeptkategorien_Id Ressourcen als Listenressource unter sich. 
+Sie beinhaltet beliebig viele Rezeptkategorien_Ids.
+
+
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/rezeptkategorie/
+---------------------------------------------------------------------------------------------------------------------------
+
+
+________________
+
+
+Rezeptkategorien_Id, Listenressource; (Endpoint: rezeptkategorie/{orderId})
+
+
+Die Rezeptkategorie_Id Ressource versammelt alle Rezept_Id Ressourcen eines bestimmten Typus als Listenressource unter sich. 
+Sie beinhaltet beliebig viele Rezept_Ids.
+Dies dient im wesentlichen dazu, nach bestimmten Kategorien von Rezepten sortieren zu können.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/rezeptkategorie/kartoffeln/
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Rezept_Id, Einzelressource; (Endpoint: rezeptkategorie/{orderId}/{orderId})
+
+
+Die Rezept_Id Ressource beschreibt alle individuellen Rezepte des Services.
+
+
+Uniform Resource Identifier Beispiel: http://fitundschoen.de/rezeptkategorie/kartoffeln/27
+---------------------------------------------------------------------------------------------------------------------------

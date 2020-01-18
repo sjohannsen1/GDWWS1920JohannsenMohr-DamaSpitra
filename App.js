@@ -9,6 +9,13 @@ const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status cod
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
 //var recipepaths,recipes=[] //Woher die rezepte?
+const rezepte={
+  recipe1:"courgette carbonara",
+  recipe2:"Brussels sprouts",
+  recipe3:"Roasted black bean burgers",
+  recipe4:"Chicken & tofu noodle soup",
+  recipe5:"Tuna fettuccine"
+}
 
 const rl=readline.createInterface({
     input:process.stdin,
@@ -33,7 +40,10 @@ const rezepteLesen=(recipepaths,recipes)=>{
 })
 }
 
+const rezeptWahl=(recipe)=>{
+ //todo: implementieren
 
+}
 
 const rezeptPresent=(recipeArray)=>{
   return new Promise((resolve, reject)=>{
@@ -212,25 +222,37 @@ if(typeof result ==="boolean" && result){
     await menu(result) //es ist ein fehler passiert und dem User wird das Fehlermenu angezeigt
    }
 }
-
+//errechnet wie viel Prozent der Nährwertvorgaben erreicht wurden
 const reachedNut=(result,user)=>{
   return new Promise((resolve,reject)=>{
   let reached=new Object()
   if (typeof result === "object"){
-    reached.kcal=user.erreichtBedarf.kcal+(result.totalNutrients.ENERC_KCAL.quantity/user.bedarf.kcal)
-    reached.protein=user.erreichtBedarf.protein+(result.totalNutrients.PROCNT.quantity/user.bedarf.protein)
-    reached.fat=user.erreichtBedarf.fett+(result.totalNutrients.FAT.quantity/user.bedarf.fett)
+    if(!_.isEmpty(result.totalNutrients.ENERC_KCAL))
+      reached.kcal=user.erreichtBedarf.kcal+(result.totalNutrients.ENERC_KCAL.quantity/user.bedarf.kcal)*100
+    else
+      reached.kcal=user.erreichtBedarf.kcal
+    if(!_.isEmpty(result.totalNutrients.PROCNT))
+      reached.protein=user.erreichtBedarf.protein+(result.totalNutrients.PROCNT.quantity/user.bedarf.protein)*100
+    else
+      reached.protein=user.erreichtBedarf.protein
+    if(!_.isEmpty(result.totalNutrients.FAT))
+      reached.fett=user.erreichtBedarf.fett+(result.totalNutrients.FAT.quantity/user.bedarf.fett)*100
+    else
+      reached.fett=user.erreichtBedarf.fett
     if(typeof result.totalNutrients.FASAT !== "undefined")
-      reached.gesFett=user.erreichtBedarf.gesFett+(result.totalNutrients.FASAT.quantity/user.bedarf.gesFett)
+      reached.gesFett=user.erreichtBedarf.gesFett+(result.totalNutrients.FASAT.quantity/user.bedarf.gesFett)*100
     else
       reached.gesFett=user.erreichtBedarf.gesFett
     if(typeof result.totalNutrients.FAMS !== "undefined" && typeof result.totalNutrients.FAPU !== "undefined")
-      reached.ungesFett=user.erreichtBedarf.ungesFett+((result.totalNutrients.FAMS.quantity+result.totalNutrients.FAPU.quantity)/user.bedarf.ungesFett)
+      reached.ungesFett=user.erreichtBedarf.ungesFett+((result.totalNutrients.FAMS.quantity+result.totalNutrients.FAPU.quantity)/user.bedarf.ungesFett)*100
     else 
       reached.ungesFett=user.erreichtBedarf.ungesFett
-    reached.carbs=user.erreichtBedarf.carbs+(result.totalNutrients.CHOCDF.quantity/user.bedarf.carbs)
+    if(!_.isEmpty(result.totalNutrients.CHOCDF))
+      reached.carbs=user.erreichtBedarf.carbs+(result.totalNutrients.CHOCDF.quantity/user.bedarf.carbs)*100
+    else
+      reached.carbs=user.erreichtBedarf.carbs
     if(typeof result.totalNutrients.SUGAR !== "undefined")
-      reached.zucker=user.erreichtBedarf.zucker+(result.totalNutrients.SUGAR.quantity/user.bedarf.zucker)
+      reached.zucker=user.erreichtBedarf.zucker+(result.totalNutrients.SUGAR.quantity/user.bedarf.zucker)*100
     else
       reached.zucker=user.erreichtBedarf.zucker
     user.erreichtBedarf=reached
@@ -246,11 +268,20 @@ const main=async()=>{
   let aktNutzer
   await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){aktNutzer=user})
   await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(user){
+    aktNutzer=user
     console.log(user)
   }))
+  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(user){
+    aktNutzer=user
+    console.log(user)
+  }))
+
   
  // await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){console.log(res) })
   rl.close()
   }
 main()
 
+module.exports={
+  //add exporte
+}

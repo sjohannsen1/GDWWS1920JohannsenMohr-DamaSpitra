@@ -1,6 +1,5 @@
 const unirest = require('unirest') //..\\GDWWS1920JohannsenMohr-DamaSpitra\\Abgabe 12.12\\node_modules\\
 const _ = require('underscore') 
-
 const readline=require('readline')
 const reqTools= require("./bedarfModul.js")
 const JSONtools=require("./JSONModul.js")
@@ -112,6 +111,15 @@ const bedarfNutzer=(user)=>{
         bedarf.carbs=reqTools.carbBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
         bedarf.zucker=reqTools.maxSugar(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
         user.bedarf=bedarf
+        user.erreichtBedarf={
+          kcal:0,
+          protein:0,
+          fett:0,
+          gesFett:0,
+          ungesFett:0,
+          carbs:0,
+          zucker:0
+        }
         resolve(user)
     })
 }
@@ -204,15 +212,44 @@ if(typeof result ==="boolean" && result){
     await menu(result) //es ist ein fehler passiert und dem User wird das Fehlermenu angezeigt
    }
 }
-const main=async()=>{ 
-  //await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>ausgabeCals(result))
-  //await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){console.log(user) })
-  //console.log(rezepteLesen(["./Recipes/Recipe1.json"]))
-  
- //rezepteReinBrute(["./Recipes/Recipe1.json","./Recipes/Recipe2.json"],new Array()).then(recipes=>function(recipes){ console.log(recipes)})
-  await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){
-    console.log(res)
+
+const reachedNut=(result,user)=>{
+  return new Promise((resolve,reject)=>{
+  let reached=new Object()
+  if (typeof result === "object"){
+    reached.kcal=user.erreichtBedarf.kcal+(result.totalNutrients.ENERC_KCAL.quantity/user.bedarf.kcal)
+    reached.protein=user.erreichtBedarf.protein+(result.totalNutrients.PROCNT.quantity/user.bedarf.protein)
+    reached.fat=user.erreichtBedarf.fett+(result.totalNutrients.FAT.quantity/user.bedarf.fett)
+    if(typeof result.totalNutrients.FASAT !== "undefined")
+      reached.gesFett=user.erreichtBedarf.gesFett+(result.totalNutrients.FASAT.quantity/user.bedarf.gesFett)
+    else
+      reached.gesFett=user.erreichtBedarf.gesFett
+    if(typeof result.totalNutrients.FAMS !== "undefined" && typeof result.totalNutrients.FAPU !== "undefined")
+      reached.ungesFett=user.erreichtBedarf.ungesFett+((result.totalNutrients.FAMS.quantity+result.totalNutrients.FAPU.quantity)/user.bedarf.ungesFett)
+    else 
+      reached.ungesFett=user.erreichtBedarf.ungesFett
+    reached.carbs=user.erreichtBedarf.carbs+(result.totalNutrients.CHOCDF.quantity/user.bedarf.carbs)
+    if(typeof result.totalNutrients.SUGAR !== "undefined")
+      reached.zucker=user.erreichtBedarf.zucker+(result.totalNutrients.SUGAR.quantity/user.bedarf.zucker)
+    else
+      reached.zucker=user.erreichtBedarf.zucker
+    user.erreichtBedarf=reached
+    
+  }else{
+      console.log("an error occurred")
+      
+     }
+     resolve(user)
   })
+}
+const main=async()=>{ 
+  let aktNutzer
+  await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){aktNutzer=user})
+  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(user){
+    console.log(user)
+  }))
+  
+ // await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){console.log(res) })
   rl.close()
   }
 main()

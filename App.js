@@ -1,8 +1,10 @@
 const unirest = require('unirest') //..\\GDWWS1920JohannsenMohr-DamaSpitra\\Abgabe 12.12\\node_modules\\
 const _ = require('underscore') 
+
 const readline=require('readline')
 const reqTools= require("./bedarfModul.js")
 const JSONtools=require("./JSONModul.js")
+const fs=require('fs')
 const app_id="d583615a"
 const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
@@ -14,11 +16,26 @@ const rl=readline.createInterface({
     output:process.stdout
 }) 
 
-const rezepteLesen=(recipepaths)=>{
-  for(let i=0; i++;i<recipepaths.length)
-   recipes[i]=JSONtools.getData(recipepaths[i])
-  //ASYNCHRON
+const rezepteReinBrute=(paths)=>{ //Läuft auch nicht
+  return new Promise((resolve, reject)=>{
+    let recipes=new Array()
+    paths.forEach(elem=>recipes.push(fs.readFileSync(elem)))
+     resolve(recipes)
+  })
 }
+const rezepteLesen=(recipepaths,recipes)=>{
+  return new Promise((resolve, reject)=>{
+  if(recipepaths.length>0)
+  JSONtools.lesen(recipepaths.shift(),function(x,string){ //Problem: funktion kennt recipes nicht.
+    
+  })
+  else 
+    resolve(recipes)
+})
+}
+
+
+
 const rezeptPresent=(recipeArray)=>{
   return new Promise((resolve, reject)=>{
     for(let i=0;i++;i<recipeArray.length){
@@ -99,7 +116,18 @@ const bedarfNutzer=(user)=>{
     })
 }
 
+const rezeptAnEdamam=(rezept)=>{
+  return new Promise((resolve, reject)=>{
+    unirest.post('https://api.edamam.com/api/nutrition-details?app_id='+app_id+'&app_key='+app_key)
+    .headers({'Content-Type': 'application/json'})
+    .attach('file', './Recipes/Recipe1.json')
+    .end(function (result) {
+      resolve(result.body)
+  })
+  
 
+})
+}
 //Fehlermenu, ermöglicht dem User die wahl zwischen einem Weiteren Versuch oder dem Programmabbruch
 const menu=(result1)=>{
  return new Promise((resolve,reject)=>{
@@ -176,10 +204,14 @@ if(typeof result ==="boolean" && result){
     await menu(result) //es ist ein fehler passiert und dem User wird das Fehlermenu angezeigt
    }
 }
-const main=async()=>{
+const main=async()=>{ 
   //await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>ausgabeCals(result))
-  await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){
-    console.log(user)
+  //await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){console.log(user) })
+  //console.log(rezepteLesen(["./Recipes/Recipe1.json"]))
+  
+ //rezepteReinBrute(["./Recipes/Recipe1.json","./Recipes/Recipe2.json"],new Array()).then(recipes=>function(recipes){ console.log(recipes)})
+  await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){
+    console.log(res)
   })
   rl.close()
   }

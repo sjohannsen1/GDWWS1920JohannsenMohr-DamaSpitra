@@ -1,13 +1,13 @@
 
 const fs= require("fs")
-function lesen(path, callback){
+function lesen(path,res, callback){
     fs.readFile(path,(err, fileData)=>{
         if(err){
             return callback && callback(err)
         }
         try{
             let jsonDaten=JSON.parse(fileData)
-            return callback && callback(null, jsonDaten)
+            return callback && callback(null,res,jsonDaten)
         } catch(err){
             return callback && callback(err)
         }

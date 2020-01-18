@@ -119,7 +119,7 @@ const bedarfNutzer=(user)=>{
 const rezeptAnEdamam=(rezept)=>{
   return new Promise((resolve, reject)=>{
     unirest.post('https://api.edamam.com/api/nutrition-details?app_id='+app_id+'&app_key='+app_key)
-    .headers({'Content-Type': 'application/json'})
+    .headers({'Content-Type': 'application/json'})//WILL NICHT FUNKTIONIEREN
     .attach('file', './Recipes/Recipe1.json')
     .end(function (result) {
       resolve(result.body)

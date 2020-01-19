@@ -132,6 +132,11 @@ const eingabeNutzer=()=>{
 //errechnet Bedarfwerte des Nutzers, getestet und funktioniert
 const bedarfNutzer=(userId)=>{
     return new Promise((resolve, reject)=>{
+      let weight=userArray[userId-1].weight
+      let height=userArray[userId-1].height
+      let activity=userArray[userId-1].activity
+      let age=userArray[userId-1].age
+      let sex=userArray[userId-1].sex
        // userArray[userId-1].bedarf=reqTools.bedarfErrechnen(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
         /*userArray[userId-1].bedarf.kcal=reqTools.calBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
         userArray[userId-1].bedarf.fett=reqTools.fatBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
@@ -143,11 +148,16 @@ const bedarfNutzer=(userId)=>{
        */ 
       //userArray[userId-1].bedarf=reqTools.test(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
       let bedarf={}
-      bedarf.kcal=(
-        userArray[userId-1].sex=="m"?
-        66.47+(13.7*userArray[userId-1].weight)+(5*userArray[userId-1].height)-(6.8*userArray[userId-1].age)*(userArray[userId-1].activity) : 655.1+(9.6*userArray[userId-1].weight)+(1.8*userArray[userId-1].height)-(4.7*userArray[userId-1].age))*(userArray[userId-1].activity
-        )
-      bedarf.protein=(userArray[userId-1].age<65? userArray[userId-1].weight*0.8: userArray[userId-1].weight)
+      if(sex=="m")
+         bedarf.kcal=66.47+(13.7*weight)+(5*height)-(6.8*age)*(activity) 
+      else
+        bedarf.kcal=655.1+(9.6*weight)+(1.8*height)-(4.7*age)*(activity)
+     
+       if(userArray[userId-1].age < 65)
+        bedarf.protein= userArray[userId-1].weight*0.8 
+      else
+        bedarf.protein= userArray[userId-1].weight
+      
       bedarf.fett=bedarf.kcal*0.3/9.3
       bedarf.gesFett=bedarf.fett*0.1
       bedarf.ungesFett=bedarf.fett-bedarf.gesFett
@@ -162,8 +172,9 @@ const bedarfNutzer=(userId)=>{
           carbs:0,
           zucker:0
         }
+      
         userArray[userId-1].bedarf=bedarf
-        resolve(userArray[userId-1].id)
+        resolve(userArray[userId-1])
     })
 }
 
@@ -303,9 +314,9 @@ const reachedNut=(result,userId)=>{
 }
 const main=async()=>{ 
   let aktNutzer//nur zum testen
-  await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(id){
-    console.log(userArray[id-1])
-    aktNutzer=id})
+  await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){
+    console.log(user)
+    aktNutzer=user.id})
 
   /*await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(id){
     aktNutzer=id

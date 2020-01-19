@@ -8,20 +8,33 @@ const app_id="d583615a"
 const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
-//var recipepaths,recipes=[] //Woher die rezepte?
-const rezepte={
-  recipe1:"courgette carbonara",
-  recipe2:"Brussels sprouts",
-  recipe3:"Roasted black bean burgers",
-  recipe4:"Chicken & tofu noodle soup",
-  recipe5:"Tuna fettuccine"
-}
+const userArray=[]
+
+const recipes=[
+  {title:"courgette carbonara",
+     id:1},  
+  {title:"Brussels sprouts",
+    id:2},
+  {title:"Roasted black bean burgers",
+    id:3},
+  {title:"Chicken & tofu noodle soup",
+    id:4},
+  {title:"Tuna fettuccine",
+    id:5}
+  ]
+const recipepaths=[
+  "./Recipes/Recipe1.json",
+  "./Recipes/Recipe2.json",
+  "./Recipes/Recipe3.json",
+  "./Recipes/Recipe4.json",
+  "./Recipes/Recipe5.json"
+]
 
 const rl=readline.createInterface({
     input:process.stdin,
     output:process.stdout
 }) 
-
+/* Vermutlich nicht nötig, da edamam auch komplette rezeptfiles analysiert
 const rezepteReinBrute=(paths)=>{ //Läuft auch nicht
   return new Promise((resolve, reject)=>{
     let recipes=new Array()
@@ -39,20 +52,15 @@ const rezepteLesen=(recipepaths,recipes)=>{
     resolve(recipes)
 })
 }
+*/
 
 const rezeptWahl=(recipe)=>{
- //todo: implementieren
+ //todo: implementieren: get mit rezept id suchtpassendes rezept aus path array (recipepaths) also: recipepaths[id+1]
 
 }
 
-const rezeptPresent=(recipeArray)=>{
-  return new Promise((resolve, reject)=>{
-    for(let i=0;i++;i<recipeArray.length){
-      console.log(i+":")
-      console.log(recipeArray[i])
-    }
-    resolve()//Auswahl ermöglichen
-  })
+const rezeptPresent=(recipeList)=>{
+  console.log(recipeList) //vllt auch einfach globale variable nutzen, array wird ja nicht verändert
 }
 //Fordert user zur eingabe einer Zutat. Formatiert diese und return dies
 const eingabe=()=>{
@@ -83,8 +91,8 @@ const eingabe=()=>{
 //TODO: funktion sichern (fehlerhafte Eingaben abfangen), vielleicht in eigene Promises aufsplitten, dann mit then verknüpfen
 const eingabeNutzer=()=>{
     return new Promise((resolve,reject)=>{
-        benutzer={}
-        benutzer.id=1 //fortlaufend (???)
+        let benutzer={}
+        benutzer.id=userArray.length+1 //so fortlaufend
         rl.question('Alter Eingeben \t', function(age){
             benutzer.alter=age
             rl.question('Groesse eingeben (in cm) \t', function(height){
@@ -99,9 +107,21 @@ const eingabeNutzer=()=>{
                         else benutzer.geschlecht="m"
                         // reject("Invalid Argument")
 
-                        rl.question('Aktivitätslevel eingeben: \n keine Aktivität = 1.2 \n kaum Aktivität = 1.5 \n mäßige Aktivität = 1.7 \n Aktiv = 1.9 \n sehr Aktiv = 2.3 \n', function(activitaet){
-                            benutzer.activity=activitaet
-                            resolve(benutzer)
+                        rl.question('Aktivitätslevel (ganzzahlig von 0 (keine Aktivität) bis 4 (sehr Aktiv)): \n', function(activitaet){
+                            switch(activitaet){
+                              case 0: benutzer.activity=1.2 
+                                      break
+                              case 1: benutzer.activity=1.5
+                                      break
+                              case 2: benutzer.activity=1.7
+                                      break
+                              case 3: benutzer.activity=1.9
+                                      break
+                              case 4: benutzer.activity=2.3
+                                       }
+                            
+                            userArray[benutzer.id-1]=benutzer 
+                            resolve(benutzer.id)
                         })
                     })
                 })
@@ -110,18 +130,30 @@ const eingabeNutzer=()=>{
     })
 }
 //errechnet Bedarfwerte des Nutzers, getestet und funktioniert
-const bedarfNutzer=(user)=>{
+const bedarfNutzer=(userId)=>{
     return new Promise((resolve, reject)=>{
-        bedarf=new Object()
-        bedarf.kcal=reqTools.calBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
-        bedarf.fett=reqTools.fatBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
-        bedarf.gesFett=reqTools.maxSatFat(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
-        bedarf.ungesFett=reqTools.fatBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)-reqTools.maxSatFat(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
-        bedarf.protein=reqTools.proBedarf(user.gewicht, user.alter) 
-        bedarf.carbs=reqTools.carbBedarf(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
-        bedarf.zucker=reqTools.maxSugar(user.groesse, user.gewicht, user.geschlecht, user.activity, user.alter)
-        user.bedarf=bedarf
-        user.erreichtBedarf={
+       // userArray[userId-1].bedarf=reqTools.bedarfErrechnen(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+        /*userArray[userId-1].bedarf.kcal=reqTools.calBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+        userArray[userId-1].bedarf.fett=reqTools.fatBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+        userArray[userId-1].bedarf.gesFett=reqTools.maxSatFat(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+        userArray[userId-1].bedarf.ungesFett=reqTools.fatBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+        userArray[userId-1].bedarf.protein=reqTools.proBedarf(userArray[userId-1].gewicht, userArray[userId-1].alter) 
+        userArray[userId-1].bedarf.carbs=reqTools.carbBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+        userArray[userId-1].bedarf.zucker=reqTools.maxSugar(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+       */ 
+      //userArray[userId-1].bedarf=reqTools.test(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+      let bedarf={}
+      bedarf.kcal=(
+        userArray[userId-1].sex=="m"?
+        66.47+(13.7*userArray[userId-1].weight)+(5*userArray[userId-1].height)-(6.8*userArray[userId-1].age)*(userArray[userId-1].activity) : 655.1+(9.6*userArray[userId-1].weight)+(1.8*userArray[userId-1].height)-(4.7*userArray[userId-1].age))*(userArray[userId-1].activity
+        )
+      bedarf.protein=(userArray[userId-1].age<65? userArray[userId-1].weight*0.8: userArray[userId-1].weight)
+      bedarf.fett=bedarf.kcal*0.3/9.3
+      bedarf.gesFett=bedarf.fett*0.1
+      bedarf.ungesFett=bedarf.fett-bedarf.gesFett
+      bedarf.carbs=(bedarf.kcal-bedarf.fett*9.3-bedarf.protein*4.1)/4.1
+      bedarf.zucker=bedarf.carbs*0.1
+      userArray[userId-1].erreichtBedarf={
           kcal:0,
           protein:0,
           fett:0,
@@ -130,15 +162,16 @@ const bedarfNutzer=(user)=>{
           carbs:0,
           zucker:0
         }
-        resolve(user)
+        userArray[userId-1].bedarf=bedarf
+        resolve(userArray[userId-1].id)
     })
 }
 
 const rezeptAnEdamam=(rezept)=>{
   return new Promise((resolve, reject)=>{
     unirest.post('https://api.edamam.com/api/nutrition-details?app_id='+app_id+'&app_key='+app_key)
-    .headers({'Content-Type': 'application/json'})//WILL NICHT FUNKTIONIEREN
-    .attach('file', './Recipes/Recipe1.json')
+    .header("Content-Type", "application/json")//WILL NICHT FUNKTIONIEREN
+    .attach('file', rezept)
     .end(function (result) {
       resolve(result.body)
   })
@@ -203,8 +236,8 @@ const anfrage=(foodQuery)=>{
    })
   })
 }
-
-const ausgabeCals=async(result)=>{
+//relikt aus POC, vermutlich nicht mehr notwendig
+/*const ausgabeCals=async(result)=>{
 if(typeof result ==="boolean" && result){ 
     return
   }else if (typeof result === "object"){
@@ -222,9 +255,12 @@ if(typeof result ==="boolean" && result){
     await menu(result) //es ist ein fehler passiert und dem User wird das Fehlermenu angezeigt
    }
 }
+*/
+
 //errechnet wie viel Prozent der Nährwertvorgaben erreicht wurden
-const reachedNut=(result,user)=>{
+const reachedNut=(result,userId)=>{
   return new Promise((resolve,reject)=>{
+  let user=userArray[userId-1]
   let reached=new Object()
   if (typeof result === "object"){
     if(!_.isEmpty(result.totalNutrients.ENERC_KCAL))
@@ -239,11 +275,11 @@ const reachedNut=(result,user)=>{
       reached.fett=user.erreichtBedarf.fett+(result.totalNutrients.FAT.quantity/user.bedarf.fett)*100
     else
       reached.fett=user.erreichtBedarf.fett
-    if(typeof result.totalNutrients.FASAT !== "undefined")
+    if(!_.isEmpty(result.totalNutrients.FASAT))
       reached.gesFett=user.erreichtBedarf.gesFett+(result.totalNutrients.FASAT.quantity/user.bedarf.gesFett)*100
     else
       reached.gesFett=user.erreichtBedarf.gesFett
-    if(typeof result.totalNutrients.FAMS !== "undefined" && typeof result.totalNutrients.FAPU !== "undefined")
+    if(!_.isEmpty(result.totalNutrients.FAMS) && !_.isEmpty(result.totalNutrients.FAPU))
       reached.ungesFett=user.erreichtBedarf.ungesFett+((result.totalNutrients.FAMS.quantity+result.totalNutrients.FAPU.quantity)/user.bedarf.ungesFett)*100
     else 
       reached.ungesFett=user.erreichtBedarf.ungesFett
@@ -251,7 +287,7 @@ const reachedNut=(result,user)=>{
       reached.carbs=user.erreichtBedarf.carbs+(result.totalNutrients.CHOCDF.quantity/user.bedarf.carbs)*100
     else
       reached.carbs=user.erreichtBedarf.carbs
-    if(typeof result.totalNutrients.SUGAR !== "undefined")
+    if(!_.isEmpty(result.totalNutrients.SUGAR))
       reached.zucker=user.erreichtBedarf.zucker+(result.totalNutrients.SUGAR.quantity/user.bedarf.zucker)*100
     else
       reached.zucker=user.erreichtBedarf.zucker
@@ -261,23 +297,23 @@ const reachedNut=(result,user)=>{
       console.log("an error occurred")
       
      }
-     resolve(user)
+     userArray[userId-1]=user
+     resolve(userId)
   })
 }
 const main=async()=>{ 
-  let aktNutzer
-  await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){aktNutzer=user})
-  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(user){
-    aktNutzer=user
-    console.log(user)
-  }))
-  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(user){
-    aktNutzer=user
-    console.log(user)
-  }))
+  let aktNutzer//nur zum testen
+  await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(id){
+    console.log(userArray[id-1])
+    aktNutzer=id})
 
-  
- // await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){console.log(res) })
+  /*await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(id){
+    aktNutzer=id
+    console.log(userArray[id-1])
+  }))*/
+
+ //rezeptPresent()
+ //await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){console.log(res) })
   rl.close()
   }
 main()

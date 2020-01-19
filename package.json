@@ -14,8 +14,8 @@
     "webpack-dev-server": "^3.9.0"
   },
   "scripts": {
-    "test": "node App.js",
-    "start": "webpack-dev-server --open"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node App.js"
   },
   "keywords": [
     "food",

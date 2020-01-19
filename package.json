@@ -14,7 +14,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node App.js",
     "start": "webpack-dev-server --open"
   },
   "keywords": [
@@ -29,9 +29,8 @@
     "url": "git+https://github.com/SophiaJ1/GDWWS1920JohannsenMohr-DamaSpitra.git"
   },
   "engines": {
-      "node": "10.16.3"
+    "node": "10.16.3"
   },
-
   "bugs": {
     "url": "https://github.com/SophiaJ1/GDWWS1920JohannsenMohr-DamaSpitra/issues"
   },

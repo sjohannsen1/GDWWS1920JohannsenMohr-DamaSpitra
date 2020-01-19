@@ -54,9 +54,9 @@ const rezepteLesen=(recipepaths,recipes)=>{
 }
 */
 
-const rezeptWahl=(recipe)=>{
- //todo: implementieren: get mit rezept id suchtpassendes rezept aus path array (recipepaths) also: recipepaths[id+1]
-
+const rezeptWahl=(id)=>{
+ //todo: implementieren: get mit rezept id suchtpassendes rezept aus path array (recipepaths) also: recipepaths[id-1]
+return(recipepaths[id-1])
 }
 
 const rezeptPresent=(recipeList)=>{

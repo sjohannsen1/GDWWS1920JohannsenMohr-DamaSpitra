@@ -11,7 +11,7 @@ var params, query,foodQuery,esc
 const userArray=[]
 
 const recipes=[
-  {title:"courgette carbonara",
+  {title:"Courgette carbonara",
      id:1},  
   {title:"Brussels sprouts",
     id:2},

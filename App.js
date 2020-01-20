@@ -2,9 +2,9 @@ const unirest = require('unirest') //..\\GDWWS1920JohannsenMohr-DamaSpitra\\Abga
 const _ = require('underscore') 
 const express = require('express')
 const readline=require('readline')
+const joi = require('@hapi/joi'); //zur validation von kpd
 const reqTools= require("./bedarfModul.js")
 const JSONtools=require("./JSONModul.js")
-const fs=require('fs')
 const app = express()
 app.use(express.json())
 const app_id="d583615a"
@@ -139,11 +139,11 @@ const eingabeNutzer=()=>{
 const bedarfNutzer=(userId)=>{
     return new Promise((resolve, reject)=>{
       //eig ist das nicht nötig 
-      let weight=userArray[userId-1].gewicht
-      let height=userArray[userId-1].groesse
-      let activity=userArray[userId-1].activity
-      let age=userArray[userId-1].alter
-      let sex=userArray[userId-1].geschlecht
+      let weight=userArray[userId-1].kpd.gewicht
+      let height=userArray[userId-1].kpd.groesse
+      let activity=userArray[userId-1].kpd.activitaet
+      let age=userArray[userId-1].kpd.alter
+      let sex=userArray[userId-1].kpd.geschlecht
 
       let bedarf={}
       bedarf.kcal=(sex==="m" ? (66.47+(13.7*weight)+(5*height)-(6.8*age))*(activity): (655.1+(9.6*weight)+(1.8*height)-(4.7*age))*(activity) )
@@ -187,9 +187,9 @@ const rezeptAnEdamam=(recipepath)=>{
     .send(res)
       .end(function (res) { 
         //if (res.error) throw new Error(res.error); 
-       // resolve(res.raw_body)
-       console.log(res.raw_body)
-       resolve("it works")
+       resolve(res.body)
+       //console.log(res.raw_body)
+       //resolve("it works")
       })
     })
    
@@ -243,7 +243,8 @@ const anfrage=(foodQuery)=>{
           resolve(true)
         }else if(result.statusCode>=500){
           console.log("server unavailable. HTTP error code:  "+ result.statusCode)
-          resolve(foodQuery) //da der fehler am server liegt ist eine erneute sucheingabe nicht nötig, foodQuery wird übergeben
+          //resolve(foodQuery) //da der fehler am server liegt ist eine erneute sucheingabe nicht nötig, foodQuery wird übergeben
+          resolve(true)
         } 
       }else if(!_.isEmpty(result.body.totalNutrients)){ //Wenns in der If-Abfrage ist lief alles gut
           resolve(result.body)
@@ -322,11 +323,103 @@ const reachedNut=(result,userId)=>{
   })
 }
 
+//zur validation von kpd
+function validateKPD(kpd) {
+  const schema = joi.object({
+    gewicht: joi.number().min(40).max(300).required(),
+    groesse: joi.number().min(100).max(250).required(),
+    activitaet: joi.integer().min(0).max(4).required(),
+    alter: joi.integer().min(0).max(120).required(),
+    geschlecht: joi.string().valid(['m','w']).required()
+ })
+  return joi.validate(kpd, schema);
+   
+  }
+
 //READ bzw GET Requests
 
-app.get('/Rezepte', (req, res) => {
-  res.send(recipes);
-  });
+app.get('/rezepte', (req, res) => {
+  res.send(recipes)
+  })
+
+app.get('/rezepte/:id', (req, res) => {
+  if(parseInt(req.params.id)<0 || req.params.id>recipes.length){
+    res.status(404).send("Recipe ID not found")
+    return 
+  }
+  let data=rezeptPresent(parseInt(req.params.id))
+  res.send(data)
+  })
+
+app.get('/user/:id/bedarf', (req, res) => {
+  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+    res.status(404).send("User ID not found")
+    return 
+  }
+  let data=userArray[parseInt(req.params.id)-1].bedarf
+  res.send(data)
+    })
+
+app.get('/user/:id/bedarfErreicht', (req, res) => {
+  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+    res.status(404).send("User ID not found")
+    return 
+  }
+  let data=userArray[parseInt(req.params.id)-1].erreichtBedarf
+  res.send(data)
+    })
+
+//CREATE bzw POST
+
+app.post('/user/:id/kpd', (req, res)=> {
+  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+    res.status(404).send("User ID not found")
+    return 
+  }
+  const { error } = validateKPD(req.body)
+  if (error){
+  res.status(400).send(error.details[0].message)
+  return
+  }
+  userArray[parseInt(req.params.id)-1].kpd=req.body
+  data=bedarfNutzer(parseInt(req.params.id))
+  res.send(data)
+})
+
+app.post('/user/', (req, res)=> {
+ res.send("your user ID: "+userArray.length)
+})
+
+//UPDATE bzw PUT
+
+app.put('/user/:id/bedarfErreicht/analyze?rezept=:rid', (req,res)=>{
+if(parseInt(req.params.rid)<0 || req.params.rid>recipes.length){
+  res.status(404).send("Recipe ID not found")
+  return 
+}
+if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+  res.status(404).send("User ID not found")
+  return 
+}
+rezeptAnEdamam(rezeptWahl(parseInt(req.params.rid)))
+.then(result=>reachedNut(result,parseInt(req.params.rid)))
+.then(function(newId){
+ res.send(userArray[newId-1].erreichtBedarf)
+})
+
+app.put('/user/:id/bedarfErreicht/analyze?zutat=:zutat', (req,res)=>{
+  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+    res.status(404).send("User ID not found")
+    return 
+  }
+  anfrage(req.params.zutat)
+  .then(result=>reachedNut(result,parseInt(req.params.rid)))
+  .then(function(newId){
+ res.send(userArray[newId-1].erreichtBedarf)
+  })
+
+})
+
 
 
 const main=async()=>{ 

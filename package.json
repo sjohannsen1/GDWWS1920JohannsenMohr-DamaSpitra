@@ -4,6 +4,7 @@
   "description": "Dienst um Nährwerte in Rezepten zu analysieren.",
   "main": "App.js",
   "dependencies": {
+    "@hapi/joi": "^17.1.0",
     "axios": "^0.19.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",

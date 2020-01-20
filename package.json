@@ -1,0 +1,41 @@
+{
+  "name": "nutrition_app",
+  "version": "1.0.0",
+  "description": "Dienst um Nährwerte in Rezepten zu analysieren.",
+  "main": "App.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "express": "^4.17.1",
+    "underscore": "^1.9.2",
+    "unirest": "^0.6.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node test.js"
+  },
+  "keywords": [
+    "food",
+    "nutrition",
+    "recipes"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SophiaJ1/GDWWS1920JohannsenMohr-DamaSpitra.git"
+  },
+  "engines": {
+    "node": "10.16.3"
+  },
+  "bugs": {
+    "url": "https://github.com/SophiaJ1/GDWWS1920JohannsenMohr-DamaSpitra/issues"
+  },
+  "homepage": "https://github.com/SophiaJ1/GDWWS1920JohannsenMohr-DamaSpitra#readme"
+}

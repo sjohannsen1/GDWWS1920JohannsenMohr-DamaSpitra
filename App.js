@@ -119,7 +119,7 @@ const eingabeNutzer=()=>{
                                       break
                               case 4: benutzer.activity=2.3
                                        }
-                            
+                            benutzer.activity=1.5
                             userArray[benutzer.id-1]=benutzer 
                             resolve(benutzer.id)
                         })
@@ -149,20 +149,20 @@ const bedarfNutzer=(userId)=>{
       //userArray[userId-1].bedarf=reqTools.test(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
       let bedarf={}
       if(sex=="m")
-         bedarf.kcal=66.47+(13.7*weight)+(5*height)-(6.8*age)*(activity) 
+         bedarf.kcal=(66.47+(13.7*weight)+(5*height)-(6.8*age))*(activity) 
       else
-        bedarf.kcal=655.1+(9.6*weight)+(1.8*height)-(4.7*age)*(activity)
+        bedarf.kcal=(655.1+(9.6*weight)+(1.8*height)-(4.7*age))*(activity)
      
-       if(userArray[userId-1].age < 65)
-        bedarf.protein= userArray[userId-1].weight*0.8 
+      if(age < 65)
+        bedarf.protein=weight*0.8 
       else
-        bedarf.protein= userArray[userId-1].weight
+        bedarf.protein=weight
       
-      bedarf.fett=bedarf.kcal*0.3/9.3
+      bedarf.fett=(bedarf.kcal*0.3)/9.3
       bedarf.gesFett=bedarf.fett*0.1
       bedarf.ungesFett=bedarf.fett-bedarf.gesFett
       bedarf.carbs=(bedarf.kcal-bedarf.fett*9.3-bedarf.protein*4.1)/4.1
-      bedarf.zucker=bedarf.carbs*0.1
+      bedarf.zucker=bedarf.carbs9*0.1
       userArray[userId-1].erreichtBedarf={
           kcal:0,
           protein:0,
@@ -315,7 +315,7 @@ const reachedNut=(result,userId)=>{
 const main=async()=>{ 
   let aktNutzer//nur zum testen
   await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){
-    console.log(user)
+    console.log(userArray[user.id-1])
     aktNutzer=user.id})
 
   /*await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(id){

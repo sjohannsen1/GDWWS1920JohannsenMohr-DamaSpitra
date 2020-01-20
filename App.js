@@ -135,21 +135,13 @@ const eingabeNutzer=()=>{
 //errechnet Bedarfwerte des Nutzers, getestet und funktioniert
 const bedarfNutzer=(userId)=>{
     return new Promise((resolve, reject)=>{
+      //eig ist das nicht nötig 
       let weight=userArray[userId-1].gewicht
       let height=userArray[userId-1].groesse
       let activity=userArray[userId-1].activity
       let age=userArray[userId-1].alter
       let sex=userArray[userId-1].geschlecht
-       // userArray[userId-1].bedarf=reqTools.bedarfErrechnen(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
-        /*userArray[userId-1].bedarf.kcal=reqTools.calBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
-        userArray[userId-1].bedarf.fett=reqTools.fatBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
-        userArray[userId-1].bedarf.gesFett=reqTools.maxSatFat(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
-        userArray[userId-1].bedarf.ungesFett=reqTools.fatBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
-        userArray[userId-1].bedarf.protein=reqTools.proBedarf(userArray[userId-1].gewicht, userArray[userId-1].alter) 
-        userArray[userId-1].bedarf.carbs=reqTools.carbBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
-        userArray[userId-1].bedarf.zucker=reqTools.maxSugar(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
-       */ 
-      //userArray[userId-1].bedarf=reqTools.test(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
+
       let bedarf={}
       bedarf.kcal=(sex==="m" ? (66.47+(13.7*weight)+(5*height)-(6.8*age))*(activity): (655.1+(9.6*weight)+(1.8*height)-(4.7*age))*(activity) )
       bedarf.protein=(age < 65 ? weight*0.8 : weight)
@@ -313,10 +305,15 @@ const main=async()=>{
     console.log(userArray[user.id-1])
     aktNutzer=user.id})
 
-  /*await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(id){
+  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(id){
     aktNutzer=id
     console.log(userArray[id-1])
-  }))*/
+  }))
+
+  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(id){
+    aktNutzer=id
+    console.log(userArray[id-1])
+  }))
 
  //rezeptPresent()
  //await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){console.log(res) })

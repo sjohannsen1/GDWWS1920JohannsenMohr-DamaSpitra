@@ -1,0 +1,1 @@
+Es war einmal in einem fernen Land eine Textdatei die dazu dient den Ordner im Git repo zu initilaisieren.

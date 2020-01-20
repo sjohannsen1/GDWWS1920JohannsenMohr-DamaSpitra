@@ -88,7 +88,7 @@ const eingabe=()=>{
          })
     })
 }
-//TODO: funktion sichern (fehlerhafte Eingaben abfangen), vielleicht in eigene Promises aufsplitten, dann mit then verknüpfen
+//TODO: nur zum testen
 const eingabeNutzer=()=>{
     return new Promise((resolve,reject)=>{
         let benutzer={}
@@ -108,7 +108,8 @@ const eingabeNutzer=()=>{
                         // reject("Invalid Argument")
 
                         rl.question('Aktivitätslevel (ganzzahlig von 0 (keine Aktivität) bis 4 (sehr Aktiv)): \n', function(activitaet){
-                            switch(activitaet){
+                            
+                          switch(parseInt(activitaet)){
                               case 0: benutzer.activity=1.2 
                                       break
                               case 1: benutzer.activity=1.5
@@ -118,8 +119,10 @@ const eingabeNutzer=()=>{
                               case 3: benutzer.activity=1.9
                                       break
                               case 4: benutzer.activity=2.3
+                                      break
+                              default: benutzer.activity=1.5
                                        }
-                            benutzer.activity=1.5
+                            //benutzer.activity=1.5
                             userArray[benutzer.id-1]=benutzer 
                             resolve(benutzer.id)
                         })
@@ -132,11 +135,11 @@ const eingabeNutzer=()=>{
 //errechnet Bedarfwerte des Nutzers, getestet und funktioniert
 const bedarfNutzer=(userId)=>{
     return new Promise((resolve, reject)=>{
-      let weight=userArray[userId-1].weight
-      let height=userArray[userId-1].height
+      let weight=userArray[userId-1].gewicht
+      let height=userArray[userId-1].groesse
       let activity=userArray[userId-1].activity
-      let age=userArray[userId-1].age
-      let sex=userArray[userId-1].sex
+      let age=userArray[userId-1].alter
+      let sex=userArray[userId-1].geschlecht
        // userArray[userId-1].bedarf=reqTools.bedarfErrechnen(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
         /*userArray[userId-1].bedarf.kcal=reqTools.calBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
         userArray[userId-1].bedarf.fett=reqTools.fatBedarf(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
@@ -148,21 +151,13 @@ const bedarfNutzer=(userId)=>{
        */ 
       //userArray[userId-1].bedarf=reqTools.test(userArray[userId-1].groesse, userArray[userId-1].gewicht, userArray[userId-1].geschlecht, userArray[userId-1].activity, userArray[userId-1].alter)
       let bedarf={}
-      if(sex=="m")
-         bedarf.kcal=(66.47+(13.7*weight)+(5*height)-(6.8*age))*(activity) 
-      else
-        bedarf.kcal=(655.1+(9.6*weight)+(1.8*height)-(4.7*age))*(activity)
-     
-      if(age < 65)
-        bedarf.protein=weight*0.8 
-      else
-        bedarf.protein=weight
-      
+      bedarf.kcal=(sex==="m" ? (66.47+(13.7*weight)+(5*height)-(6.8*age))*(activity): (655.1+(9.6*weight)+(1.8*height)-(4.7*age))*(activity) )
+      bedarf.protein=(age < 65 ? weight*0.8 : weight)
       bedarf.fett=(bedarf.kcal*0.3)/9.3
       bedarf.gesFett=bedarf.fett*0.1
       bedarf.ungesFett=bedarf.fett-bedarf.gesFett
       bedarf.carbs=(bedarf.kcal-bedarf.fett*9.3-bedarf.protein*4.1)/4.1
-      bedarf.zucker=bedarf.carbs9*0.1
+      bedarf.zucker=bedarf.carbs*0.1
       userArray[userId-1].erreichtBedarf={
           kcal:0,
           protein:0,
@@ -178,11 +173,11 @@ const bedarfNutzer=(userId)=>{
     })
 }
 
-const rezeptAnEdamam=(rezept)=>{
+const rezeptAnEdamam=(recipepath)=>{
   return new Promise((resolve, reject)=>{
     unirest.post('https://api.edamam.com/api/nutrition-details?app_id='+app_id+'&app_key='+app_key)
-    .header("Content-Type", "application/json")//WILL NICHT FUNKTIONIEREN
-    .attach('file', rezept)
+    .headers({'Content-Type': 'application/json'})//WILL NICHT FUNKTIONIEREN
+    .attach('file', recipepath)
     .end(function (result) {
       resolve(result.body)
   })
@@ -329,6 +324,4 @@ const main=async()=>{
   }
 main()
 
-module.exports={
-  //add exporte
-}
+//module.exports={}

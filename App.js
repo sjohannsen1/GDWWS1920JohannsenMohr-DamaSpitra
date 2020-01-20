@@ -1,9 +1,12 @@
 const unirest = require('unirest') //..\\GDWWS1920JohannsenMohr-DamaSpitra\\Abgabe 12.12\\node_modules\\
 const _ = require('underscore') 
+const express = require('express')
 const readline=require('readline')
 const reqTools= require("./bedarfModul.js")
 const JSONtools=require("./JSONModul.js")
 const fs=require('fs')
+const app = express()
+app.use(express.json())
 const app_id="d583615a"
 const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
@@ -318,6 +321,14 @@ const reachedNut=(result,userId)=>{
      resolve(userId)
   })
 }
+
+//READ bzw GET Requests
+
+app.get('/Rezepte', (req, res) => {
+  res.send(recipes);
+  });
+
+
 const main=async()=>{ 
   let aktNutzer//nur zum testen
  /* await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){

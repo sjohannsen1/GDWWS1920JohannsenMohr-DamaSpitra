@@ -35,6 +35,7 @@ const schreiben=(unformatString, path)=>{
         } else{
             //console.log(jsonString)
             console.log("Datei erfolgreich beschrieben")
+           
         }
     })
 }

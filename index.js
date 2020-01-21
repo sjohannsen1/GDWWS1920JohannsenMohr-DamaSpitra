@@ -11,11 +11,18 @@ const app_id="d583615a"
 const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
-const userArray=[{}]
+const userArray
+const pathData="userData.json"
 
 
 
-
+const einlesen=(path)=>{ 
+  return new Promise((resolve,reject)=>
+  {JSONtools.lesen(path, function(x,res){
+    resolve(res)
+  })
+  })
+  }
 
 
 const recipes=[
@@ -376,22 +383,29 @@ rezeptWahl(parseInt(req.params.id))
 })
 
 app.get('/benutzer/:id/bedarf', (req, res) => {
-  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
-    res.status(404).send("User ID nicht gefunden")
-    return 
-  }
-  let data=userArray[parseInt(req.params.id)-1].bedarf
-  res.send(data)
+ 
+  einlesen(pathData).then(function(data){
+    userArray=data
+    if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+      res.status(404).send("User ID nicht gefunden")
+      return 
+    }
+    res.send(userArray[parseInt(req.params.id)-1].bedarf)
+  })
+  
     })
 
 app.get('/benutzer/:id/erreichtBedarf', (req, res) => {
-  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
-    res.status(404).send("User ID nicht gefunden")
-    return 
-  }
-  let data=userArray[parseInt(req.params.id)-1].erreichtBedarf
-  res.send(data)
+  
+  einlesen(pathData).then(function(data){
+    userArray=data
+    if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+      res.status(404).send("User ID nicht gefunden")
+      return 
+    }
+    res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
     })
+  })
 
 
   
@@ -399,32 +413,41 @@ app.get('/benutzer/:id/erreichtBedarf', (req, res) => {
 //CREATE bzw POST -> getestet und funktionieren
 
 app.post('/benutzer/:id/kpd', (req, res)=> {
-  if(parseInt(req.params.id)<0 || req.params.id>userArray.length+1){
-    res.status(404).send("User ID nicht gefunden")
-    return 
-  }
+  
   const { error } = validateKPD(req.body)
   if (error){
   res.status(400).send(error.details[0].message)
  return
   }
- userArray.push={
+  einlesen(pathData).then(function(result){
+    userArray=result
+    if(parseInt(req.params.id)<0 || req.params.id>userArray.length+1){
+      res.status(404).send("User ID nicht gefunden")
+      return 
+    }
+    userArray.push={
      id: parseInt(req.params.id)
- }
-  userArray[parseInt(req.params.id)-1].kpd=req.body
-  bedarfNutzer(parseInt(req.params.id)).then(function(data){
-    res.send(data)
-  })
-  
+     }
+    userArray[parseInt(req.params.id)-1].kpd=req.body
+    bedarfNutzer(parseInt(req.params.id)).then(function(data){
+      JSONtools.schreiben(userArray,pathData) //vllt probleme mit async, evt callback oder promise
+      res.send(data)
+    })
+})
 })
 
-app.post('/benutzer/', (req, res)=> {
- res.send("Benutzer ID: "+userArray.length++)
+  app.post('/benutzer/', (req, res)=> {
+    einlesen(pathData).then(function(res){
+      userArray=res
+  res.send("Benutzer ID: "+userArray.length++)
+  })
 })
 
 //UPDATE bzw PUT
 
 app.put('/benutzer/:id/erreichtBedarf/analyse_rezept/:rid', (req,res)=>{
+  einlesen(pathData).then(function(result){
+    userArray=result
 if(parseInt(req.params.rid)<0 || req.params.rid>recipes.length){
   res.status(404).send("Recipe ID nicht gefunden")
   return 
@@ -436,12 +459,16 @@ if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
 rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 .then(result=>reachedNut(result,parseInt(req.params.id)))
 .then(function(newId){
+JSONtools.schreiben(userArray,pathData) //vllt probleme mit async, evt callback oder promise
  res.send(userArray[newId-1].erreichtBedarf)
+})
 })
 })
 
 //edamam will iwie unsere app id bzw app key nicht annehmen
 app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
+  einlesen(pathData).then(function(result){
+    userArray=result
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
     res.status(404).send("User ID nicht gefunden")
     return 
@@ -454,34 +481,17 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
         return 
       }
       else
-        res.send(userArray[newId-1].erreichtBedarf)
+      JSONtools.schreiben(userArray,pathData) //vllt probleme mit async, evt callback oder promise
+      res.send(userArray[newId-1].erreichtBedarf)
   })
 
+})
 })
 
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Listening on port ${port}..`))
-const main=async()=>{ 
-  let aktNutzer//nur zum testen
- /* await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){
-    console.log(userArray[user.id-1])
-    aktNutzer=user.id})
 
-  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(id){
-    aktNutzer=id
-    console.log(userArray[id-1])
-  }))
-
-  await eingabe().then(foodQuery=>anfrage(foodQuery)).then(result=>reachedNut(result, aktNutzer).then(function(id){
-    aktNutzer=id
-    console.log(userArray[id-1])
-  }))
-*/
- //rezeptPresent()
- await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){console.log(res) })
-  rl.close()
-  }
   userArray[0].kpd={
     gewicht: 60,
     groesse: 170,

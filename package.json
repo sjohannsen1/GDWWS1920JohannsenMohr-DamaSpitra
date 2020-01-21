@@ -2,7 +2,7 @@
   "name": "nutrition_app",
   "version": "1.0.0",
   "description": "Dienst um Nährwerte in Rezepten zu analysieren.",
-  "main": "App.js",
+  "main": "index.js",
   "dependencies": {
     "@hapi/joi": "^17.1.0",
     "axios": "^0.19.0",
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "node test.js",
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "keywords": [
     "food",

@@ -62,14 +62,19 @@ const rezepteLesen=(recipepaths,recipes)=>{
 */
 
 const rezeptWahl=(id)=>{
+    return new Promise((resolve,reject)=>{
+        resolve(recipepaths[id-1])
+    })
  //todo: implementieren: get mit rezept id suchtpassendes rezept aus path array (recipepaths) also: recipepaths[id-1]
-return(recipepaths[id-1])
+
 }
 
 const rezeptPresent=(recipepath)=>{
+    return new Promise((resolve,reject)=>{
     JSONtools.lesen(recipepath, function(x,res){
-        return res
+        resolve(res)
     })
+})
 }
 //Fordert user zur eingabe einer Zutat. Formatiert diese und return dies
 const eingabe=()=>{
@@ -358,7 +363,7 @@ app.get('/rezepte', (req, res) => {
 
 app.get('/rezepte/:id', (req, res) => {
   if(parseInt(req.params.id)<0 || req.params.id>recipes.length){
-    res.status(404).send("Recipe ID not found")
+    res.status(404).send("Recipe ID nicht gefunden")
     return 
   }
 
@@ -369,18 +374,18 @@ rezeptWahl(parseInt(req.params.id))
 })
 })
 
-app.get('/user/:id/bedarf', (req, res) => {
+app.get('/benutzer/:id/bedarf', (req, res) => {
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
-    res.status(404).send("User ID not found")
+    res.status(404).send("User ID nicht gefunden")
     return 
   }
   let data=userArray[parseInt(req.params.id)-1].bedarf
   res.send(data)
     })
 
-app.get('/user/:id/erreichtBedarf', (req, res) => {
+app.get('/benutzer/:id/erreichtBedarf', (req, res) => {
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
-    res.status(404).send("User ID not found")
+    res.status(404).send("User ID nicht gefunden")
     return 
   }
   let data=userArray[parseInt(req.params.id)-1].erreichtBedarf
@@ -389,14 +394,14 @@ app.get('/user/:id/erreichtBedarf', (req, res) => {
 
 //CREATE bzw POST
 
-app.post('/user/:id/kpd', (req, res)=> {
+app.post('/benutzer/:id/kpd', (req, res)=> {
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length+1){
-    res.status(404).send("User ID not found")
+    res.status(404).send("User ID nicht gefunden")
     return 
   }
   const { error } = validateKPD(req.body)
   if (error){
-  res.status(400).send(error.details[0].message+"invalid input")
+  res.status(400).send(error.details[0].message)
  return
   }
  userArray.push={
@@ -409,19 +414,19 @@ app.post('/user/:id/kpd', (req, res)=> {
   
 })
 
-app.post('/user/', (req, res)=> {
- res.send("your user ID: "+userArray.length++)
+app.post('/benutzer/', (req, res)=> {
+ res.send("Benutzer ID: "+userArray.length++)
 })
 
 //UPDATE bzw PUT
 
-app.put('/user/:id/bedarfErreicht/analyze?rezept=:rid', (req,res)=>{
+app.put('/benutzer/:id/bedarfErreicht/analyze?rezept=:rid', (req,res)=>{
 if(parseInt(req.params.rid)<0 || req.params.rid>recipes.length){
-  res.status(404).send("Recipe ID not found")
+  res.status(404).send("Recipe ID nnicht gefunden")
   return 
 }
 if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
-  res.status(404).send("User ID not found")
+  res.status(404).send("User ID nicht gefunden")
   return 
 }
 rezeptAnEdamam(rezeptWahl(parseInt(req.params.rid)))
@@ -431,9 +436,9 @@ rezeptAnEdamam(rezeptWahl(parseInt(req.params.rid)))
 })
 })
 
-app.put('/user/:id/bedarfErreicht/analyze?zutat=:zutat', (req,res)=>{
+app.put('/benutzer/:id/bedarfErreicht/analyze?zutat=:zutat', (req,res)=>{
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
-    res.status(404).send("User ID not found")
+    res.status(404).send("User ID nicht gefunden")
     return 
   }
   anfrage(req.params.zutat)

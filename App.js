@@ -337,6 +337,9 @@ function validateKPD(kpd) {
   }
 
 //READ bzw GET Requests
+app.get('/', (req,res)=>{
+  res.send('Willkomen bei unserem GDW Projekt')
+})
 
 app.get('/rezepte', (req, res) => {
   res.send(recipes)

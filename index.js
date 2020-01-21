@@ -13,6 +13,18 @@ const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
 const userArray=[]
 
+userArray[0].kpd={
+    gewicht: 60,
+    groesse: 170,
+    activitaet: 2,
+    alter: 30,
+    geschlecht: "m"
+    }
+
+userArray[0].bedarf=bedarfNutzer(1)
+
+
+
 const recipes=[
   {title:"Courgette carbonara",
      id:1},  
@@ -387,6 +399,7 @@ app.post('/user/:id/kpd', (req, res)=> {
   res.status(400).send(error.details[0].message+"invalid input")
  return
   }
+
   userArray[parseInt(req.params.id)-1].kpd=req.body
   bedarfNutzer(parseInt(req.params.id)).then(function(data){
     res.send(data)

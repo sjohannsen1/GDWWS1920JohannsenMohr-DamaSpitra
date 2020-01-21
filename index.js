@@ -352,7 +352,7 @@ function validateKPD(kpd) {
    
   }
 
-//READ bzw GET Requests
+//READ bzw GET Requests -> getestet und funktionieren
 app.get('/', (req,res)=>{
   res.send('Willkomen bei unserem GDW Projekt')
 })
@@ -392,7 +392,7 @@ app.get('/benutzer/:id/erreichtBedarf', (req, res) => {
   res.send(data)
     })
 
-//CREATE bzw POST
+//CREATE bzw POST -> getestet und funktionieren
 
 app.post('/benutzer/:id/kpd', (req, res)=> {
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length+1){
@@ -420,9 +420,9 @@ app.post('/benutzer/', (req, res)=> {
 
 //UPDATE bzw PUT
 
-app.put('/benutzer/:id/bedarfErreicht/analyze?rezept=:rid', (req,res)=>{
+app.put('/benutzer/:id/bedarfErreicht/analyse_rezept/:rid', (req,res)=>{
 if(parseInt(req.params.rid)<0 || req.params.rid>recipes.length){
-  res.status(404).send("Recipe ID nnicht gefunden")
+  res.status(404).send("Recipe ID nicht gefunden")
   return 
 }
 if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
@@ -436,7 +436,7 @@ rezeptAnEdamam(rezeptWahl(parseInt(req.params.rid)))
 })
 })
 
-app.put('/benutzer/:id/bedarfErreicht/analyze?zutat=:zutat', (req,res)=>{
+app.put('/benutzer/:id/bedarfErreicht/analyse_zutat/:zutat', (req,res)=>{
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
     res.status(404).send("User ID nicht gefunden")
     return 

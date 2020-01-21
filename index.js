@@ -385,12 +385,13 @@ app.post('/user/:id/kpd', (req, res)=> {
   const { error } = validateKPD(req.body)
   if (error){
   res.status(400).send(error.details[0].message+"invalid input")
-
-  return
+ return
   }
   userArray[parseInt(req.params.id)-1].kpd=req.body
-  data=bedarfNutzer(parseInt(req.params.id))
-  res.send(data)
+  bedarfNutzer(parseInt(req.params.id)).then(function(data){
+    res.send(data)
+  })
+  
 })
 
 app.post('/user/', (req, res)=> {

@@ -335,7 +335,7 @@ function validateKPD(kpd) {
     groesse: joi.number().min(100).max(250).required(),
     activitaet: joi.number().integer().min(0).max(4).required(),
     alter: joi.number().integer().min(0).max(120).required(),
-    geschlecht: joi.string().valid(['m','w']).required()
+    geschlecht: joi.string().valid('m','w').required()
  })
   return joi.validate(kpd, schema);
    

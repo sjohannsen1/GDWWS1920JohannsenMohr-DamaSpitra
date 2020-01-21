@@ -191,8 +191,6 @@ const rezeptAnEdamam=(recipepath)=>{
     .end(function (result) {
       resolve(result.body)*/
     JSONtools.lesen(recipepath, function(etwas,res){
-      console.log(res)
-      console.log("hallo")
     unirest('POST', 'https://api.edamam.com/api/nutrition-details?app_id='+app_id+'&app_key='+app_key)
       .headers({
         'Content-Type': ['application/json', 'application/json']
@@ -331,7 +329,7 @@ const reachedNut=(result,userId)=>{
     user.erreichtBedarf=reached
     
   }else{
-      console.log("an error occurred")
+      resolve(false)
       
      }
      userArray[userId-1]=user
@@ -444,7 +442,12 @@ app.put('/benutzer/:id/bedarfErreicht/analyse_zutat/:zutat', (req,res)=>{
   anfrage(req.params.zutat)
   .then(result=>reachedNut(result,parseInt(req.params.id)))
   .then(function(newId){
- res.send(userArray[newId-1].erreichtBedarf)
+      if(typeof newId === "boolean"){
+        res.status(400).send("hoppla, da ist ein fehler passiert")  
+        return 
+      }
+      else
+        res.send(userArray[newId-1].erreichtBedarf)
   })
 
 })

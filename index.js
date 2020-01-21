@@ -66,8 +66,10 @@ const rezeptWahl=(id)=>{
 return(recipepaths[id-1])
 }
 
-const rezeptPresent=(recipeList)=>{
-  console.log(recipeList) //vllt auch einfach globale variable nutzen, array wird ja nicht verändert
+const rezeptPresent=(recipepath)=>{
+    JSONtools.lesen(recipepath, function(x,res){
+        return res
+    })
 }
 //Fordert user zur eingabe einer Zutat. Formatiert diese und return dies
 const eingabe=()=>{
@@ -159,7 +161,8 @@ const bedarfNutzer=(userId)=>{
       bedarf.carbs=(bedarf.kcal-bedarf.fett*9.3-bedarf.protein*4.1)/4.1
       bedarf.zucker=bedarf.carbs*0.1
       userArray[userId-1].erreichtBedarf={
-          kcal:0,
+        unit: "prozent",  
+        kcal:0,
           protein:0,
           fett:0,
           gesFett:0,
@@ -287,7 +290,9 @@ if(typeof result ==="boolean" && result){
 const reachedNut=(result,userId)=>{
   return new Promise((resolve,reject)=>{
   let user=userArray[userId-1]
-  let reached=new Object()
+  let reached={
+      unit:user.unit
+  }
   if (typeof result === "object"){
     if(!_.isEmpty(result.totalNutrients.ENERC_KCAL))
       reached.kcal=user.erreichtBedarf.kcal+(result.totalNutrients.ENERC_KCAL.quantity/user.bedarf.kcal)*100
@@ -317,6 +322,7 @@ const reachedNut=(result,userId)=>{
       reached.zucker=user.erreichtBedarf.zucker+(result.totalNutrients.SUGAR.quantity/user.bedarf.zucker)*100
     else
       reached.zucker=user.erreichtBedarf.zucker
+      
     user.erreichtBedarf=reached
     
   }else{
@@ -355,12 +361,13 @@ app.get('/rezepte/:id', (req, res) => {
     res.status(404).send("Recipe ID not found")
     return 
   }
-//add promise
-let data= rezeptWahl(parseInt(req.params.id))//.then(function(result){
-    res.send(data)
- // })
 
-  })
+rezeptWahl(parseInt(req.params.id))
+.then(path=> rezeptPresent(path))
+.then(function(result){
+    res.send(result)
+})
+})
 
 app.get('/user/:id/bedarf', (req, res) => {
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
@@ -403,7 +410,7 @@ app.post('/user/:id/kpd', (req, res)=> {
 })
 
 app.post('/user/', (req, res)=> {
- res.send("your user ID: "+userArray.length+1)
+ res.send("your user ID: "+userArray.length++)
 })
 
 //UPDATE bzw PUT

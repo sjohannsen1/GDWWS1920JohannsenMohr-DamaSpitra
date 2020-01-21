@@ -406,6 +406,7 @@ rezeptAnEdamam(rezeptWahl(parseInt(req.params.rid)))
 .then(function(newId){
  res.send(userArray[newId-1].erreichtBedarf)
 })
+})
 
 app.put('/user/:id/bedarfErreicht/analyze?zutat=:zutat', (req,res)=>{
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){

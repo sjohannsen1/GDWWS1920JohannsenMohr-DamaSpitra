@@ -385,7 +385,8 @@ res.send(req.body)
   }
   const { error } = validateKPD(req.body)
   if (error){
-  res.status(400).send(error.details[0].message)
+  res.status(400).send(error.details[0].message+"invalid input")
+
   return
   }
   userArray[parseInt(req.params.id)-1].kpd=req.body

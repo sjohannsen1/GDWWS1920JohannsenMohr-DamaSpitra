@@ -146,6 +146,7 @@ const bedarfNutzer=(userId)=>{
       let weight=userArray[userId-1].kpd.gewicht
       let height=userArray[userId-1].kpd.groesse
       let activity=userArray[userId-1].kpd.activitaet
+      //switch einfügen
       let age=userArray[userId-1].kpd.alter
       let sex=userArray[userId-1].kpd.geschlecht
 
@@ -332,8 +333,8 @@ function validateKPD(kpd) {
   const schema = joi.object({
     gewicht: joi.number().min(40).max(300).required(),
     groesse: joi.number().min(100).max(250).required(),
-    activitaet: joi.integer().min(0).max(4).required(),
-    alter: joi.integer().min(0).max(120).required(),
+    activitaet: joi.number().integer().min(0).max(4).required(),
+    alter: joi.number().integer().min(0).max(120).required(),
     geschlecht: joi.string().valid(['m','w']).required()
  })
   return joi.validate(kpd, schema);
@@ -370,7 +371,7 @@ app.get('/user/:id/bedarf', (req, res) => {
   res.send(data)
     })
 
-app.get('/user/:id/bedarfErreicht', (req, res) => {
+app.get('/user/:id/erreichtBedarf', (req, res) => {
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
     res.status(404).send("User ID not found")
     return 
@@ -391,7 +392,7 @@ app.post('/user/:id/kpd', (req, res)=> {
   res.status(400).send(error.details[0].message+"invalid input")
  return
   }
- userArray[parseInt(req.params.id)-1]={
+ userArray.push={
      id: parseInt(req.params.id)
  }
   userArray[parseInt(req.params.id)-1].kpd=req.body

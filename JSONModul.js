@@ -27,12 +27,13 @@ const getData=(path)=>{
         }
     })
 }
-const schreiben=(jsonString, path)=>{
+const schreiben=(unformatString, path)=>{
+    jsonString=JSON.stringify(unformatString)
     fs.writeFile(path,jsonString, err=>{
         if(err){
             console.log("Error writing file", err)
         } else{
-            console.log(jsonString)
+            //console.log(jsonString)
             console.log("Datei erfolgreich beschrieben")
         }
     })

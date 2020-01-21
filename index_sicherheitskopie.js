@@ -3,7 +3,7 @@ const _ = require('underscore')
 const express = require('express')
 const readline=require('readline')
 const joi = require('@hapi/joi') //zur validation von kpd
-const reqTools= require("./bedarfModul.js")
+//const reqTools= require("./bedarfModul.js")
 const JSONtools=require("./JSONModul.js")
 const app = express()
 app.use(express.json())

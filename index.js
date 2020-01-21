@@ -443,7 +443,7 @@ app.put('/benutzer/:id/bedarfErreicht/analyse_zutat/:zutat', (req,res)=>{
   .then(result=>reachedNut(result,parseInt(req.params.id)))
   .then(function(newId){
       if(typeof newId === "boolean"){
-        res.status(400).send("hoppla, da ist ein fehler passiert")  
+        res.status(400).send("hoppla, da ist ein fehler beim kontaktieren von Edamam passiert")  
         return 
       }
       else

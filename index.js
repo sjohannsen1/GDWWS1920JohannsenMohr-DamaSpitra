@@ -391,7 +391,9 @@ app.post('/user/:id/kpd', (req, res)=> {
   res.status(400).send(error.details[0].message+"invalid input")
  return
   }
-
+ userArray[parseInt(req.params.id)-1]={
+     id: parseInt(req.params.id)
+ }
   userArray[parseInt(req.params.id)-1].kpd=req.body
   bedarfNutzer(parseInt(req.params.id)).then(function(data){
     res.send(data)
@@ -465,7 +467,7 @@ const main=async()=>{
     geschlecht: "m"
     }
 
-userArray[0].bedarf=bedarfNutzer(1)
+bedarfNutzer(1)
 //main()
 
 //module.exports={}

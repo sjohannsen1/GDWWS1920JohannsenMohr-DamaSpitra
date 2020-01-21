@@ -17,6 +17,7 @@ const userArray=[{}]
 
 
 
+
 const recipes=[
   {title:"Courgette carbonara",
      id:1},  
@@ -391,6 +392,9 @@ app.get('/benutzer/:id/erreichtBedarf', (req, res) => {
   let data=userArray[parseInt(req.params.id)-1].erreichtBedarf
   res.send(data)
     })
+
+
+  
 
 //CREATE bzw POST -> getestet und funktionieren
 

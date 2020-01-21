@@ -350,6 +350,8 @@ function validateKPD(kpd) {
    
   }
 
+//REST methoden implementation:
+
 //READ bzw GET Requests -> getestet und funktionieren
 app.get('/', (req,res)=>{
   res.send('Willkomen bei unserem GDW Projekt')
@@ -418,7 +420,7 @@ app.post('/benutzer/', (req, res)=> {
 
 //UPDATE bzw PUT
 
-app.put('/benutzer/:id/bedarfErreicht/analyse_rezept/:rid', (req,res)=>{
+app.put('/benutzer/:id/erreichtBedarf/analyse_rezept/:rid', (req,res)=>{
 if(parseInt(req.params.rid)<0 || req.params.rid>recipes.length){
   res.status(404).send("Recipe ID nicht gefunden")
   return 
@@ -434,7 +436,8 @@ rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 })
 })
 
-app.put('/benutzer/:id/bedarfErreicht/analyse_zutat/:zutat', (req,res)=>{
+//edamam will iwie unsere app id bzw app key nicht annehmen
+app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
   if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
     res.status(404).send("User ID nicht gefunden")
     return 

@@ -429,8 +429,8 @@ if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
   res.status(404).send("User ID nicht gefunden")
   return 
 }
-rezeptAnEdamam(rezeptWahl(parseInt(req.params.rid)))
-.then(result=>reachedNut(result,parseInt(req.params.rid)))
+rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
+.then(result=>reachedNut(result,parseInt(req.params.id)))
 .then(function(newId){
  res.send(userArray[newId-1].erreichtBedarf)
 })

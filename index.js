@@ -13,15 +13,7 @@ const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
 const userArray=[{}]
 
-userArray[0].kpd={
-    gewicht: 60,
-    groesse: 170,
-    activitaet: 2,
-    alter: 30,
-    geschlecht: "m"
-    }
 
-userArray[0].bedarf=bedarfNutzer(1)
 
 
 
@@ -465,6 +457,15 @@ const main=async()=>{
  await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){console.log(res) })
   rl.close()
   }
+  userArray[0].kpd={
+    gewicht: 60,
+    groesse: 170,
+    activitaet: 2,
+    alter: 30,
+    geschlecht: "m"
+    }
+
+userArray[0].bedarf=bedarfNutzer(1)
 //main()
 
 //module.exports={}

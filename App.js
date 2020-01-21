@@ -422,7 +422,8 @@ app.put('/user/:id/bedarfErreicht/analyze?zutat=:zutat', (req,res)=>{
 })
 
 
-
+const port = process.env.PORT || 8080
+app.listen(port, () => console.log(`Listening on port ${port}..`))
 const main=async()=>{ 
   let aktNutzer//nur zum testen
  /* await eingabeNutzer().then(user=>bedarfNutzer(user)).then(function(user){
@@ -443,6 +444,6 @@ const main=async()=>{
  await rezeptAnEdamam("./Recipes/Recipe1.json").then(function(res){console.log(res) })
   rl.close()
   }
-main()
+//main()
 
 //module.exports={}

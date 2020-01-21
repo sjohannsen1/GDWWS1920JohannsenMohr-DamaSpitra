@@ -350,8 +350,11 @@ app.get('/rezepte/:id', (req, res) => {
     res.status(404).send("Recipe ID not found")
     return 
   }
-  let data=rezeptPresent(parseInt(req.params.id))
-  res.send(data)
+//add promise
+let data= rezeptWahl(parseInt(req.params.id))//.then(function(result){
+    res.send(data)
+ // })
+
   })
 
 app.get('/user/:id/bedarf', (req, res) => {
@@ -390,7 +393,7 @@ app.post('/user/:id/kpd', (req, res)=> {
 })
 
 app.post('/user/', (req, res)=> {
- res.send("your user ID: "+userArray.length)
+ res.send("your user ID: "+userArray.length+1)
 })
 
 //UPDATE bzw PUT

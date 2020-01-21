@@ -1,8 +1,8 @@
 {
-  "name": "App.js GdW",
-  "description": "Dienst um Nährwerte zu Analysieren für ein Bewusteres Leben",
+  "name": "nutrition_app",
+  "description": "Dienst um Nährwerte zu Analysieren für ein Bewussteres Leben",
   "repository": "https://github.com/SophiaJ1/GDWWS1920JohannsenMohr-DamaSpitra.git",
   "logo":"",
   "keywords": ["nutrition","recipes","food"],
-  "image":"",
+  "image": ""
 }

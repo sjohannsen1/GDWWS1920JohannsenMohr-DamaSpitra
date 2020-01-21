@@ -378,7 +378,7 @@ app.get('/user/:id/bedarfErreicht', (req, res) => {
 //CREATE bzw POST
 
 app.post('/user/:id/kpd', (req, res)=> {
-  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+  if(parseInt(req.params.id)<0 || req.params.id>userArray.length+1){
     res.status(404).send("User ID not found")
     return 
   }

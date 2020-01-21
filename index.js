@@ -296,7 +296,7 @@ const reachedNut=(result,userId)=>{
   return new Promise((resolve,reject)=>{
   let user=userArray[userId-1]
   let reached={
-      unit:user.unit
+      unit: user.erreichtBedarf.unit
   }
   if (typeof result === "object"){
     if(!_.isEmpty(result.totalNutrients.ENERC_KCAL))
@@ -442,7 +442,7 @@ app.put('/benutzer/:id/bedarfErreicht/analyse_zutat/:zutat', (req,res)=>{
     return 
   }
   anfrage(req.params.zutat)
-  .then(result=>reachedNut(result,parseInt(req.params.rid)))
+  .then(result=>reachedNut(result,parseInt(req.params.id)))
   .then(function(newId){
  res.send(userArray[newId-1].erreichtBedarf)
   })

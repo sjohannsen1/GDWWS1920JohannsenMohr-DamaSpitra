@@ -12,7 +12,7 @@ const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status cod
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
 var userArray
-var pathData="userData.json"
+const pathData="userData.json"
 
 
 
@@ -410,7 +410,7 @@ app.get('/rezepte', (req, res) => {
   })
 
 app.get('/rezepte/:id', (req, res) => {
-  if(parseInt(req.params.id)<0 || req.params.id>recipes.length){
+  if(parseInt(req.params.id)<0 || parseInt(req.params.id)>recipes.length){
     res.status(404).send("Recipe ID nicht gefunden")
     return 
   }
@@ -425,7 +425,7 @@ app.get('/benutzer/:id/bedarf', (req, res) => {
  
   einlesen(pathData).then(function(data){
     userArray=data
-    if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+    if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length){
       res.status(404).send("User ID nicht gefunden")
       return 
     }
@@ -438,7 +438,7 @@ app.get('/benutzer/:id/erreichtBedarf', (req, res) => {
   
   einlesen(pathData).then(function(data){
     userArray=data
-    if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+    if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length){
       res.status(404).send("User ID nicht gefunden")
       return 
     }
@@ -472,9 +472,9 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
      id: parseInt(req.params.id)
      }
     userArray[parseInt(req.params.id)-1].kpd=req.body
-    bedarfNutzer(parseInt(req.params.id)).then(data =>JSONtools.schreibenSync(data,pathData)).then(function(flag,path){
+    bedarfNutzer(parseInt(req.params.id)).then(data =>JSONtools.schreibenSync(data,pathData)).then(function(flag){
       //vllt probleme mit async, evt callback oder promise
-      pathData=path
+      
       if (typeof flag === "boolean"){
         res.status(404).send("Problem beim Speichern des Users")
         return  
@@ -508,7 +508,7 @@ if(!_.isEmpty(req.body))
     res.status(400).send(error2.details[0].message)
    return
     }
-   const { error3 } = validateBedarfE(req.body.bedarfE)
+   const { error3 } = validateBedarfE(req.body.erreichtBedarf)
     if (error3){
     res.status(400).send(error3.details[0].message)
    return
@@ -525,8 +525,8 @@ userArray[parseInt(req.params.id)-1]=req.body
 rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 .then(result=>reachedNut(result,parseInt(req.params.id)))
 .then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
-    .then(function(flag,path){
-      pathData=path
+    .then(function(flag){
+      
       if (typeof flag === "boolean"){
             res.status(404).send("Problem beim Speichern des Users")
             return 
@@ -537,19 +537,19 @@ rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 else {
     einlesen(pathData).then(function(result){
         userArray=result
-    if(parseInt(req.params.rid)<0 || req.params.rid>recipes.length){
+    if(parseInt(req.params.rid)<0 || parseInt(req.params.rid).rid>recipes.length){
       res.status(404).send("Recipe ID nicht gefunden")
       return 
     }
-    if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+    if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length){
       res.status(404).send("User ID nicht gefunden")
       return 
     }
     rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
     .then(result=>reachedNut(result,parseInt(req.params.id)))
     .then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
-    .then(function(flag,path){
-      pathData=path
+    .then(function(flag){
+      
       if (typeof flag === "boolean"){
             res.status(404).send("Problem beim Speichern des Users")
             return 
@@ -574,7 +574,7 @@ const { error2 } = validateBedarf(req.body.bedarf)
   res.status(400).send(error2.details[0].message)
  return
   }
-const { error3 } = validateBedarfE(req.body.bedarfE)
+const { error3 } = validateBedarfE(req.body.erreichtBedarf)
   if (error3){
   res.status(400).send(error3.details[0].message)
  return
@@ -594,8 +594,8 @@ const { error3 } = validateBedarfE(req.body.bedarfE)
     else
       resolve(newId)
   }).then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
-  .then(function(flag,path){
-  pathData=path
+  .then(function(flag){
+  
   if (typeof flag === "boolean"){
         res.status(404).send("Problem beim Speichern des Users")
         return
@@ -620,8 +620,8 @@ const { error3 } = validateBedarfE(req.body.bedarfE)
         else
           resolve(newId)
       }).then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
-      .then(function(flag,path){
-      pathData=path
+      .then(function(flag){
+    
       if (typeof flag === "boolean"){
             res.status(404).send("Problem beim Speichern des Users")
             return

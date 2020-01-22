@@ -49,7 +49,7 @@ const schreibenSync=(unformatString, path)=>{
             resolve(false)
         } else{
             //console.log(jsonString)
-            resolve("Datei erfolgreich beschrieben",path)
+            resolve("Datei erfolgreich beschrieben")
            
         }
     })

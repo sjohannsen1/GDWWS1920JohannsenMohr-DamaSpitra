@@ -10,7 +10,7 @@ app.use(express.json())
 const app_id="d583615a"
 //const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
-//var params, query,foodQuery,esc
+var params, query,foodQuery,esc
 var userArray
 const pathData="userData.json"
 
@@ -74,6 +74,24 @@ const rezeptWahl=(id)=>{
     })
  //todo: implementieren: get mit rezept id suchtpassendes rezept aus path array (recipepaths) also: recipepaths[id-1]
 
+}
+
+const mkString=(foodStr)=>{
+  return new Promise((resolve,reject)=>{
+    var ingredients = new Array()
+    ingredients.push(foodStr)
+   //console.log(foodStr)
+      params = {
+        ingr: ingredients,
+        }
+      esc = encodeURIComponent
+      query = Object.keys(params)
+      .map(k => esc(k) + '=' + esc(params[k]))
+      .join('&')
+      foodQuery = query.replace(/%20/g, "+")
+      resolve(foodQuery)
+
+  })
 }
 
 const rezeptPresent=(recipepath)=>{
@@ -374,7 +392,12 @@ function validateKPD(kpd) {
   return schema.validate(kpd)
    
   }
-
+function validateZutat(zutat){
+  const schemaZ= joi.object({
+    zutat: joi.string().required()
+  })
+  return schemaZ.validate(zutat)
+}
 //REST methoden implementation:
 
 //READ bzw GET Requests -> getestet und funktionieren
@@ -468,7 +491,7 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
   app.post('/benutzer/', (req, res)=> {
     einlesen(pathData).then(function(data){
       //userArray=data
-      let id=data.length
+      let id=data.length+1
       res.send("Benutzer ID: "+id)
     })
 })
@@ -501,14 +524,20 @@ rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 })
 
 //edamam will iwie unsere app id bzw app key nicht annehmen
-app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
+app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/', (req,res)=>{
+  const { error } = validateZutat(req.body)
+  if (error){
+  res.status(400).send(error.details[0].message)
+ return
+  }
   einlesen(pathData).then(function(result){
     userArray=result
   if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length){
     res.status(404).send("User ID nicht gefunden")
     return 
   }
-  anfrage("ingr="+req.params.zutat)
+  mkString(req.body.zutat)
+  .then(anfrage(req.params.zutat))
   .then(result=>reachedNut(result,parseInt(req.params.id)))
   .then(function(newId){
     if(typeof newId === "boolean"){

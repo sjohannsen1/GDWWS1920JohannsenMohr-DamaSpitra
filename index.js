@@ -232,6 +232,8 @@ const rezeptAnEdamam=(recipepath)=>{
 
 
 //Fehlermenu, ermöglicht dem User die wahl zwischen einem Weiteren Versuch oder dem Programmabbruch
+//relikt aus POC
+/*
 const menu=(result1)=>{
  return new Promise((resolve,reject)=>{
     rl.question('1: Nochmal versuchen \n2: Abort \nEingabe: ', function(answer){
@@ -256,7 +258,7 @@ const menu=(result1)=>{
       }
   })
   })
-}
+}*/
 
 //schickt die formatierte Suchquery und schickt diese an die API, falls der StatusCode der Rückgabe einen Fehler indiziert, wird dieser
 // in entsprechenden fallbacks behandelt
@@ -282,7 +284,7 @@ const anfrage=(foodQuery)=>{
           resolve(result.body)
       }else { //fallback falls eingabe invalid ist
           console.log("invalid argument")
-          resolve(false) //sagt dem then dass eine neue eingabe nötig ist
+          resolve(foodQuery) //sagt dem then dass eine neue eingabe nötig ist
           
            
       }
@@ -511,6 +513,10 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
       res.status(400).send("hoppla, da ist ein fehler beim kontaktieren von Edamam passiert")  
       resolve()
     }
+    else if(typeof newId === "string"){
+      res.status(400).send("eingabe invalid")  
+      resolve()
+    }
     else
       resolve(newId)
   }).then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
@@ -529,16 +535,3 @@ const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Listening on port ${port}..`))
 
 
-/*
-  userArray[0].kpd={
-    gewicht: 60,
-    groesse: 170,
-    activitaet: 2,
-    alter: 30,
-    geschlecht: "m"
-    }
-
-bedarfNutzer(1)*/
-//main()
-
-//module.exports={}

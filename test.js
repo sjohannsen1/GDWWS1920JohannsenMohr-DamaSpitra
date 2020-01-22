@@ -14,7 +14,7 @@ var params, query,foodQuery,esc
 var userArray=[{}]
 const pathData="./userData.json"
 
-
+//TEST DATEI, zum Testen von Heroku
 
 const einlesen=(path)=>{ 
   return new Promise((resolve,reject)=>

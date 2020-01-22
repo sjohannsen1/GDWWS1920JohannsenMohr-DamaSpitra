@@ -442,9 +442,9 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
       res.status(404).send("User ID nicht gefunden")
       return 
     }
-    userArray.push={
+    userArray.push({
      id: parseInt(req.params.id)
-     }
+     })
     userArray[parseInt(req.params.id)-1].kpd=req.body
     bedarfNutzer(parseInt(req.params.id))
     .then(data =>JSONtools.schreibenSync(data,pathData))

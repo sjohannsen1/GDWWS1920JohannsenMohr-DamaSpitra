@@ -1,0 +1,147 @@
+Rezept und Produkt APIs:
+1. Spoonacular Food API
+Bietet die Möglichkeit mit natürlicher Sprache nach Rezepten zu suchen. Die Datenbank umfasst 360.000 Rezepte und 80.000 Produkte. Die Benutzer können sich bei Rezepten die Nährwerte, Zutaten und die Kosten anzeigen lassen. Die Suche lässt sich nach Nährstoffen, bevorzugten Zutaten (was ist noch im Kühlschrank vorhanden?) Filtern. Außerdem lässt sich ein Essensplan erstellen.
+https://www.programmableweb.com/api/food
+Einbindung über JSON möglich
+
++ Suche mit Natürlicher Sprache
++ Gute Such Filter
++ Umfangreiche Datenbank
++ Umfangreiche Dokumentation
+
+- In der Free Version nur begrenzte Aufrufe möglich (Begrenzte Anzahl an Punkten)
+- Aufrufe der API werden in Punkte umgerechnet 
+
+Die Begrenzung der Aufrufe ist hier ein mögliches Ausschlusskriterium.
+
+2. Food2Fork 
+Food2Fork ist eine Rezeptdatenbank, die auf Rezeptaustauschen mit anderen Benutzern basiert. Die API bietet auch eine Suchfunktion für Zutaten. Außerdem gibt es einen sozial Media Ranking Algorithmus.
+https://www.programmableweb.com/api/food2fork-recipe
+
++ kostenlos
+
+- Umfang der Rezepte nicht klar
+- Datenbank basiert nur auf getauschten Rezepten von anderen Benutzern
+- Suche lässt sich nur nach Zutaten filtern 
+-  Beim Aufrufen der Such API URL Fehler: 403 FORBIDDEN
+
+Der geringe Umfang der API und die nicht ersichtliche vorhandene Menge an APIs ist ein mögliches Ausschlusskriterium.
+3. Big Oven Recipe API
+Big Oven bietet eine umfangreiche Datenbank von über 350.000 Rezepten, tausenden Fotos, Suche nach Zutaten, Keywords, oder Nährwertinformationen. Außerdem gibt es die Möglichkeit eine Einkaufsliste zu erstellen und in einer Cloud zu speichern.
+https://www.programmableweb.com/api/bigoven-recipe
++ umfangreiche Datenbank
++ umfangreiche Suchfunktionen
++ umfangreiche Dokumentation
+- eigenständige App
+- Benutzung der API kostenpflichtig
+
+Mögliches Konkurrenzprodukt, da eine eigene App bereits entwickelt wurde.
+
+4. BARZZ API 
+Mit der Brazz API lassen sich detaillierte Informationen zu Restaurants, Bars und Nachtclubs abrufen. Darunter die Öffnungszeiten, der Standort, die Tagesgerichte, und weiteres. Um die API nutzen zu können, muss ein Benutzerschlüssel über die Homepage angefordert werden.
+Da einige Elemente auf der Homepage zurzeit nicht erreichbar sind, kann keine Informationen über mögliche Kosten gefunden werden.
+https://www.programmableweb.com/api/barzz
++ umfangreiche Datenbank über Restaurants, Bars und Clubs
++ ausführliche Dokumentation
++/- evtl. Kostenlose Nutzung möglich
+- API ist als Location Finder ausgelegt und besitzt keine Datenbank zu Rezepten o.ä.
+API bietet für unser Projekt keinen Mehrwert, das es sich um einen Location Finder für Restaurants, Bars und Clubs handelt.
+
+
+5. Eat Street 
+Die API Eat Street erlaubt Entwickler den Zugriff auf Menüdaten von Lokalen Restaurants, sowie Informationen ob die Möglichkeit einer Lieferung oder einer Selbstabholung besteht. Die Datenbank umfasst Menüeinträge von über 12.000 Restaurants. Im Moment ist das Aufrufen der Homepage jedoch nicht möglich (The requested URL was rejected. Please consult with your administrator.), sodass keine weiteren Informationen in Erfahrung gebracht werden konnten.
+https://www.programmableweb.com/api/eatstreet
+- API ist für Restaurants ausgelegt
+- Es ist unklar um welche 12.000 lokalen Restaurants es sich handelt
+- Homepage ist für weitere Recherche nicht erreichbar (The requested URL was rejected. Please consult with your administrator.)
+Keinen Mehrwert für unser Projekt, da Restaurants im Vordergrund stehen.
+
+6. Recipe Bridge
+Recipe Bridge ist eine auf das Suchen von Rezepten über hunderte verschiedene Websites spezialisierte API. Außerdem wird eine Umfangreiche Suche unter anderem nach, Zutaten, detaillierte Rezeptangaben, Mengenangaben oder Rezeptquelle ermöglicht. Um die API benutzen zu können ist eine Registrierung auf der Homepage erforderlich.
+https://www.programmableweb.com/api/recipebridge
+
+ + ermöglicht Cross-Plattform Suche nach Rezepten
++ große Datenbank an Rezepten und Websites
++ kostenlose Benutzung
+- Dokumentation nicht einsehbar (evtl. erst nach Registrierung möglich)
+
+7. Recipe Puppy
+Recipe Puppy ist eine Such Engine, mit der Rezept auf Basis von Zutaten oder Keywords gesucht werden können. Die Datenbank umfasst dabei über eine Millionen Rezepte.
+Kostenlos verfügbar, jedoch wird darum gebeten den Link der API Homepage anzugeben. Außerdem soll mit den Entwicklern der API Kontakt aufgenommen werden, wenn mehr als 1.000 Anfragen pro Tag an die API gestellt werden.
+https://www.programmableweb.com/api/recipe-puppy
+
++ Suche nach Zutaten und Keywords möglich
++ große Datenbank an Rezepten (1 Millionen) 
+o evtl. Begrenzung der Anfragen oder entstehende Kosten bei +1000 Anfragen pro Tag
+- geringer Funktionsumfang der API 
+
+
+
+
+Nutrition APIs:
+
+1. Edamam Food Database API
+Die Edamam Food Database API bietet Tools um Ernährungsdaten für verpackte Lebensmittel, sowie für Restaurant Menüs zu finden. Außerdem bietet die API eine umfangreiche Suche, die auch Allergiehinweise sowie, Micro und Makro Nährstoffe auf Wunsch berücksichtigt und erlaubt das Scannen von Barcodes.
+https://www.programmableweb.com/api/edamam-food-database
+
++ umfangreiche Suche
++ berücksichtigt Allergie Hinweise
++ ausführliche Dokumentation
++ kostenlos für Entwickler und Startups
+- beschränkte Anfragen (abweichend je nach ausgewähltem Plan)
+
+
+
+2. Edamam Nutrition Analysis API
+Die Edamam Nutrition Analysis API ermöglicht Entwicklern Rezepte in Form von Titel und Zutatenliste einzugeben, wozu die API dann die Rezepte auf Nährwerte analysiert und das Ergebnis zurückgibt.
+https://www.programmableweb.com/api/edamam-nutrition-analysis
+
++ einfache Analyse von Rezepten
++ gute Erweiterung zu anderen APIs
++ kostenlos für Entwickler und Startups
+- beschränkte Anfragen (abweichend je nach ausgewähltem Plan)
+
+
+
+3. Chomp
+Chomp ist eine Food Nutrition Database API mit einer umfassenden Datenbank von 535.000 Produkten. Dabei bietet die Datenbank den Zugriff unter anderem auf: Produktbilder, Nährwertangaben, Zutaten, Allergiehinweise, Mineralien und Vitamine, Hersteller oder Marken und mehr. Die Daten können über das Scannen eines Barcodes abgerufen werden. 
+https://www.programmableweb.com/api/chomp
++ sehr umfangreiche Datenbank
++ einfacher Zugriff mittels Barcode Scan oder Produkt ID
++ Erstellen eigener Produktlisten
+- Ausschließlich kostenpflichtig
+
+
+
+
+4. Can I eat it?
+‚Can I eat it?‘ ist eine API, die Produktsuche über Barcode Scans oder Eingabe ermöglicht. Die Datenbank deckt dabei 80.000 Produkte ab. Die ausgegebenen Daten umfassen, Produktinformationen, Detaillierte Nährwertangaben, Allergene Listen und weiteres. 
+https://www.programmableweb.com/api/can-i-eat-it-barcode
++ Barcode Scanner
++ Detaillierte Nährwertangaben
+- Überschaubare Datenbank im Vergleich zu anderen APIs (80,000 Produkte)
+
+Mögliches Ausschlusskriterium: Die im Vergleich zu anderen APIs sehr überschaubare Datenbank
+
+
+5. USDA Food Composition Database 
+Mit der USDA Food Composition Databases API wird Entwicklern die Möglichkeit gegeben sowohl Lebensmittel Daten einzulesen und dafür dann die Nährwertdaten für bestimmte Lebensmittel zu erhalten, als auch Nährstoffdaten einzulesen und dafür dann entsprechende Lebensmittel mit der Angabe wie viel von den gesuchten Nährstoffen enthalten sind.
+https://www.programmableweb.com/api/usda-food-composition-databases
+
++ kostenloser Dienst
++ Filterung nach benötigten Nährstoffen möglich
++ Suche funktioniert sowohl mit Lebensmittel als auch mit Nährstoffen
+o Betrieben von der US-Regierung
+- Support wird zum 31.03.20 eingestellt, Homepage ist bereits seit dem 01.10.2019 nicht mehr verfügbar, es erfolgt eine Weiterleitung auf https://fdc.nal.usda.gov/
+6. FatSecret Platform - möglich, aber unklare Dokumentation
+Mit der FatSecret Platform API lassen sich ausgewählte Lebensmittel, Nährwerte und Kalorien in mobile Apps, Websites oder anderen Diensten einbinden.
+Eine kostenlose, aber in den Abfragen beschränkte Edition steht zur Verfügung. 
+Leider ist die Dokumentation auf der Homepage unklar, sodass nicht deutlich wird welche Leistungen die API konkret anbietet. Dadurch kann keine Bewertung von Vor- und Nachteilen getroffen werden.
+https://www.programmableweb.com/api/fatsecret-platform
+
+Auswahl der APIs
+Die Auswahl der APIs wurde in zwei Kategorien unterteilt. In der ersten Kategorie werden APIs mit dem Schwerpunkt auf Rezept und Produkte untersucht. In der zweiten Kategorie APIs aus dem Bereich Nutrition.
+Die für unser Projekt entscheidenden Kriterien für die Auswahl der APIs sind: Umfang der Datenbank, Umfang der Leistung, Kosten, Verfügbarkeit und Dokumentation.
+Nach der umfassenden Recherche auf der Plattform Programmable Web, sowie auf den API Websites der Betreiber wurden die Kernfeatures der APIs herausgearbeitet und in Vor- und Nachteile gegliedert.
+Nach eingehenden Überlegungen und Betrachtung der Pro- und Contra- Argumente hat sich im ersten Bereich die API Recipe Bridge durchgesetzt.
+In der zweiten Kategorie ist die beste Option für unser Projekt eine Kombination aus den APIs Edamam Food Database und Edamam Nutrition Analysis. 

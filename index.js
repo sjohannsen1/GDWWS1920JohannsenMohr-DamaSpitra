@@ -463,9 +463,9 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
 
   app.post('/benutzer/', (req, res)=> {
     einlesen(pathData).then(function(data){
-      userArray=data
-      let id=userArray.length
-      res.send("INDEX: Benutzer ID: "+id)
+      //userArray=data
+      let id=data.length
+      res.send("Benutzer ID: "+id)
     })
 })
 
@@ -474,11 +474,11 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
 app.put('/benutzer/:id/erreichtBedarf/analyse_rezept/:rid', (req,res)=>{
   einlesen(pathData).then(function(result){
     userArray=result
-if(parseInt(req.params.rid)<0 || req.params.rid>recipes.length){
+if(parseInt(req.params.rid)<0 || parseInt(req.params.rid)>recipes.length){
   res.status(404).send("Recipe ID nicht gefunden")
   return 
 }
-if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length){
   res.status(404).send("User ID nicht gefunden")
   return 
 }
@@ -500,7 +500,7 @@ rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
   einlesen(pathData).then(function(result){
     userArray=result
-  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+  if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length){
     res.status(404).send("User ID nicht gefunden")
     return 
   }

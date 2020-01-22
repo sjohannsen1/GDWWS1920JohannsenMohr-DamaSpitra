@@ -464,7 +464,7 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
   app.post('/benutzer/', (req, res)=> {
     einlesen(pathData).then(function(data){
       let id=userArray.length
-      res.send("Benutzer ID: "+id)
+      res.send("INDEX: Benutzer ID: "+id)
     })
 })
 
@@ -490,7 +490,7 @@ rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
         res.status(404).send("Problem beim Speichern des Users")
         return 
       }
-  res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
+  res.send(userArray[parseInt(req.params.id)-1])
 }) 
 })
 })
@@ -518,7 +518,7 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
         res.status(404).send("Problem beim Speichern des Users")
         return
       }
-  res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
+  res.send(userArray[parseInt(req.params.id)-1])
 })
 })
 })

@@ -402,7 +402,7 @@ function validateBedarfE(bedarfE){
 
 //READ bzw GET Requests -> getestet und funktionieren
 app.get('/', (req,res)=>{
-  res.send('Willkomen bei unserem GDW Projekt')
+  res.send('Willkomen zu unserem GDW Projekt')
 })
 
 app.get('/rezepte', (req, res) => {

@@ -1,0 +1,51 @@
+AUFGABE:
+Durch das Material arbeiten, und genau feststellen, was wie wo wenn wieso?!
+
+Verarbeitete Mindmap:
+Grobe Kategorisierung für die Idee und für die verschiedenen Problembereiche und Domänenenenbereiche.
+ 
+-	Nährwerte
+-	Kalorien 
+-	
+-	
+-	
+
+-	Rezepte
+-	Ernährungsweisen
+-	Vegan
+-	Vegetarisch
+-	Laktosefrei
+-	Glutenfrei
+-	Pescetarisch
+-	Fleisch
+-	Fleischarm
+-	Von welchen Tieren
+-	Kuh
+-	Schwein
+-	Schaf
+-	Wild
+-	Geflügel
+-	Fisch
+
+-	Sportbewusst
+-	low fat
+-	low carb
+-	intermittierendes Fasten
+-	Nährwerte
+-	Nährwertbewusst
+ 
+Schlüsse, die wir aus dem Arbeitsprozess ziehen:
+
+Wir halten fest, es gibt viele verschiedene Möglichkeiten, die App zu designen, gestalten und zu konstruieren, vor allem abhängig von der Nutzungsweise und Motivation des Nutzers.
+
+Wir haben allerdings nur begrenzte Ressourcen, heist Zeit, Geld, Lust und Kraft.
+Wir halten Ideen fest:
+-	Einen kompletten Ernährungsplan, basierend auf deinen Körperlichen Daten. -> Vision: Ein sehr guter, abwägender und ausgewogener Ernährungsplan, allerdings vermutlich nicht in Zeit und Kraft zu machen.
+-	Erst kochen, dann eintragen. Du siehst dann deine verschiedenen Werte und Ziele.
+-	Baubaren Plan, wo du gewünschte Rezepte einträgst, deren Nährwerte werden berechnet und die dir noch fehlenden Nährstoffe werden angezeigt.
+-	Darstellung etwa in Form von Auffüllbalken/Ladebalken/Fortschrittsdiagrammen etc. Sehr GUI Lastig, aber schön.
+-	Beispiel: Vorgeschlagene Rezepte aufgrund wieviel Kalorien (oder andere Nährstoffe) noch übrig sind.
+-	Die müssen auch deine anderen Präferenzen beachten. 
+
+-	Einzelne Möglichkeiten auch so nutzen können. (Für den faulen User)
+-	Rezepte nach Nährwerten sortieren.

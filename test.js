@@ -555,8 +555,8 @@ else {
       res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
     }) 
     })
-*/
-}
+
+}*/
 })
 
 //edamam will iwie unsere app id bzw app key nicht annehmen

@@ -1,16 +1,16 @@
 const unirest = require('unirest') //..\\GDWWS1920JohannsenMohr-DamaSpitra\\Abgabe 12.12\\node_modules\\
 const _ = require('underscore') 
 const express = require('express')
-const readline=require('readline')
+//const readline=require('readline')
 const joi = require('@hapi/joi') //zur validation von kpd
-const reqTools= require("./bedarfModul.js")
+//const reqTools= require("./bedarfModul.js")
 const JSONtools=require("./JSONModul.js")
 const app = express()
 app.use(express.json())
 const app_id="d583615a"
-const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
+//const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
-var params, query,foodQuery,esc
+//var params, query,foodQuery,esc
 var userArray
 const pathData="userData.json"
 
@@ -23,7 +23,6 @@ const einlesen=(path)=>{
   })
   })
   }
-
 
 const recipes=[
   {title:"Courgette carbonara",
@@ -44,11 +43,11 @@ const recipepaths=[
   "./Recipes/Recipe4.json",
   "./Recipes/Recipe5.json"
 ]
-
+/*
 const rl=readline.createInterface({
     input:process.stdin,
     output:process.stdout
-}) 
+}) */
 /* Vermutlich nicht nötig, da edamam auch komplette rezeptfiles analysiert
 const rezepteReinBrute=(paths)=>{ //Läuft auch nicht
   return new Promise((resolve, reject)=>{
@@ -85,6 +84,8 @@ const rezeptPresent=(recipepath)=>{
 })
 }
 //Fordert user zur eingabe einer Zutat. Formatiert diese und return dies
+//relikt aus POC
+/*
 const eingabe=()=>{
     return new Promise((resolve,reject)=>{
         rl.question('Zutaten eingeben: ', function(foodStr){
@@ -109,8 +110,9 @@ const eingabe=()=>{
          resolve(foodQuery)
          })
     })
-}
+}*/
 //TODO: nur zum testen
+/*
 const eingabeNutzer=()=>{
     return new Promise((resolve,reject)=>{
         let benutzer={}
@@ -153,7 +155,7 @@ const eingabeNutzer=()=>{
             })
          })
     })
-}
+}*/
 //errechnet Bedarfwerte des Nutzers, getestet und funktioniert
 const bedarfNutzer=(userId)=>{
     return new Promise((resolve, reject)=>{
@@ -506,7 +508,7 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
     res.status(404).send("User ID nicht gefunden")
     return 
   }
-  anfrage(req.params.zutat)
+  anfrage("ingr="+req.params.zutat)
   .then(result=>reachedNut(result,parseInt(req.params.id)))
   .then(function(newId){
     if(typeof newId === "boolean"){
@@ -530,6 +532,14 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
 })
 })
 
+/*const main=async()=>{
+  await eingabe().then(x=>anfrage(x)).then(function(y){
+    console.log(y)
+  })
+
+  rl.close()
+}
+main()*/
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Listening on port ${port}..`))

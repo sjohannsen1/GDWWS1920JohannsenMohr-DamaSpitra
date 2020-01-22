@@ -1,0 +1,99 @@
+-	Projektidee festhalten
+-	Nutrition Api
+
+
+	Was sind unsere APi kriterien.
+-	Geringer Aufwand, wenig Anmeldung Kram bitte.
+-	Anmeldungen sind immer notwendig
+-	Abfrage Begrenzungen:
+-	Edamer Nutrition only 2000 per month. (We deem this insufficient.) Maybe we can work around that.
+-	Fatsecret has 5000 Nutrition per day. Seems enough.
+-	Chomp unfortunately is kostenpflichtig.
+-	“Can I eat it” seems not properly supported, and is maybe not in a workable status. Schlechte Dokumentation.
+-	Fat secret, möglich aber unklare Dokumentation. Großes Fragezeichen.
+	
+-	WICHTIG: WIR BRAUCHEN EINE API UM EMPFOHLENE NÄHRWERTMENGEN ZU BERECHNEN.
+
+
+-	Gute Sample Codes
+-	Gute Dokumentation, how to use it.
+-	USDA (Unfortunately will be discontinued on 31.March 2020). 
+-	Quite good documentation.
+
+
+
+-	Wie wollen wir unsere Branches anlegen?
+-	Branch Map zeichnen.
+-	Jeweils ein persönlicher Branch
+-	A dumb dump. (For all the stuff there is)
+-	semi official (one for master)
+
+UNSERE Projektidee:
+
+-	Rezepte durch Nutrition jagen.
+-	Drumherum halt bauen,  
+
+ 
+Zu tun für die erste Abgabe:
+
+-	Problemszenario,
+-	Domäne, (Denk dich in das Thema rein)
+-	Begrifflichkeiten der Domäne (Ubiquitous language + What means nutrition)
+-	Concept Map (Was ist eine Concept Map?)
+-	Projektdefinition
+-	Projektausarbeitung.
+-	Stakeholder + nutzen dieser. (Warum will das überhaupt einer nutzen)
+-	alternative modellierung (was heißt das genau? Auch mal anders gezeichnet oder was?)
+
+AUFGABE:
+Durch das Material arbeiten, und genau feststellen, was wie wo wann wieso?!
+Bis nächste Woche Montag ne ungefähre ausformulierte Projektidee. Gerne auch mit wilden Ideen, damit diese kritisiert werden können.
+
+Verarbeitete Mindmap:
+Grobe Kategorisierung für die Idee und für die verschiedenen Problembereiche und Domänenenenbereiche.
+ 
+-	Nährwerte
+-	Kalorien 
+-	
+-	
+-	
+
+-	Rezepte
+-	Ernährungsweisen
+-	Vegan
+-	Vegetarisch
+-	Laktosefrei
+-	Glutenfrei
+-	Pescetarisch
+-	Fleisch
+-	Fleischarm
+-	Von welchen Tieren
+-	Kuh
+-	Schwein
+-	Schaf
+-	Wild
+-	Geflügel
+-	Fisch
+
+-	Sportbewusst
+-	low fat
+-	low carb
+-	intermittierendes Fasten
+-	Nährwerte
+-	Nährwert Bewusst
+
+
+
+Wir halten fest, es gibt viele verschiedene Möglichkeiten, die App zu designen, gestalten und zu konstruieren, vor allem abhängig von der Nutzungsweise und Motivation des Nutzers.
+
+Wir haben allerdings nur begrenzte Ressourcen, heißt Zeit, Geld, Lust und Kraft.
+Wir halten Ideen fest:
+-	Einen kompletten Ernährungsplan, basierend auf deinen Körperlichen Daten. -> Vision: Ein sehr guter, abwägender und ausgewogener Ernährungsplan, allerdings vermutlich nicht in Zeit und Kraft zu machen.
+-	Erst kochen, dann eintragen. Du siehst dann deine verschiedenen Werte und Ziele.
+-	Baubaren Plan, wo du gewünschte Rezepte einträgst, deren Nährwerte werden berechnet und die dir noch fehlenden Nährstoffe werden angezeigt.
+-	Darstellung etwa in Form von Aufladebalken/Ladebalken/Fortschritts Diagrammen etc. Sehr GUI Lastig, aber schön.
+-	Beispiel: Vorgeschlagene Rezepte aufgrund wieviel Kalorien (oder andere Nährstoffe) noch übrig sind.
+-	Die müssen auch deine anderen Präferenzen beachten. 
+
+-	Einzelne Möglichkeiten auch so nutzen können. (Für den faulen User)
+-	Rezepte nach Nährwerten sortieren.

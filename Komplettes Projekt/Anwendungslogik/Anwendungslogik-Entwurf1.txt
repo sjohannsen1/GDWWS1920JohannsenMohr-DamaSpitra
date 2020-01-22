@@ -1,0 +1,37 @@
+Anwendungslogik
+
+Benutzersuche
+
+input: nichts
+
+1. User auffordern einen Suchbegriff einzugeben
+
+2. Rezepte nach Suchbegriff durchsuchen -> Javascript String search method oder includes (auch stringlibrary)
+
+output: gefundene Rezepte 
+
+Benutzerauswahl
+
+input: liste an Rezepten
+
+1. User auffordern eine Auswahl zu treffen
+
+2. User wählt aus 
+
+output: Array mit Zutaten die zum Rezept gehören
+
+Anfrage an API
+
+Konstanten: API Key, APP ID, API Endpoint
+
+input Array, welches Zutaten (unformatierte Strings) sammelt die zu einem Rezept gehören.
+
+1. Funktion die Eingabe bzw String annimmt, diesen formatiert sodass er im rahmen eines GET command
+an die API weiter gegeben werden kann (mkString im Code).
+
+2. GET Anfrage an API senden mit Formatiertem String und Konstanten, Resultat wird gespeichert.
+
+output: Komplettes Resultat oder einzelne Teile
+
+on fail: 5 Sekunden warten, dann 3 wiederholen 
+

@@ -185,7 +185,7 @@ const bedarfNutzer=(userId)=>{
         }
       
         userArray[userId-1].bedarf=bedarf
-        resolve(userArray[userId-1])
+        resolve(userArray)
     })
 }
 
@@ -341,7 +341,7 @@ const reachedNut=(result,userId)=>{
       
      }
      userArray[userId-1]=user
-     resolve(userId)
+     resolve(userArray)
   })
 }
 
@@ -407,7 +407,11 @@ app.get('/benutzer/:id/erreichtBedarf', (req, res) => {
     })
   })
 
-
+  app.get('/benutzer/', (req, res)=> {
+    einlesen(pathData).then(function(data){
+      res.send(data)
+    })
+})
   
 
 //CREATE bzw POST -> getestet und funktionieren
@@ -421,7 +425,7 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
   }
   einlesen(pathData).then(function(result){
     userArray=result
-    if(parseInt(req.params.id)<0 || req.params.id>userArray.length+1){
+    if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length+1){
       res.status(404).send("User ID nicht gefunden")
       return 
     }
@@ -429,9 +433,14 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
      id: parseInt(req.params.id)
      }
     userArray[parseInt(req.params.id)-1].kpd=req.body
-    bedarfNutzer(parseInt(req.params.id)).then(function(data){
-      JSONtools.schreiben(userArray,pathData) //vllt probleme mit async, evt callback oder promise
-      res.send(data)
+    bedarfNutzer(parseInt(req.params.id)).then(data =>JSONtools.schreibenSync(data,pathData)).then(function(flag){
+      //vllt probleme mit async, evt callback oder promise
+      if (typeof flag === "boolean"){
+        res.status(404).send("Problem beim Speichern des Users")
+        return  
+      }
+
+      res.send(userArray[parseInt(req.params.id)-1])
     })
 })
 })
@@ -439,7 +448,7 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
   app.post('/benutzer/', (req, res)=> {
     einlesen(pathData).then(function(data){
       userArray=data
-      let id=userArray.length+1
+      let id=userArray.length
       res.send("Benutzer ID: "+id)
     })
 })
@@ -459,10 +468,14 @@ if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
 }
 rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 .then(result=>reachedNut(result,parseInt(req.params.id)))
-.then(function(newId){
-JSONtools.schreiben(userArray,pathData) //vllt probleme mit async, evt callback oder promise
- res.send(userArray[newId-1].erreichtBedarf)
-})
+.then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
+.then(function(flag){
+  if (typeof flag === "boolean"){
+        res.status(404).send("Problem beim Speichern des Users")
+        return 
+      }
+  res.send(userArray[parseInt(req.params.id)].erreichtBedarf)
+}) 
 })
 })
 
@@ -477,15 +490,20 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
   anfrage(req.params.zutat)
   .then(result=>reachedNut(result,parseInt(req.params.id)))
   .then(function(newId){
-      if(typeof newId === "boolean"){
-        res.status(400).send("hoppla, da ist ein fehler beim kontaktieren von Edamam passiert")  
-        return 
+    if(typeof newId === "boolean"){
+      res.status(400).send("hoppla, da ist ein fehler beim kontaktieren von Edamam passiert")  
+      resolve()
+    }
+    else
+      resolve(newId)
+  }).then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
+  .then(function(flag){
+  if (typeof flag === "boolean"){
+        res.status(404).send("Problem beim Speichern des Users")
+        return
       }
-      else
-      JSONtools.schreiben(userArray,pathData) //vllt probleme mit async, evt callback oder promise
-      res.send(userArray[newId-1].erreichtBedarf)
-  })
-
+  res.send(userArray[parseInt(req.params.id)].erreichtBedarf)
+})
 })
 })
 

@@ -561,14 +561,14 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/', (req,res)=>{
 })
 })
 
-const main=async()=>{
+/*const main=async()=>{
   await mkString("100g rice").then(x=>anfrage(x)).then(function(y){
     console.log(y)
   })
 
   //rl.close()
 }
-main()
+main()*/
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Listening on port ${port}..`))

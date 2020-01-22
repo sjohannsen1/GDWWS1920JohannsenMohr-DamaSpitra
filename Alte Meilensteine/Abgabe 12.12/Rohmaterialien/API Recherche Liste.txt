@@ -16,14 +16,17 @@ https://www.programmableweb.com/api/food
 
 
 2. Food2Fork 
-Food2Fork is a recipe sharing website. The Food2Fork Recipe API provides JSON responses to access recipes based on a huge recipe database, powerful ingredient search function, and social-media based ranking algorithm.
+Food2Fork is a recipe sharing website. The Food2Fork Recipe API provides JSON responses to access recipes based on a huge recipe
+database, powerful ingredient search function, and social-media based ranking algorithm.
 
 https://www.programmableweb.com/api/food2fork-recipe
 
 
 3. BigOven Recipe API
 BigOven is a social network that aims to make users better cooks. 
-Users can query recipes, plan menus, and make shopping lists with the BigOven Recipe site. The BigOven Recipe API enables users to get 350,000+ recipes and hundreds of thousands of photos. This API gives developers and data scientists working on applications in the food-tech, health, grocery delivery, home automation field access to recipes at affordable prices. Search by title, ingredient, keyword, nutritional information (paid plan required) plus manage folders and grocery lists in the cloud.
+Users can query recipes, plan menus, and make shopping lists with the BigOven Recipe site. The BigOven Recipe API enables users to get 350,000+ recipes and hundreds of thousands of photos.
+
+This API gives developers and data scientists working on applications in the food-tech, health, grocery delivery, home automation field access to recipes at affordable prices. Search by title, ingredient, keyword, nutritional information (paid plan required) plus manage folders and grocery lists in the cloud.
 
 https://www.programmableweb.com/api/bigoven-recipe
 

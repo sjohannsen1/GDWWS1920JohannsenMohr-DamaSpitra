@@ -529,7 +529,7 @@ rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
             res.status(404).send("Problem beim Speichern des Users")
             return 
           }
-      res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
+      res.send(userArray[parseInt(req.params.id)-1])
 })
 /*}
 else {
@@ -598,7 +598,7 @@ const { error3 } = validateBedarfE(req.body.erreichtBedarf)
         res.status(404).send("Problem beim Speichern des Users")
         return
       }
-  res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
+  res.send(userArray[parseInt(req.params.id)-1])
   //vllt probleme mit async, evt callback oder promise
 })
 /*}else{

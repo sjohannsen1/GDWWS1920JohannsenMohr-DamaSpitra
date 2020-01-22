@@ -523,7 +523,7 @@ rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 })
 })
 
-//edamam will iwie unsere app id bzw app key nicht annehmen
+
 app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/', (req,res)=>{
   const { error } = validateZutat(req.body)
   if (error){
@@ -537,7 +537,7 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/', (req,res)=>{
     return 
   }
   mkString(req.body.zutat)
-  .then(anfrage(req.params.zutat))
+  .then(foodString => anfrage(foodString))
   .then(result=>reachedNut(result,parseInt(req.params.id)))
   .then(function(newId){
     if(typeof newId === "boolean"){
@@ -561,14 +561,14 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/', (req,res)=>{
 })
 })
 
-/*const main=async()=>{
-  await eingabe().then(x=>anfrage(x)).then(function(y){
+const main=async()=>{
+  await mkString("100g rice").then(x=>anfrage(x)).then(function(y){
     console.log(y)
   })
 
-  rl.close()
+  //rl.close()
 }
-main()*/
+main()
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Listening on port ${port}..`))

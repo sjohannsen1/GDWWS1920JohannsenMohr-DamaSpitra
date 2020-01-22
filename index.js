@@ -18,8 +18,8 @@ const pathData="userData.json"
 
 const einlesen=(path)=>{ 
   return new Promise((resolve,reject)=>
-  {JSONtools.lesen(path, function(x,res){
-    resolve(res)
+  {JSONtools.lesen(path, function(x,data){
+    resolve(data)
   })
   })
   }
@@ -437,10 +437,11 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
 })
 
   app.post('/benutzer/', (req, res)=> {
-    einlesen(pathData).then(function(res){
-      userArray=res
-  res.send("Benutzer ID: "+userArray.length++)
-  })
+    einlesen(pathData).then(function(data){
+      userArray=data
+      let id=userArray.length+1
+      res.send("Benutzer ID: "+id)
+    })
 })
 
 //UPDATE bzw PUT

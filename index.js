@@ -463,6 +463,7 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
 
   app.post('/benutzer/', (req, res)=> {
     einlesen(pathData).then(function(data){
+      userArray=data
       let id=userArray.length
       res.send("INDEX: Benutzer ID: "+id)
     })

@@ -542,14 +542,14 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/', (req,res)=>{
   .then(function(newId){
     if(typeof newId === "boolean"){
       res.status(400).send("hoppla, da ist ein fehler beim kontaktieren von Edamam passiert")  
-      resolve()
+      return
     }
     else if(typeof newId === "string"){
       res.status(400).send("eingabe invalid")  
-      resolve()
+      return
     }
     else
-      resolve(newId)
+      return newId
   }).then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
   .then(function(flag){
   if (typeof flag === "boolean"){

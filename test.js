@@ -510,8 +510,14 @@ if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
 }
 rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 .then(result=>reachedNut(result,parseInt(req.params.id)))
-.then(function(user){
-  res.send(user.erreichtBedarf)
+.then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
+    .then(function(flag,path){
+      pathData=path
+      if (typeof flag === "boolean"){
+            res.status(404).send("Problem beim Speichern des Users")
+            return 
+          }
+      res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
 })
 }
 else {
@@ -566,13 +572,21 @@ const { error } = validateBedarfE(req.body.bedarfE)
   }
   anfrage(req.params.zutat)
   .then(result=>reachedNut(result,parseInt(req.params.id)))
-  .then(function(user){
-    if(typeof user === "boolean"){
+  .then(function(newId){
+    if(typeof newId === "boolean"){
       res.status(400).send("hoppla, da ist ein fehler beim kontaktieren von Edamam passiert")  
       resolve()
     }
     else
-    res.send(user.erreichtBedarf)
+      resolve(newId)
+  }).then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
+  .then(function(flag,path){
+  pathData=path
+  if (typeof flag === "boolean"){
+        res.status(404).send("Problem beim Speichern des Users")
+        return
+      }
+  res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
   //vllt probleme mit async, evt callback oder promise
 })
 }else{

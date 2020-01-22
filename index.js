@@ -23,7 +23,18 @@ const recipes=[
   {title:"Chicken & tofu noodle soup",
     id:4},
   {title:"Tuna fettuccine",
-    id:5}
+    id:5},
+  {title:"Sir Patrick Stewart's mole enchiladas",
+    id:6},
+  {title:"Shrimp & black bean quesadillas",
+    id:7},
+  {title:"South American-style guacamole with popped black beans",
+    id:8},
+  {title:"Mega veggie nachos",
+    id:9},
+  {title:"Mark Hamill's roast sirloin & Yorkshire puddings",
+    id:10}
+
   ]
 
 //array mit allen Rezeptdateipfaden
@@ -32,7 +43,12 @@ const recipepaths=[
   "./Recipes/Recipe2.json",
   "./Recipes/Recipe3.json",
   "./Recipes/Recipe4.json",
-  "./Recipes/Recipe5.json"
+  "./Recipes/Recipe5.json",
+  "./Recipes/Recipe6.json",
+  "./Recipes/Recipe7.json",
+  "./Recipes/Recipe8.json",
+  "./Recipes/Recipe9.json",
+  "./Recipes/Recipe10.json"
 ]
 
 

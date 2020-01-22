@@ -40,9 +40,26 @@ const schreiben=(unformatString, path)=>{
     })
 }
 
+const schreibenSync=(unformatString, path)=>{
+    return new Promise((resolve,reject)=>{
+    jsonString=JSON.stringify(unformatString)
+    fs.writeFile(path,jsonString, err=>{
+        if(err){
+            console.log("Error writing file", err)
+            resolve(false)
+        } else{
+            //console.log(jsonString)
+            resolve("Datei erfolgreich beschrieben")
+           
+        }
+    })
+})
+}
+
 module.exports={
     lesen,
     schreiben,
+    schreibenSync,
    getData
     
 }

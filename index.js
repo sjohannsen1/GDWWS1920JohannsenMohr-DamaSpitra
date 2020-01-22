@@ -549,7 +549,7 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/', (req,res)=>{
       return
     }
     else
-      return newId
+      return(newId)
   }).then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
   .then(function(flag){
   if (typeof flag === "boolean"){

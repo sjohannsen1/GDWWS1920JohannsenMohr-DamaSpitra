@@ -1,7 +1,7 @@
 
 const fs= require("fs")
 function lesen(path, callback){
-    fs.readFile(path,(err, fileData)=>{
+    fs.readFileSync(path,(err, fileData)=>{
         if(err){
             return callback && callback(err)
         }

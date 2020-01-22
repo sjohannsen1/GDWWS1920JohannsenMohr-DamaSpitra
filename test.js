@@ -160,8 +160,21 @@ const bedarfNutzer=(userId)=>{
       //eig ist das nicht nötig 
       let weight=userArray[userId-1].kpd.gewicht
       let height=userArray[userId-1].kpd.groesse
-      let activity=userArray[userId-1].kpd.activitaet
-      //switch einfügen
+      let activity
+      switch(userArray[userId-1].kpd.activitaet){
+        case 0:activity=1.2 
+                break
+        case 1: activity=1.5
+                break
+        case 2: activity=1.7
+                break
+        case 3: activity=1.9
+                break
+        case 4: activity=2.3
+                break
+        default: activity=1.5
+                 }
+      
       let age=userArray[userId-1].kpd.alter
       let sex=userArray[userId-1].kpd.geschlecht
 
@@ -485,29 +498,30 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
 app.put('/benutzer/:id/erreichtBedarf/analyse_rezept/:rid', (req,res)=>{
 if(!_.isEmpty(req.body))
 {
-    const { error } = validateKPD(req.body.kpd)
-    if (error){
-    res.status(400).send(error.details[0].message)
+    const { error1 } = validateKPD(req.body.kpd)
+    if (error1){
+    res.status(400).send(error1.details[0].message)
    return
     }
-    const { error } = validateBedarf(req.body.bedarf)
-    if (error){
-    res.status(400).send(error.details[0].message)
+    const { error2 } = validateBedarf(req.body.bedarf)
+    if (error2){
+    res.status(400).send(error2.details[0].message)
    return
     }
-   const { error } = validateBedarfE(req.body.bedarfE)
-    if (error){
-    res.status(400).send(error.details[0].message)
+   const { error3 } = validateBedarfE(req.body.bedarfE)
+    if (error3){
+    res.status(400).send(error3.details[0].message)
    return
     } 
-if(parseInt(req.params.rid)<0 || req.params.rid>recipes.length){
+    if(parseInt(req.params.rid)<0 || parseInt(req.params.rid)>recipes.length){
   res.status(404).send("Recipe ID nicht gefunden")
   return 
 }
-if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+    if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length){
   res.status(404).send("User ID nicht gefunden")
   return 
 }
+userArray[parseInt(req.params.id)-1]=req.body
 rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 .then(result=>reachedNut(result,parseInt(req.params.id)))
 .then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
@@ -550,23 +564,23 @@ else {
 //edamam will iwie unsere app id bzw app key nicht annehmen
 app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
 if(!_.isEmpty(req.body)){
-const { error } = validateKPD(req.body.kpd)
-  if (error){
-  res.status(400).send(error.details[0].message)
+const { error1 } = validateKPD(req.body.kpd)
+  if (error1){
+  res.status(400).send(error1.details[0].message)
  return
   }
-const { error } = validateBedarf(req.body.bedarf)
-  if (error){
-  res.status(400).send(error.details[0].message)
+const { error2 } = validateBedarf(req.body.bedarf)
+  if (error2){
+  res.status(400).send(error2.details[0].message)
  return
   }
-const { error } = validateBedarfE(req.body.bedarfE)
-  if (error){
-  res.status(400).send(error.details[0].message)
+const { error3 } = validateBedarfE(req.body.bedarfE)
+  if (error3){
+  res.status(400).send(error3.details[0].message)
  return
   }
- userArray=req.body
-  if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
+  userArray[parseInt(req.params.id)-1]=req.body
+  if(parseInt(req.params.id)<0 || parseInt(req.params.id)>userArray.length){
     res.status(404).send("User ID nicht gefunden")
     return 
   }

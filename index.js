@@ -160,7 +160,20 @@ const bedarfNutzer=(userId)=>{
       //eig ist das nicht nötig 
       let weight=userArray[userId-1].kpd.gewicht
       let height=userArray[userId-1].kpd.groesse
-      let activity=userArray[userId-1].kpd.activitaet
+      let activity
+      switch(userArray[userId-1].kpd.activitaet){
+        case 0:activity=1.2 
+                break
+        case 1: activity=1.5
+                break
+        case 2: activity=1.7
+                break
+        case 3: activity=1.9
+                break
+        case 4: activity=2.3
+                break
+        default: activity=1.5
+                 }
       //switch einfügen
       let age=userArray[userId-1].kpd.alter
       let sex=userArray[userId-1].kpd.geschlecht

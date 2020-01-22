@@ -12,7 +12,7 @@ const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status cod
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
 var userArray
-const pathData="userData.json"
+const pathData="./userData.json"
 
 
 
@@ -474,7 +474,6 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
     userArray[parseInt(req.params.id)-1].kpd=req.body
     bedarfNutzer(parseInt(req.params.id)).then(data =>JSONtools.schreibenSync(data,pathData)).then(function(flag){
       //vllt probleme mit async, evt callback oder promise
-      
       if (typeof flag === "boolean"){
         res.status(404).send("Problem beim Speichern des Users")
         return  
@@ -496,8 +495,7 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
 //UPDATE bzw PUT
 
 app.put('/benutzer/:id/erreichtBedarf/analyse_rezept/:rid', (req,res)=>{
-if(!_.isEmpty(req.body))
-{
+//if(!_.isEmpty(req.body)){
     const { error1 } = validateKPD(req.body.kpd)
     if (error1){
     res.status(400).send(error1.details[0].message)
@@ -533,7 +531,7 @@ rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
           }
       res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
 })
-}
+/*}
 else {
     einlesen(pathData).then(function(result){
         userArray=result
@@ -557,13 +555,13 @@ else {
       res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
     }) 
     })
-
+*/
 }
 })
 
 //edamam will iwie unsere app id bzw app key nicht annehmen
 app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
-if(!_.isEmpty(req.body)){
+//if(!_.isEmpty(req.body)){
 const { error1 } = validateKPD(req.body.kpd)
   if (error1){
   res.status(400).send(error1.details[0].message)
@@ -603,7 +601,7 @@ const { error3 } = validateBedarfE(req.body.erreichtBedarf)
   res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
   //vllt probleme mit async, evt callback oder promise
 })
-}else{
+/*}else{
     einlesen(pathData).then(function(result){
         userArray=result
       if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
@@ -629,7 +627,7 @@ const { error3 } = validateBedarfE(req.body.erreichtBedarf)
       res.send(userArray[parseInt(req.params.id)-1].erreichtBedarf)
     })
     })   
-}
+}*/
 })
 
 

@@ -12,7 +12,7 @@ const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status cod
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
 var userArray
-var pathData="userData.json"
+const pathData="userData.json"
 
 
 
@@ -446,9 +446,11 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
      id: parseInt(req.params.id)
      }
     userArray[parseInt(req.params.id)-1].kpd=req.body
-    bedarfNutzer(parseInt(req.params.id)).then(data =>JSONtools.schreibenSync(data,pathData)).then(function(flag,path){
+    bedarfNutzer(parseInt(req.params.id))
+    .then(data =>JSONtools.schreibenSync(data,pathData))
+    .then(function(flag){
       //vllt probleme mit async, evt callback oder promise
-      pathData=path
+      
       if (typeof flag === "boolean"){
         res.status(404).send("Problem beim Speichern des Users")
         return  
@@ -461,7 +463,6 @@ app.post('/benutzer/:id/kpd', (req, res)=> {
 
   app.post('/benutzer/', (req, res)=> {
     einlesen(pathData).then(function(data){
-      userArray=data
       let id=userArray.length
       res.send("Benutzer ID: "+id)
     })
@@ -483,8 +484,8 @@ if(parseInt(req.params.id)<0 || req.params.id>userArray.length){
 rezeptWahl(parseInt(req.params.rid)).then(path=>rezeptAnEdamam(path))
 .then(result=>reachedNut(result,parseInt(req.params.id)))
 .then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
-.then(function(flag,path){
-  pathData=path
+.then(function(flag){
+ 
   if (typeof flag === "boolean"){
         res.status(404).send("Problem beim Speichern des Users")
         return 
@@ -512,8 +513,7 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
     else
       resolve(newId)
   }).then(data => JSONtools.schreiben(data,pathData)) //vllt probleme mit async, evt callback oder promise
-  .then(function(flag,path){
-  pathData=path
+  .then(function(flag){
   if (typeof flag === "boolean"){
         res.status(404).send("Problem beim Speichern des Users")
         return

@@ -11,14 +11,14 @@ const app_id="d583615a"
 const app_id2="13242f" //falsche app_id zum testen von fallbacks bzgl status code 400-500
 const app_key="360dfcc569d8706ce6255d3595c6cd68"
 var params, query,foodQuery,esc
-var userArray
+var userArray=[{}]
 const pathData="./userData.json"
 
 
 
 const einlesen=(path)=>{ 
   return new Promise((resolve,reject)=>
-  {JSONtools.lesen(path, function(x,data){
+  {JSONtools.lesen("./userData.json", function(x,data){
     resolve(data)
   })
   })

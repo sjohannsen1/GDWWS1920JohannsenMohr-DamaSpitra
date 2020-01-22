@@ -491,7 +491,7 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/:zutat', (req,res)=>{
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Listening on port ${port}..`))
-
+/*
   userArray[0].kpd={
     gewicht: 60,
     groesse: 170,
@@ -500,7 +500,7 @@ app.listen(port, () => console.log(`Listening on port ${port}..`))
     geschlecht: "m"
     }
 
-bedarfNutzer(1)
+bedarfNutzer(1)*/
 //main()
 
 //module.exports={}

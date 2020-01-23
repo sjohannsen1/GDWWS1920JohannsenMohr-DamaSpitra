@@ -41,7 +41,9 @@ const recipes=[
   {title:"Russell Howard's chicken & prawn curry",
     id:13},
   {title:"Stephen Mangan's Sri Lankan fish curry",
-    id:14}
+    id:14},
+  {title:"Harry Hill's vegetarian thali",
+    id:15}
   ]
 
 //Array mit allen Rezeptdateipfaden
@@ -59,7 +61,8 @@ const recipepaths=[
   "./Recipes/Recipe11.json",
   "./Recipes/Recipe12.json",
   "./Recipes/Recipe13.json",
-  "./Recipes/Recipe14.json"
+  "./Recipes/Recipe14.json",
+  "./Recipes/Recipe15.json"
 ]
 
 

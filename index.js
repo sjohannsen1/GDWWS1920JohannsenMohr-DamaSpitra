@@ -35,7 +35,9 @@ const recipes=[
   {title:"Mark Hamill's roast sirloin & Yorkshire puddings",
     id:10},
   {title:"Jodie Whittaker's massaman curry",
-    id:11}
+    id:11},
+  {title:"Aubergine & tomato rogan josh",
+    id:12}
   ]
 
 //Array mit allen Rezeptdateipfaden
@@ -50,7 +52,8 @@ const recipepaths=[
   "./Recipes/Recipe8.json",
   "./Recipes/Recipe9.json",
   "./Recipes/Recipe10.json",
-  "./Recipes/Recipe11.json"
+  "./Recipes/Recipe11.json",
+  "./Recipes/Recipe12.json"
 ]
 
 

@@ -105,7 +105,7 @@ const rezeptPresent=(recipepath)=>{
 })
 }
 
-//errechnet Bedarfwerte des Nutzers, getestet und funktioniert
+//errechnet Bedarfwerte des Nutzers, Algorithmen dafür sind in der Anwendungslogik spezifiziert
 const bedarfNutzer=(userId)=>{
     return new Promise((resolve, reject)=>{
       //eig ist das nicht nötig 
@@ -125,7 +125,7 @@ const bedarfNutzer=(userId)=>{
                 break
         default: activity=1.5
                  }
-      //switch einfügen
+
       let age=userArray[userId-1].kpd.alter
       let sex=userArray[userId-1].kpd.geschlecht
 
@@ -164,7 +164,6 @@ const rezeptAnEdamam=(recipepath)=>{
       })
     .send(res)
       .end(function (res) { 
-        //if (res.error) throw new Error(res.error) //??? vllt drin lassen?
        resolve(res.body)
        
       })
@@ -175,6 +174,7 @@ const rezeptAnEdamam=(recipepath)=>{
 
 //schickt die formatierte Suchquery und schickt diese an die API, falls der StatusCode der Rückgabe einen Fehler indiziert, wird dieser
 // in entsprechenden fallbacks behandelt, die fallbacks landen in den heroku logs
+//falls mit einem boolean oder einem String resolved wird, wird dem nächsten Promise signalisiert dass ein Fehler vorliegt und ein entsprechender Statuscode gesendet
 const anfrage=(foodQuery)=>{
   return new Promise((resolve,reject)=>{
     unirest.get('https://api.edamam.com/api/nutrition-data?app_id='+app_id+'&app_key='+app_key+'&'+foodQuery)
@@ -190,14 +190,13 @@ const anfrage=(foodQuery)=>{
           resolve(true)
         }else if(result.statusCode>=500){
           console.log("server unavailable. HTTP error code:  "+ result.statusCode)
-          //resolve(foodQuery) //da der Fehler am Server liegt, ist eine erneute Sucheingabe nicht nötig foodQuery wird übergeben
           resolve(true)
         } 
       }else if(!_.isEmpty(result.body.totalNutrients)){ //Wenn es in der If-Abfrage ist lief alles gut
           resolve(result.body)
       }else { //fallback falls Eingabe invalid ist
           console.log("invalid argument")
-          resolve(foodQuery) //sagt dem then, dass eine neue Eingabe nötig ist
+          resolve(foodQuery) //zum debuggen
                      
       }
    })

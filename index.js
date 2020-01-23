@@ -12,7 +12,7 @@ var params, query,foodQuery,esc
 var userArray
 const pathData="userData.json"
 
-//array mit allen Rezepttiteln und des zugehörigen IDs
+//Array mit allen Rezepttiteln und des zugehörigen IDs
 const recipes=[
   {title:"Courgette carbonara",
      id:1},  
@@ -34,10 +34,9 @@ const recipes=[
     id:9},
   {title:"Mark Hamill's roast sirloin & Yorkshire puddings",
     id:10}
-
   ]
 
-//array mit allen Rezeptdateipfaden
+//Array mit allen Rezeptdateipfaden
 const recipepaths=[
   "./Recipes/Recipe1.json",
   "./Recipes/Recipe2.json",
@@ -68,7 +67,7 @@ const rezeptWahl=(id)=>{
     return new Promise((resolve,reject)=>{
         resolve(recipepaths[id-1])
     })
- //todo: implementieren: get mit rezept id suchtpassendes rezept aus path array (recipepaths) also: recipepaths[id-1]
+ //todo: implementieren: get mit Rezept ID sucht passendes Rezept aus path array (recipepaths) also: recipepaths[id-1]
 
 }
 
@@ -148,7 +147,7 @@ const bedarfNutzer=(userId)=>{
     })
 }
 
-//nimmt einen Dateipfad an, liest das rezept ein und sendet das an Edamam. Gibt die Antwort von Edamam zurück
+//nimmt einen Dateipfad an, liest das Rezept ein und sendet das an Edamam. Gibt die Antwort von Edamam zurück
 const rezeptAnEdamam=(recipepath)=>{
   return new Promise((resolve, reject)=>{
     
@@ -185,21 +184,19 @@ const anfrage=(foodQuery)=>{
           resolve(true)
         }else if(result.statusCode>=500){
           console.log("server unavailable. HTTP error code:  "+ result.statusCode)
-          //resolve(foodQuery) //da der fehler am server liegt ist eine erneute sucheingabe nicht nötig, foodQuery wird übergeben
+          //resolve(foodQuery) //da der Fehler am Server liegt, ist eine erneute Sucheingabe nicht nötig foodQuery wird übergeben
           resolve(true)
         } 
-      }else if(!_.isEmpty(result.body.totalNutrients)){ //Wenns in der If-Abfrage ist lief alles gut
+      }else if(!_.isEmpty(result.body.totalNutrients)){ //Wenn es in der If-Abfrage ist lief alles gut
           resolve(result.body)
-      }else { //fallback falls eingabe invalid ist
+      }else { //fallback falls Eingabe invalid ist
           console.log("invalid argument")
-          resolve(foodQuery) //sagt dem then dass eine neue eingabe nötig ist
-          
-           
+          resolve(foodQuery) //sagt dem then, dass eine neue Eingabe nötig ist
+                     
       }
    })
   })
 }
-
 
 //errechnet wie viel Prozent der Nährwertvorgaben erreicht wurden
 const reachedNut=(result,userId)=>{
@@ -241,9 +238,9 @@ const reachedNut=(result,userId)=>{
     user.erreichtBedarf=reached
     
   }else{
-      resolve(false)
-      
+      resolve(false)      
      }
+
      userArray[userId-1]=user
      resolve(userArray)
   })
@@ -381,7 +378,6 @@ app.post('/benutzer/', (req, res)=> {
     })
 })
 
-
 //PUT
 
 //Analysiert das Rezept mit der passenden RID, errechnet wie viel Prozent des Bedarfs dadurch gedeckt wurden.
@@ -449,7 +445,6 @@ app.put('/benutzer/:id/erreichtBedarf/analyse_zutat/', (req,res)=>{
 })
 })
 })
-
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Listening on port ${port}..`))
